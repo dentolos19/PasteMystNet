@@ -12,7 +12,7 @@ namespace PasteMystNet
         
         public string Code { get; set; }
         
-        public PasteMystExpire Expiration { get; set; }
+        public PasteMystExpiration Expiration { get; set; }
         
         public PasteMystLanguage Language { get; set; }
         

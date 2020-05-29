@@ -23,7 +23,9 @@ namespace PasteMystNet
             {
                 Id = infoJson.Id,
                 Date = DateTimeOffset.FromUnixTimeSeconds(infoJson.Date).DateTime,
-                Code = Uri.UnescapeDataString(infoJson.Code)
+                Code = Uri.UnescapeDataString(infoJson.Code),
+                Expiration = StringRepresentationExtensions.StringToExpiration(infoJson.Expiration),
+                Language = StringRepresentationExtensions.StringToLanguage(infoJson.Language)
             };
             return info;
         }
@@ -31,29 +33,38 @@ namespace PasteMystNet
         private static PasteMystInfoJson PostJson(PasteMystFormJson form)
         {
             var json = JsonConvert.SerializeObject(form);
-            var request = WebRequest.Create("https://paste.myst.rs/paste");
+            var request = WebRequest.Create(PasteMystContants.PmPostEndpoint);
             request.ContentType = "application/json";
             request.Method = "POST";
-            using var writer = new StreamWriter(request.GetRequestStream());
+            var writer = new StreamWriter(request.GetRequestStream());
             writer.Write(json);
+            writer.Close();
             var response = (HttpWebResponse)request.GetResponse();
-            using var reader = new StreamReader(response.GetResponseStream()!);
+            var reader = new StreamReader(response.GetResponseStream()!);
             var data = reader.ReadToEnd();
+            reader.Close();
             return JsonConvert.DeserializeObject<PasteMystInfoJson>(data);
         }
 
         public static PasteMystInfo Get(string id)
         {
-            var data = GetJson(id);
-            var info = new PasteMystInfo();
-            // todo
+            var infoJson = GetJson(id);
+            var info = new PasteMystInfo
+            {
+                Id = infoJson.Id,
+                Date = DateTimeOffset.FromUnixTimeSeconds(infoJson.Date).DateTime,
+                Code = Uri.UnescapeDataString(infoJson.Code),
+                Expiration = StringRepresentationExtensions.StringToExpiration(infoJson.Expiration),
+                Language = StringRepresentationExtensions.StringToLanguage(infoJson.Language)
+            };
             return info;
         }
 
         private static PasteMystInfoJson GetJson(string id)
         {
-            // todo
-            return null;
+            using var client = new WebClient();
+            var data = client.DownloadString(PasteMystContants.PmGetEndpoint + id);
+            return JsonConvert.DeserializeObject<PasteMystInfoJson>(data);
         }
 
     }

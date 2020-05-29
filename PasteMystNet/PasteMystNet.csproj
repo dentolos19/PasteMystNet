@@ -6,12 +6,13 @@
         <Authors>Dennise Catolos</Authors>
         <Copyright>Copyright © 2020</Copyright>
         <PackageProjectUrl>https://dennise.me/projects/pastemystnet</PackageProjectUrl>
-        <PackageLicenseUrl>https://dennise.me/license</PackageLicenseUrl>
-        <RepositoryUrl>https://github.com/dentolos19/PasteMyst.NET</RepositoryUrl>
+        <PackageLicenseUrl></PackageLicenseUrl>
+        <RepositoryUrl>https://github.com/dentolos19/PasteMystNet</RepositoryUrl>
         <SignAssembly>true</SignAssembly>
         <AssemblyOriginatorKeyFile>Properties\AssemblyKey.snk</AssemblyOriginatorKeyFile>
         <PublicSign>true</PublicSign>
         <LangVersion>8</LangVersion>
+        <Company>Aprodots</Company>
     </PropertyGroup>
 
     <ItemGroup>

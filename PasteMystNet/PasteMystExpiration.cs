@@ -3,7 +3,7 @@
 namespace PasteMystNet
 {
     
-    public enum PasteMystExpire
+    public enum PasteMystExpiration
     {
         [StringRepresentation("never")] Never,
         [StringRepresentation("1h")] OneHour,

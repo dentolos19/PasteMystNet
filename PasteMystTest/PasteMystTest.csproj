@@ -7,12 +7,16 @@
         <Title>PasteMyst.NET</Title>
         <Copyright>Copyright © 2020</Copyright>
         <PackageProjectUrl>https://dennise.me/projects/pastemystnet</PackageProjectUrl>
-        <PackageLicenseUrl>https://dennise.me/license</PackageLicenseUrl>
+        <PackageLicenseUrl></PackageLicenseUrl>
         <Company>Aprodots</Company>
         <SignAssembly>true</SignAssembly>
         <AssemblyOriginatorKeyFile>Properties\AssemblyKey.snk</AssemblyOriginatorKeyFile>
         <PublicSign>true</PublicSign>
-        <RepositoryUrl>https://github.com/dentolos19/PasteMyst.NET</RepositoryUrl>
+        <RepositoryUrl>https://github.com/dentolos19/PasteMystNet</RepositoryUrl>
     </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\PasteMystNet\PasteMystNet.csproj" />
+    </ItemGroup>
 
 </Project>

@@ -12,10 +12,20 @@
         <LangVersion>8</LangVersion>
         <Company>Aprodots</Company>
         <TargetFrameworks>net46;netstandard2.0;netcoreapp3.1</TargetFrameworks>
+        <PackageLicenseFile>LICENSE</PackageLicenseFile>
+        <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+        <Description>A simple .NET API wrapper for pastemyst!</Description>
     </PropertyGroup>
 
     <ItemGroup>
       <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Include="..\LICENSE">
+        <Pack>True</Pack>
+        <PackagePath></PackagePath>
+      </None>
     </ItemGroup>
 
 </Project>

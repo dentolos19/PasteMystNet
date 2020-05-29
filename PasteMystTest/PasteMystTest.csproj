@@ -4,14 +4,14 @@
         <OutputType>Exe</OutputType>
         <TargetFramework>netcoreapp3.1</TargetFramework>
         <IsPackable>false</IsPackable>
-        <Title>PasteMyst.NET</Title>
-        <Copyright>Copyright © 2020</Copyright>
-        <PackageProjectUrl>https://dennise.me/projects/pastemystnet</PackageProjectUrl>
-        <Company>Aprodots</Company>
+	    <Copyright>Copyright © 2020</Copyright>
+	    <Company>Aprodots</Company>
         <SignAssembly>true</SignAssembly>
         <AssemblyOriginatorKeyFile>Properties\AssemblyKey.snk</AssemblyOriginatorKeyFile>
         <PublicSign>true</PublicSign>
-        <RepositoryUrl>https://github.com/dentolos19/PasteMystNet</RepositoryUrl>
+	    <LangVersion>8</LangVersion>
+	    <Authors>Dennise Catolos</Authors>
+	    <StartupObject>PasteMystTest.Program</StartupObject>
     </PropertyGroup>
 
     <ItemGroup>

@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace PasteMystNet
+namespace PasteMystNet.Internals
 {
     
     internal class PasteMystFormJson

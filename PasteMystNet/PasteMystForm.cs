@@ -8,7 +8,7 @@
         
         public PasteMystExpire Expiration { get; set; } = PasteMystExpire.Never;
 
-        public PasteMystLanguage Language { get; set; } = PasteMystLanguage.PlainText;
+        public PasteMystLanguage Language { get; set; } = PasteMystLanguage.Autodetect;
 
     }
     

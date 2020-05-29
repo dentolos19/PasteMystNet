@@ -1,6 +1,8 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Net;
 using Newtonsoft.Json;
+using PasteMystNet.Internals;
 
 namespace PasteMystNet
 {
@@ -10,7 +12,20 @@ namespace PasteMystNet
 
         public static PasteMystInfo Post(PasteMystForm form)
         {
-            // todo
+            var formJson = new PasteMystFormJson
+            {
+                Code = Uri.EscapeDataString(form.Code),
+                Expiration = form.Expiration.GetStringRepresentation(),
+                Language = form.Language.GetStringRepresentation()
+            };
+            var infoJson = PostJson(formJson);
+            var info = new PasteMystInfo
+            {
+                Id = infoJson.Id,
+                Date = DateTimeOffset.FromUnixTimeSeconds(infoJson.Date).DateTime,
+                Code = Uri.UnescapeDataString(infoJson.Code)
+            };
+            return info;
         }
 
         private static PasteMystInfoJson PostJson(PasteMystFormJson form)
@@ -38,6 +53,7 @@ namespace PasteMystNet
         private static PasteMystInfoJson GetJson(string id)
         {
             // todo
+            return null;
         }
 
     }

@@ -33,7 +33,7 @@ namespace PasteMystNet
         private static PasteMystInfoJson PostJson(PasteMystFormJson form)
         {
             var json = JsonConvert.SerializeObject(form);
-            var request = WebRequest.Create(PasteMystContants.PmPostEndpoint);
+            var request = WebRequest.Create(PasteMystConstants.PmPostEndpoint);
             request.ContentType = "application/json";
             request.Method = "POST";
             var writer = new StreamWriter(request.GetRequestStream());
@@ -63,7 +63,7 @@ namespace PasteMystNet
         private static PasteMystInfoJson GetJson(string id)
         {
             using var client = new WebClient();
-            var data = client.DownloadString(PasteMystContants.PmGetEndpoint + id);
+            var data = client.DownloadString(PasteMystConstants.PmGetEndpoint + id);
             return JsonConvert.DeserializeObject<PasteMystInfoJson>(data);
         }
 

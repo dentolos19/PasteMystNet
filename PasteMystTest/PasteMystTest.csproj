@@ -7,7 +7,6 @@
         <Title>PasteMyst.NET</Title>
         <Copyright>Copyright © 2020</Copyright>
         <PackageProjectUrl>https://dennise.me/projects/pastemystnet</PackageProjectUrl>
-        <PackageLicenseUrl></PackageLicenseUrl>
         <Company>Aprodots</Company>
         <SignAssembly>true</SignAssembly>
         <AssemblyOriginatorKeyFile>Properties\AssemblyKey.snk</AssemblyOriginatorKeyFile>

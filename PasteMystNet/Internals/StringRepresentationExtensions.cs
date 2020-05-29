@@ -26,7 +26,7 @@ namespace PasteMystNet.Internals
         
         public static PasteMystLanguage StringToLanguage(string value)
         {
-            foreach (PasteMystLanguage entry in Enum.GetValues(typeof(PasteMystExpiration)))
+            foreach (PasteMystLanguage entry in Enum.GetValues(typeof(PasteMystLanguage)))
                 if (entry.GetStringRepresentation() == value)
                     return entry;
             return PasteMystLanguage.Plaintext;

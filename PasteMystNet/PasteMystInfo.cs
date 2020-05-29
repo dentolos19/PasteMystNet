@@ -7,7 +7,7 @@ namespace PasteMystNet
     {
         
         public string Id { get; set; }
-        
+
         public DateTime Date { get; set; }
         
         public string Code { get; set; }

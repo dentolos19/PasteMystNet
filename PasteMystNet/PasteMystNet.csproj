@@ -1,18 +1,17 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>netstandard2.0</TargetFramework>
         <Title>PasteMyst.NET</Title>
         <Authors>Dennise Catolos</Authors>
         <Copyright>Copyright © 2020</Copyright>
         <PackageProjectUrl>https://dennise.me/projects/pastemystnet</PackageProjectUrl>
-        <PackageLicenseUrl></PackageLicenseUrl>
         <RepositoryUrl>https://github.com/dentolos19/PasteMystNet</RepositoryUrl>
         <SignAssembly>true</SignAssembly>
         <AssemblyOriginatorKeyFile>Properties\AssemblyKey.snk</AssemblyOriginatorKeyFile>
         <PublicSign>true</PublicSign>
         <LangVersion>8</LangVersion>
         <Company>Aprodots</Company>
+        <TargetFrameworks>net46;netstandard2.0;netcoreapp3.1</TargetFrameworks>
     </PropertyGroup>
 
     <ItemGroup>

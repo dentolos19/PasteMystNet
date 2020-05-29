@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <TargetFramework>netcoreapp3.1</TargetFramework>
+        <IsPackable>false</IsPackable>
+        <Title>PasteMyst.NET</Title>
+        <Copyright>Copyright © 2020</Copyright>
+        <PackageProjectUrl>https://dennise.me/projects/pastemystnet</PackageProjectUrl>
+        <PackageLicenseUrl>https://dennise.me/license</PackageLicenseUrl>
+        <Company>Aprodots</Company>
+        <SignAssembly>true</SignAssembly>
+        <AssemblyOriginatorKeyFile>Properties\AssemblyKey.snk</AssemblyOriginatorKeyFile>
+        <PublicSign>true</PublicSign>
+        <RepositoryUrl>https://github.com/dentolos19/PasteMyst.NET</RepositoryUrl>
+    </PropertyGroup>
+
+</Project>

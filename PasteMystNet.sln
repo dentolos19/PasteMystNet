@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PasteMystNet", "PasteMystNet\PasteMystNet.csproj", "{9755911A-2A8B-4892-AE76-8BE1B77B7C14}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PasteMystTest", "PasteMystTest\PasteMystTest.csproj", "{D5FD7E07-7686-45A8-9E86-EDCBEEC188C1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9755911A-2A8B-4892-AE76-8BE1B77B7C14}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9755911A-2A8B-4892-AE76-8BE1B77B7C14}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9755911A-2A8B-4892-AE76-8BE1B77B7C14}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9755911A-2A8B-4892-AE76-8BE1B77B7C14}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D5FD7E07-7686-45A8-9E86-EDCBEEC188C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D5FD7E07-7686-45A8-9E86-EDCBEEC188C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D5FD7E07-7686-45A8-9E86-EDCBEEC188C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D5FD7E07-7686-45A8-9E86-EDCBEEC188C1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,40 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <Authors>Dennise Catolos</Authors>
+    <Product>PasteMystNet</Product>
+    <Copyright>Copyright © 2020</Copyright>
+    <Description>A simple .NET API wrapper for PasteMyst!</Description>
+    <RepositoryUrl>https://github.com/dentolos19/PasteMystNet</RepositoryUrl>
+    <PackageProjectUrl>https://dennise.me/projects/pastemystnet</PackageProjectUrl>
+    <Version>1.0.1</Version>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>Properties\AssemblyKey.snk</AssemblyOriginatorKeyFile>
+    <PackageIcon>Icon.png</PackageIcon>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove=".gitattributes" />
+    <None Remove=".gitignore" />
+    <None Remove="LICENSE" />
+    <None Remove="README.md" />
+    <None Include="LICENSE">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Resources\Icon.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+  </ItemGroup>
+
+</Project>

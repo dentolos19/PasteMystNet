@@ -1,8 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PasteMystNet", "PasteMystNet\PasteMystNet.csproj", "{9755911A-2A8B-4892-AE76-8BE1B77B7C14}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PasteMystTest", "PasteMystTest\PasteMystTest.csproj", "{D5FD7E07-7686-45A8-9E86-EDCBEEC188C1}"
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30114.105
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PasteMystNet", "PasteMystNet.csproj", "{9A288A98-8C55-48C1-9443-B0F775AAD7BF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -10,13 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{9755911A-2A8B-4892-AE76-8BE1B77B7C14}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9755911A-2A8B-4892-AE76-8BE1B77B7C14}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9755911A-2A8B-4892-AE76-8BE1B77B7C14}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9755911A-2A8B-4892-AE76-8BE1B77B7C14}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D5FD7E07-7686-45A8-9E86-EDCBEEC188C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D5FD7E07-7686-45A8-9E86-EDCBEEC188C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D5FD7E07-7686-45A8-9E86-EDCBEEC188C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D5FD7E07-7686-45A8-9E86-EDCBEEC188C1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9A288A98-8C55-48C1-9443-B0F775AAD7BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9A288A98-8C55-48C1-9443-B0F775AAD7BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9A288A98-8C55-48C1-9443-B0F775AAD7BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9A288A98-8C55-48C1-9443-B0F775AAD7BF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {36FA2B9B-A049-449F-94B5-8035A50DB5AF}
 	EndGlobalSection
 EndGlobal

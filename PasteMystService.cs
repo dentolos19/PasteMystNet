@@ -40,7 +40,7 @@ namespace PasteMystNet
             writer.Write(json);
             writer.Close();
             var response = (HttpWebResponse)request.GetResponse();
-            var reader = new StreamReader(response.GetResponseStream()!);
+            var reader = new StreamReader(response.GetResponseStream());
             var data = reader.ReadToEnd();
             reader.Close();
             return JsonConvert.DeserializeObject<PasteMystInfoJson>(data);
@@ -62,8 +62,9 @@ namespace PasteMystNet
 
         private static PasteMystInfoJson GetJson(string id)
         {
-            using var client = new WebClient();
+            var client = new WebClient();
             var data = client.DownloadString(PasteMystConstants.PmGetEndpoint + id);
+            client.Dispose();
             return JsonConvert.DeserializeObject<PasteMystInfoJson>(data);
         }
 

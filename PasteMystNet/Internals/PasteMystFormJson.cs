@@ -1,23 +1,18 @@
-﻿using Newtonsoft.Json;
+﻿using System;
+using Newtonsoft.Json;
 
 namespace PasteMystNet.Internals
 {
 
-    internal class PasteMystInfoJson
+    internal class PasteMystFormJson
     {
-
-        [JsonProperty("id")]
-        public string Id { get; set; }
-
-        [JsonProperty("createdAt")]
-        public uint Date { get; set; }
 
         [JsonProperty("code")]
         public string Code { get; set; }
-        
+
         [JsonProperty("expiresIn")]
         public string Expiration { get; set; }
-        
+
         [JsonProperty("language")]
         public string Language { get; set; }
 
@@ -26,9 +21,14 @@ namespace PasteMystNet.Internals
             return JsonConvert.SerializeObject(this);
         }
 
-        public static PasteMystInfoJson FromJson(string data)
+        public static PasteMystFormJson ToJson(PasteMystForm form)
         {
-            return JsonConvert.DeserializeObject<PasteMystInfoJson>(data);
+            return new PasteMystFormJson
+            {
+                Code = Uri.EscapeDataString(form.Code),
+                Expiration = form.Expiration.GetStringRepresentation(),
+                Language = form.Language.GetStringRepresentation()
+            };
         }
 
     }

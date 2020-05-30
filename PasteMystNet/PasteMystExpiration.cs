@@ -2,7 +2,7 @@
 
 namespace PasteMystNet
 {
-    
+
     public enum PasteMystExpiration
     {
         [StringRepresentation("never")] Never,
@@ -15,5 +15,5 @@ namespace PasteMystNet
         [StringRepresentation("1m")] OneMonth,
         [StringRepresentation("1y")] OneYear
     }
-    
+
 }

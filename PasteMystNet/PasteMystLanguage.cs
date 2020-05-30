@@ -2,7 +2,7 @@
 
 namespace PasteMystNet
 {
-    
+
     public enum PasteMystLanguage
     {
         [StringRepresentation("autodetect")] Autodetect,

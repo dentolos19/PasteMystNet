@@ -2,10 +2,10 @@
 
 namespace PasteMystNet.Internals
 {
-    
+
     internal static class StringRepresentationExtensions
     {
-        
+
         public static string GetStringRepresentation(this Enum @enum)
         {
             var type = @enum.GetType();
@@ -23,7 +23,7 @@ namespace PasteMystNet.Internals
                     return entry;
             return PasteMystExpiration.Never;
         }
-        
+
         public static PasteMystLanguage StringToLanguage(string value)
         {
             foreach (PasteMystLanguage entry in Enum.GetValues(typeof(PasteMystLanguage)))
@@ -33,5 +33,5 @@ namespace PasteMystNet.Internals
         }
 
     }
-    
+
 }

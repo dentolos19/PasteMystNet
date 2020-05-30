@@ -1,5 +1,4 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using System.Net;
 using System.Net.Http;
 using System.Text;
@@ -9,7 +8,7 @@ using PasteMystNet.Internals;
 
 namespace PasteMystNet
 {
-    
+
     public static class PasteMystService
     {
 
@@ -87,5 +86,5 @@ namespace PasteMystNet
         }
 
     }
-    
+
 }

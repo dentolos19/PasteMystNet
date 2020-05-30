@@ -1,3 +1,3 @@
-# PasteMyst.NET ![Grade](https://img.shields.io/codefactor/grade/github/dentolos19/PasteMystNet?style=flat-square)
+# PasteMyst.NET [![Codacy Badge](https://app.codacy.com/project/badge/Grade/bf0ae44bdf78494f8e287f29cf65d680)](https://www.codacy.com/manual/dentolos19/PasteMystNet?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=dentolos19/PasteMystNet&amp;utm_campaign=Badge_Grade)
 
 A simple .NET API wrapper for [PasteMyst](https://paste.myst.rs)! To get started using this library, check the link above.

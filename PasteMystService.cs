@@ -1,6 +1,9 @@
 ﻿using System;
 using System.IO;
 using System.Net;
+using System.Net.Http;
+using System.Text;
+using System.Threading.Tasks;
 using Newtonsoft.Json;
 using PasteMystNet.Internals;
 
@@ -12,27 +15,21 @@ namespace PasteMystNet
 
         public static PasteMystInfo Post(PasteMystForm form)
         {
-            var formJson = new PasteMystFormJson
-            {
-                Code = Uri.EscapeDataString(form.Code),
-                Expiration = form.Expiration.GetStringRepresentation(),
-                Language = form.Language.GetStringRepresentation()
-            };
-            var infoJson = PostJson(formJson);
-            var info = new PasteMystInfo
-            {
-                Id = infoJson.Id,
-                Date = DateTimeOffset.FromUnixTimeSeconds(infoJson.Date).DateTime,
-                Code = Uri.UnescapeDataString(infoJson.Code),
-                Expiration = StringRepresentationExtensions.StringToExpiration(infoJson.Expiration),
-                Language = StringRepresentationExtensions.StringToLanguage(infoJson.Language)
-            };
-            return info;
+            var json = PasteMystFormJson.ToJson(form);
+            var info = PostJson(json);
+            return PasteMystInfo.FromJson(info);
+        }
+
+        public static async Task<PasteMystInfo> PostAsync(PasteMystForm form)
+        {
+            var json = PasteMystFormJson.ToJson(form);
+            var info = await PostJsonAsync(json);
+            return PasteMystInfo.FromJson(info);
         }
 
         private static PasteMystInfoJson PostJson(PasteMystFormJson form)
         {
-            var json = JsonConvert.SerializeObject(form);
+            var json = form.ToString();
             var request = WebRequest.Create(PasteMystConstants.PmPostEndpoint);
             request.ContentType = "application/json";
             request.Method = "POST";
@@ -40,23 +37,36 @@ namespace PasteMystNet
             writer.Write(json);
             writer.Close();
             var response = (HttpWebResponse)request.GetResponse();
-            var reader = new StreamReader(response.GetResponseStream());
+            var stream = response.GetResponseStream();
+            if (stream == null)
+                return null;
+            var reader = new StreamReader(stream);
             var data = reader.ReadToEnd();
             reader.Close();
             return JsonConvert.DeserializeObject<PasteMystInfoJson>(data);
         }
 
+        private static async Task<PasteMystInfoJson> PostJsonAsync(PasteMystFormJson form)
+        {
+            var client = new HttpClient();
+            var content = new StringContent(form.ToString(), Encoding.UTF8, "application/json");
+            var response = await client.PostAsync(PasteMystConstants.PmPostEndpoint, content);
+            client.Dispose();
+            var responseContent = response.Content.ReadAsStringAsync().Result;
+            return PasteMystInfoJson.FromJson(responseContent);
+        }
+
         public static PasteMystInfo Get(string id)
         {
-            var infoJson = GetJson(id);
-            var info = new PasteMystInfo
-            {
-                Id = infoJson.Id,
-                Date = DateTimeOffset.FromUnixTimeSeconds(infoJson.Date).DateTime,
-                Code = Uri.UnescapeDataString(infoJson.Code),
-                Expiration = StringRepresentationExtensions.StringToExpiration(infoJson.Expiration),
-                Language = StringRepresentationExtensions.StringToLanguage(infoJson.Language)
-            };
+            var json = GetJson(id);
+            var info = PasteMystInfo.FromJson(json);
+            return info;
+        }
+
+        public static async Task<PasteMystInfo> GetAsync(string id)
+        {
+            var json = await GetJsonAsync(id);
+            var info = PasteMystInfo.FromJson(json);
             return info;
         }
 
@@ -65,7 +75,15 @@ namespace PasteMystNet
             var client = new WebClient();
             var data = client.DownloadString(PasteMystConstants.PmGetEndpoint + id);
             client.Dispose();
-            return JsonConvert.DeserializeObject<PasteMystInfoJson>(data);
+            return PasteMystInfoJson.FromJson(data);
+        }
+
+        private static async Task<PasteMystInfoJson> GetJsonAsync(string id)
+        {
+            var client = new HttpClient();
+            var data = await client.GetStringAsync(PasteMystConstants.PmGetEndpoint + id);
+            client.Dispose();
+            return PasteMystInfoJson.FromJson(data);
         }
 
     }

@@ -22,7 +22,7 @@ namespace PasteMystNet
         public static async Task<PasteMystInfo> PostAsync(PasteMystForm form)
         {
             var json = PasteMystFormJson.ToJson(form);
-            var info = await PostJsonAsync(json);
+            var info = await PostJsonAsync(json).ConfigureAwait(false);
             return PasteMystInfo.FromJson(info);
         }
 
@@ -64,7 +64,7 @@ namespace PasteMystNet
 
         public static async Task<PasteMystInfo> GetAsync(string id)
         {
-            var json = await GetJsonAsync(id);
+            var json = await GetJsonAsync(id).ConfigureAwait(false);
             var info = PasteMystInfo.FromJson(json);
             return info;
         }

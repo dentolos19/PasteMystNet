@@ -9,11 +9,21 @@ namespace PasteMystTest
     internal static class Program
     {
 
-        private static void Main()
+        private static void Main(string[] args)
         {
             Console.Title = "PasteMystTest";
-            Console.Write("Input File > ");
-            var input = Console.ReadLine();
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.BackgroundColor = ConsoleColor.Black;
+            Console.Clear();
+            string input;
+            if (args.Length > 0)
+            {
+                input = args[0];
+                goto Skip;
+            }
+            Console.Write("Input File For Testing > ");
+            input = Console.ReadLine();
+            Skip:
             var content = File.ReadAllText(input);
             var form = new PasteMystForm
             {
@@ -21,26 +31,46 @@ namespace PasteMystTest
                 Expiration = PasteMystExpiration.OneHour,
                 Language = PasteMystLanguage.Autodetect
             };
-            Console.WriteLine("Testing Post Function (Non-Async)...");
-            var output = PasteMystService.Post(form);
-            Console.WriteLine($"Test Completed! VFP: {output.Id} // {output.Language}");
-            Console.WriteLine("Testing Get Function (Non-Async)...");
-            output = PasteMystService.Get(output.Id);
-            Console.WriteLine($"Test Completed! VFP: {output.Id} // {output.Language}");
-            Task.Run(() => DoAsyncTest(form));
-            Console.ReadKey();
-            Environment.Exit(0);
+            try
+            {
+                Console.WriteLine("Testing Post Function (Non-Async)...");
+                var output = PasteMystService.Post(form);
+                Console.WriteLine($"Test Completed! VFP: {output.Id} // {output.Language}");
+                Console.WriteLine("Testing Get Function (Non-Async)...");
+                output = PasteMystService.Get(output.Id);
+                var fileOutput = Path.Combine(AppDomain.CurrentDomain.BaseDirectory!, "PasteMystTest-NonAsync.txt");
+                File.WriteAllText(fileOutput, output.Code);
+                Console.WriteLine($"Test Completed! Written To {fileOutput}!");
+                Task.Run(() => DoAsyncTest(form));
+                Console.ReadKey();
+                Environment.Exit(0);
+            }
+            catch (Exception error)
+            {
+                Console.WriteLine($"An error had occurred! {error.Message} Press Any Key To Exit...");
+                Console.ReadKey();
+                Environment.Exit(0);
+            }
         }
 
         private static async void DoAsyncTest(PasteMystForm form)
         {
-            Console.WriteLine("Testing Post Function (Async)...");
-            var output = await PasteMystService.PostAsync(form);
-            Console.WriteLine($"Test Completed! VFP: {output.Id} // {output.Language}");
-            Console.WriteLine("Testing Get Function (Async)...");
-            output = await PasteMystService.GetAsync(output.Id);
-            Console.WriteLine($"Test Completed! VFP: {output.Id} // {output.Language}");
-            Console.WriteLine("Overall Test Completed! Press Any Key To Exit...");
+            try
+            {
+                Console.WriteLine("Testing Post Function (Async)...");
+                var output = await PasteMystService.PostAsync(form);
+                Console.WriteLine($"Test Completed! VFP: {output.Id} // {output.Language}");
+                Console.WriteLine("Testing Get Function (Async)...");
+                output = await PasteMystService.GetAsync(output.Id);
+                var fileOutput = Path.Combine(AppDomain.CurrentDomain.BaseDirectory!, "PasteMystTest-Async.txt");
+                await File.WriteAllTextAsync(fileOutput, output.Code);
+                Console.WriteLine($"Test Completed! Written To {fileOutput}!");
+                Console.WriteLine("Overall Test Completed! Press Any Key To Exit...");
+            }
+            catch (Exception error)
+            {
+                Console.WriteLine($"An error had occurred! {error.Message} Press Any Key To Exit...");
+            }
         }
 
     }

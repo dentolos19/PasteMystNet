@@ -3,16 +3,17 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <Authors>Dennise Catolos</Authors>
-    <Product>PasteMystNet</Product>
+    <Product>PasteMyst.NET</Product>
     <Copyright>Copyright © 2020</Copyright>
     <Description>A simple .NET API wrapper for PasteMyst!</Description>
-    <RepositoryUrl>https://github.com/dentolos19/PasteMystNet</RepositoryUrl>
-    <PackageProjectUrl>https://dennise.me/projects/pastemystnet</PackageProjectUrl>
+    <RepositoryUrl></RepositoryUrl>
+    <PackageProjectUrl>https://github.com/dentolos19/PasteMystNet</PackageProjectUrl>
     <Version>1.0.1</Version>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>Properties\AssemblyKey.snk</AssemblyOriginatorKeyFile>
     <PackageIcon>Icon.png</PackageIcon>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <Company>Aprodots</Company>
   </PropertyGroup>
 
   <ItemGroup>

@@ -6,6 +6,7 @@
     <Authors>Dennise Catolos</Authors>
     <Company>Aprodots</Company>
     <Copyright>Copyright © 2020</Copyright>
+    <Product>PasteMyst.NET</Product>
   </PropertyGroup>
 
   <ItemGroup>

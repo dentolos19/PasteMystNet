@@ -4,9 +4,9 @@
     internal static class PasteMystConstants
     {
 
-        public static readonly string PmPostEndpoint = "https://paste.myst.rs/api/paste";
+        public const string PmPostEndpoint = "https://paste.myst.rs/api/paste";
 
-        public static readonly string PmGetEndpoint = "https://paste.myst.rs/api/paste?id=";
+        public const string PmGetEndpoint = "https://paste.myst.rs/api/paste?id=";
 
     }
 

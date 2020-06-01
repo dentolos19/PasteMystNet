@@ -25,4 +25,4 @@ var response = PasteMystService.Post(form); // Posts to server and retrieve info
 Process.Start("https://paste.myst.rs/" + response.Id); // Open posted file in browser
 ```
 
-This code snippet above should give you an idea of how is it used, I'm too lazy to explain futher but if you have any questions just DM me on Discord, @dennise#6996.
+This code snippet above should give you an idea of how is it used, I'm too lazy to explain futher but if you have any questions just [contact me](https://dentolos19.github.io/contact).

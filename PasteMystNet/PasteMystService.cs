@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Net;
 using System.Net.Http;
 using System.Text;
@@ -14,6 +15,8 @@ namespace PasteMystNet
 
         public static PasteMystInfo Post(PasteMystForm form)
         {
+            if (string.IsNullOrEmpty(form.Code))
+                throw new Exception("Input form doesn't contain code!");
             var json = PasteMystFormJson.ToJson(form);
             var info = PostJson(json);
             return PasteMystInfo.FromJson(info);
@@ -21,6 +24,8 @@ namespace PasteMystNet
 
         public static async Task<PasteMystInfo> PostAsync(PasteMystForm form)
         {
+            if (string.IsNullOrEmpty(form.Code))
+                throw new Exception("Input form doesn't contain code!");
             var json = PasteMystFormJson.ToJson(form);
             var info = await PostJsonAsync(json).ConfigureAwait(false);
             return PasteMystInfo.FromJson(info);

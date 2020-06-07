@@ -8,7 +8,7 @@
     <Description>A simple .NET API wrapper for PasteMyst!</Description>
     <RepositoryUrl></RepositoryUrl>
     <PackageProjectUrl>https://github.com/dentolos19/PasteMystNet</PackageProjectUrl>
-    <Version>1.0.1</Version>
+    <Version>1.0.2</Version>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>Properties\AssemblyKey.snk</AssemblyOriginatorKeyFile>
     <PackageIcon>Icon.png</PackageIcon>

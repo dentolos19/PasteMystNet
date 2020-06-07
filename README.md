@@ -4,14 +4,14 @@ A simple API wrapper for [PasteMyst](https://paste.myst.rs)! It is really simple
 
 First of all, install the library on your project by entering this command into your package manager console.
 
-```Install-Package PasteMystNet -Version 1.0.0```
+```Install-Package PasteMystNet```
 
 Follow the code snippet below, there's small comments of what different functions or properties do.
 
 ```cs
 using System.Diagnostics;
 using System.IO;
-using PasteMystNet;
+using PasteMystNet; // This code is using version 1.0.2
 
 var codeContent = File.ReadAllText("test.java"); // Reads file code content
 
@@ -22,7 +22,7 @@ var form = new PasteMystForm
     Language = PasteMystLanguage.Java // The language of the code content
 };
 var response = PasteMystService.Post(form); // Posts to server and retrieve info
-Process.Start("https://paste.myst.rs/" + response.Id); // Open posted file in browser
+Process.Start(Response.Link); // Open posted file in browser
 ```
 
 This code snippet above should give you an idea of how is it used, I'm too lazy to explain futher but if you have any questions just [contact me](https://dentolos19.github.io/contact).

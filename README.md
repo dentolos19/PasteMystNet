@@ -1,12 +1,12 @@
-# PasteMyst.NET [![Quality](https://app.codacy.com/project/badge/Grade/bf0ae44bdf78494f8e287f29cf65d680)](https://www.codacy.com/manual/dentolos19/PasteMystNet?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=dentolos19/PasteMystNet&amp;utm_campaign=Badge_Grade) [![NuGet](https://img.shields.io/nuget/v/PasteMystNet)](https://www.nuget.org/packages/PasteMystNet)
+# PasteMyst.NET [![Code Quality](https://app.codacy.com/project/badge/Grade/bf0ae44bdf78494f8e287f29cf65d680)](https://www.codacy.com/manual/dentolos19/PasteMystNet?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=dentolos19/PasteMystNet&amp;utm_campaign=Badge_Grade) [![NuGet](https://img.shields.io/nuget/v/PasteMystNet)](https://www.nuget.org/packages/PasteMystNet)
 
 A simple API wrapper for [PasteMyst](https://paste.myst.rs)! It is really simple to use and works with almost any platform, get started using this library by following the instructions below.
 
-First of all, install the library on your project by entering this command into your package manager console.
+First of all, install the library on your project by entering this command into your package manager console, or just search it on the package manager.
 
 ```Install-Package PasteMystNet```
 
-Follow the code snippet below, there's small comments of what different functions or properties do.
+Follow the code snippet below, there's comments of what different functions or properties do.
 
 ```cs
 using System.Diagnostics;

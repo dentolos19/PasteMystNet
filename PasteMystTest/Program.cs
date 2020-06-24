@@ -47,7 +47,7 @@ namespace PasteMystTest
             }
             catch (Exception error)
             {
-                Console.WriteLine($"An error had occurred! {error.Message} Press Any Key To Exit...");
+                Console.WriteLine($"An error had occurred! {error.Message} Press any key to exit...");
                 Console.ReadKey();
                 Environment.Exit(0);
             }
@@ -65,11 +65,11 @@ namespace PasteMystTest
                 var fileOutput = Path.Combine(AppDomain.CurrentDomain.BaseDirectory!, "PasteMystTest-Async.txt");
                 await File.WriteAllTextAsync(fileOutput, output.Code);
                 Console.WriteLine($"Test Completed! Written To {fileOutput}!");
-                Console.WriteLine("Overall Test Completed! Press Any Key To Exit...");
+                Console.WriteLine("Overall Test Completed! Press any key to exit...");
             }
             catch (Exception error)
             {
-                Console.WriteLine($"An error had occurred! {error.Message} Press Any Key To Exit...");
+                Console.WriteLine($"An error had occurred! {error.Message} Press any key to exit...");
             }
         }
 

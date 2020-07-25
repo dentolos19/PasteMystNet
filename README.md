@@ -26,3 +26,11 @@ Process.Start(Response.Link); // Open posted file in browser
 ```
 
 This code snippet above should give you an idea of how is it used, I'm too lazy to explain futher but if you want more reference then check out [this project](https://github.com/dentolos19/PasteMystNet/tree/master/PasteMystTest). If you have any questions just [contact me](https://dentolos19.github.io/contact).
+
+### Contributing
+
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
+
+### License
+
+This project is licensed with the [MIT License](https://choosealicense.com/licenses/mit).

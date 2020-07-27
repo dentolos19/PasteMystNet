@@ -21,7 +21,7 @@ namespace PasteMystTest
                 input = args[0];
                 goto Skip;
             }
-            Console.Write("Input File For Testing > ");
+            Console.Write("Input File For Post/Get Functions Testing > ");
             input = Console.ReadLine();
             Skip:
             var content = File.ReadAllText(input);
@@ -35,7 +35,7 @@ namespace PasteMystTest
             {
                 Console.WriteLine("Testing Post Function (Non-Async)...");
                 var output = PasteMystService.Post(form);
-                Console.WriteLine($"Test Completed! VFP: {output.Id} // {output.Language}");
+                Console.WriteLine($"Test Completed! VFP: {output.Link} // {output.Language}");
                 Console.WriteLine("Testing Get Function (Non-Async)...");
                 output = PasteMystService.Get(output.Id);
                 var fileOutput = Path.Combine(AppDomain.CurrentDomain.BaseDirectory!, "PasteMystTest-NonAsync.txt");
@@ -59,7 +59,7 @@ namespace PasteMystTest
             {
                 Console.WriteLine("Testing Post Function (Async)...");
                 var output = await PasteMystService.PostAsync(form);
-                Console.WriteLine($"Test Completed! VFP: {output.Id} // {output.Language}");
+                Console.WriteLine($"Test Completed! VFP: {output.Link} // {output.Language}");
                 Console.WriteLine("Testing Get Function (Async)...");
                 output = await PasteMystService.GetAsync(output.Id);
                 var fileOutput = Path.Combine(AppDomain.CurrentDomain.BaseDirectory!, "PasteMystTest-Async.txt");

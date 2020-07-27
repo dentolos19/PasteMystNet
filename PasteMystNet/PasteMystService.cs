@@ -3,8 +3,8 @@ using System.IO;
 using System.Net;
 using System.Net.Http;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
 using PasteMystNet.Internals;
 
 namespace PasteMystNet
@@ -47,7 +47,7 @@ namespace PasteMystNet
             var reader = new StreamReader(stream);
             var data = reader.ReadToEnd();
             reader.Close();
-            return JsonConvert.DeserializeObject<PasteMystInfoJson>(data);
+            return JsonSerializer.Deserialize<PasteMystInfoJson>(data);
         }
 
         private static async Task<PasteMystInfoJson> PostJsonAsync(PasteMystFormJson form)
@@ -63,15 +63,13 @@ namespace PasteMystNet
         public static PasteMystInfo Get(string id)
         {
             var json = GetJson(id);
-            var info = PasteMystInfo.FromJson(json);
-            return info;
+            return PasteMystInfo.FromJson(json);
         }
 
         public static async Task<PasteMystInfo> GetAsync(string id)
         {
             var json = await GetJsonAsync(id).ConfigureAwait(false);
-            var info = PasteMystInfo.FromJson(json);
-            return info;
+            return PasteMystInfo.FromJson(json);
         }
 
         private static PasteMystInfoJson GetJson(string id)

@@ -6,6 +6,8 @@ namespace PasteMystNet
     public enum PasteMystLanguage
     {
 
+        Unknown,
+
         [StringRepresentation("autodetect")] Autodetect,
         [StringRepresentation("plaintext")] Plaintext,
         [StringRepresentation("bat")] Batch,
@@ -41,8 +43,7 @@ namespace PasteMystNet
         [StringRepresentation("typescript")] Typescript,
         [StringRepresentation("vb")] Visualbasic,
         [StringRepresentation("xml")] Xml,
-        [StringRepresentation("yaml")] Yaml,
-        Unknown
+        [StringRepresentation("yaml")] Yaml
 
     }
 

@@ -21,7 +21,7 @@ namespace PasteMystNet
 
         internal static PasteMystInfo FromJson(PasteMystInfoJson json)
         {
-            var info = new PasteMystInfo
+            return new PasteMystInfo
             {
                 Id = json.Id,
                 Link = PasteMystConstants.PmEndpoint + json.Id,
@@ -30,7 +30,6 @@ namespace PasteMystNet
                 Expiration = StringRepresentationExtensions.StringToExpiration(json.Expiration),
                 Language = StringRepresentationExtensions.StringToLanguage(json.Language)
             };
-            return info;
         }
 
     }

@@ -8,7 +8,7 @@
     <Description>A simple .NET API wrapper for PasteMyst!</Description>
     <RepositoryUrl></RepositoryUrl>
     <PackageProjectUrl>https://github.com/dentolos19/PasteMystNet</PackageProjectUrl>
-    <Version>1.0.2</Version>
+    <Version>1.0.3</Version>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>Properties\AssemblyKey.snk</AssemblyOriginatorKeyFile>
     <PackageIcon>Icon.png</PackageIcon>
@@ -35,7 +35,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="System.Text.Json" Version="4.7.2" />
   </ItemGroup>
 
 </Project>

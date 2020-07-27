@@ -6,6 +6,8 @@ namespace PasteMystNet
     public enum PasteMystExpiration
     {
 
+        Unknown,
+
         [StringRepresentation("never")] Never,
         [StringRepresentation("1h")] OneHour,
         [StringRepresentation("2h")] TwoHours,
@@ -14,8 +16,7 @@ namespace PasteMystNet
         [StringRepresentation("2d")] TwoDays,
         [StringRepresentation("1w")] OneWeek,
         [StringRepresentation("1m")] OneMonth,
-        [StringRepresentation("1y")] OneYear,
-        Unknown
+        [StringRepresentation("1y")] OneYear
 
     }
 

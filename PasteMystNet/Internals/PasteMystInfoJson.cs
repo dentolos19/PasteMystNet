@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace PasteMystNet.Internals
 {
@@ -6,29 +7,29 @@ namespace PasteMystNet.Internals
     internal class PasteMystInfoJson
     {
 
-        [JsonProperty("id")]
+        [JsonPropertyName("id")]
         public string Id { get; set; }
 
-        [JsonProperty("createdAt")]
+        [JsonPropertyName("createdAt")]
         public uint Date { get; set; }
 
-        [JsonProperty("code")]
+        [JsonPropertyName("code")]
         public string Code { get; set; }
 
-        [JsonProperty("expiresIn")]
+        [JsonPropertyName("expiresIn")]
         public string Expiration { get; set; }
 
-        [JsonProperty("language")]
+        [JsonPropertyName("language")]
         public string Language { get; set; }
 
         public override string ToString()
         {
-            return JsonConvert.SerializeObject(this);
+            return JsonSerializer.Serialize(this);
         }
 
         public static PasteMystInfoJson FromJson(string data)
         {
-            return JsonConvert.DeserializeObject<PasteMystInfoJson>(data);
+            return JsonSerializer.Deserialize<PasteMystInfoJson>(data);
         }
 
     }

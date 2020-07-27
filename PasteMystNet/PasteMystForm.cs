@@ -6,9 +6,9 @@
 
         public string Code { get; set; }
 
-        public PasteMystExpiration Expiration { get; set; } = PasteMystExpiration.Never;
+        public PasteMystExpiration Expiration { get; set; }
 
-        public PasteMystLanguage Language { get; set; } = PasteMystLanguage.Autodetect;
+        public PasteMystLanguage Language { get; set; }
 
     }
 

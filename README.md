@@ -11,7 +11,7 @@ Follow the code snippet below, there's comments of what different functions or p
 ```cs
 using System.Diagnostics;
 using System.IO;
-using PasteMystNet; // This code is using version 1.0.2
+using PasteMystNet; // This code is using version 1.0.2/.3
 
 var codeContent = File.ReadAllText("test.java"); // Reads file code content
 
@@ -25,7 +25,7 @@ var response = PasteMystService.Post(form); // Posts to server and retrieve info
 Process.Start(Response.Link); // Open posted file in browser
 ```
 
-This code snippet above should give you an idea of how is it used, I'm too lazy to explain futher but if you want more reference then check out [this project](https://github.com/dentolos19/PasteMystNet/tree/master/PasteMystTest). If you have any questions just [contact me](https://dentolos19.github.io/contact).
+This code snippet above should give you an idea of how is it used, I'm too lazy to explain futher but if you want more reference then check out [this project](https://github.com/dentolos19/PasteMystNet/tree/master/PasteMystTest). If you have a question please open an issue [here](https://github.com/dentolos19/PasteMystNet/issues).
 
 ### Contributing
 

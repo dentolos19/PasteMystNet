@@ -1,4 +1,4 @@
-# PasteMyst.NET
+# PasteMyst.NET [![NuGet](https://img.shields.io/nuget/v/PasteMystNet?style=flat-square)](https://www.nuget.org/packages/PasteMystNet)
 
 A simple API wrapper for [PasteMyst](https://paste.myst.rs)! It is really simple to use and works with almost any platform, get started using this library by following the instructions below.
 

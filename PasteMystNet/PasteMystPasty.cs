@@ -1,4 +1,4 @@
-﻿using System.Text.Json.Serialization;
+﻿using Newtonsoft.Json;
 
 namespace PasteMystNet
 {
@@ -6,10 +6,17 @@ namespace PasteMystNet
     public class PasteMystPasty
     {
 
-        [JsonPropertyName("_id")] public string Id { get; }
-        [JsonPropertyName("language")] public PasteMystLanguage Language { get; } // TODO
-        [JsonPropertyName("title")] public string Title { get; }
-        [JsonPropertyName("code")] public string Code { get; }
+        [JsonProperty(PropertyName = "_id")]
+        public string Id { get; private set; }
+
+        [JsonProperty(PropertyName = "language")]
+        public string Language { get; private set; }
+
+        [JsonProperty(PropertyName = "title")]
+        public string Title { get; private set; }
+
+        [JsonProperty(PropertyName = "code")]
+        public string Code { get; private set; }
 
     }
 

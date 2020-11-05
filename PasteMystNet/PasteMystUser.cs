@@ -1,8 +1,7 @@
 ﻿using System.Net;
 using System.Net.Http;
-using System.Text.Json;
-using System.Text.Json.Serialization;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace PasteMystNet
 {
@@ -13,12 +12,26 @@ namespace PasteMystNet
         private const string UserExistsEndpoint = "https://paste.myst.rs/api/v2/user/{0}/exists";
         private const string GetUserEndpoint = "https://paste.myst.rs/api/v2/user/{0}";
 
-        [JsonPropertyName("_id")] public string Id { get; set; }
-        [JsonPropertyName("username")] public string Username { get; set; }
-        [JsonPropertyName("avatarUrl")] public string AvatarUrl { get; set; }
-        [JsonPropertyName("defaultLang")] public string DefaultLanguage { get; set; }
-        [JsonPropertyName("publicProfile")] public bool HasPublicProfile { get; set; }
-        [JsonPropertyName("supporterLength")] public uint SupporterLength { get; set; }
+        [JsonProperty(PropertyName = "_id")]
+        public string Id { get; private set; }
+
+        [JsonProperty(PropertyName = "username")]
+        public string Username { get; private set; }
+
+        [JsonProperty(PropertyName = "avatarUrl")]
+        public string AvatarUrl { get; private set; }
+
+        [JsonProperty(PropertyName = "defaultLang")]
+        public string DefaultLanguage { get; private set; }
+
+        [JsonProperty(PropertyName = "publicProfile")]
+        public bool HasPublicProfile { get; private set; }
+
+        [JsonProperty(PropertyName = "supporterLength")]
+        public uint SupporterLength { get; private set; }
+
+        [JsonIgnore]
+        public bool IsSupporter => SupporterLength != 0;
 
         public static async Task<bool> UserExistsAsync(string name)
         {
@@ -37,7 +50,7 @@ namespace PasteMystNet
                 if (response.StatusCode != HttpStatusCode.OK)
                     return null;
                 var content = await response.Content.ReadAsStringAsync();
-                return JsonSerializer.Deserialize<PasteMystUser>(content);
+                return JsonConvert.DeserializeObject<PasteMystUser>(content);
             }
         }
 

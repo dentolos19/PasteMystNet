@@ -4,13 +4,20 @@
 		<OutputType>Exe</OutputType>
 		<TargetFramework>netcoreapp3.1</TargetFramework>
 		<Authors>Dennise Catolos</Authors>
-		<Company>Aprodots</Company>
 		<Copyright>Copyright © 2020</Copyright>
 		<Product>PasteMyst.NET</Product>
+		<StartupObject>PasteMystTest.Program</StartupObject>
+		<ApplicationIcon>Resources\Icon.ico</ApplicationIcon>
 	</PropertyGroup>
 
 	<ItemGroup>
 		<ProjectReference Include="..\PasteMystNet\PasteMystNet.csproj"/>
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Update="Resources\Test.py">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
 	</ItemGroup>
 
 </Project>

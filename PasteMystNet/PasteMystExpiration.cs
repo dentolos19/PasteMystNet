@@ -16,7 +16,7 @@ namespace PasteMystNet
         [StringRepresentation("2d")] TwoDays,
         [StringRepresentation("1w")] OneWeek,
         [StringRepresentation("1m")] OneMonth,
-        [StringRepresentation("1y")] OneYear
+        [StringRepresentation("1y")] OneYear,
 
     }
 

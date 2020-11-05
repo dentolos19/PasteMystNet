@@ -1,49 +1,26 @@
-﻿using PasteMystNet.Internals;
+﻿using System.Text.Json.Serialization;
 
 namespace PasteMystNet
 {
 
-    public enum PasteMystLanguage
+    public class PasteMystLanguage
     {
 
-        Unknown,
+        [JsonPropertyName("name")] public string Name { get; }
+        [JsonPropertyName("mode")] public string Mode { get; }
+        [JsonPropertyName("mimes")] public string[] Mimes { get; }
+        [JsonPropertyName("ext")] public string[] Extensions { get; }
+        [JsonPropertyName("color")] public string Color { get; } // TODO
 
-        [StringRepresentation("autodetect")] Autodetect,
-        [StringRepresentation("plaintext")] Plaintext,
-        [StringRepresentation("bat")] Batch,
-        [StringRepresentation("c")] C,
-        [StringRepresentation("csharp")] Csharp,
-        [StringRepresentation("cpp")] Cpp,
-        [StringRepresentation("css")] Css,
-        [StringRepresentation("clojure")] Clojure,
-        [StringRepresentation("coffeescript")] Coffeescript,
-        [StringRepresentation("d")] D,
-        [StringRepresentation("dockerfile")] Dockerfile,
-        [StringRepresentation("fsharp")] Fsharp,
-        [StringRepresentation("go")] Go,
-        [StringRepresentation("html")] Html,
-        [StringRepresentation("handlebars")] Handlebars,
-        [StringRepresentation("ini")] Ini,
-        [StringRepresentation("json")] Json,
-        [StringRepresentation("java")] Java,
-        [StringRepresentation("javascript")] Javascript,
-        [StringRepresentation("lua")] Lua,
-        [StringRepresentation("markdown")] Markdown,
-        [StringRepresentation("objective")] Objective,
-        [StringRepresentation("php")] Php,
-        [StringRepresentation("perl")] Perl,
-        [StringRepresentation("powershell")] Powershell,
-        [StringRepresentation("python")] Python,
-        [StringRepresentation("r")] R,
-        [StringRepresentation("razor")] Razor,
-        [StringRepresentation("ruby")] Ruby,
-        [StringRepresentation("rust")] Rust,
-        [StringRepresentation("sql")] Sql,
-        [StringRepresentation("swift")] Swift,
-        [StringRepresentation("typescript")] Typescript,
-        [StringRepresentation("vb")] Visualbasic,
-        [StringRepresentation("xml")] Xml,
-        [StringRepresentation("yaml")] Yaml
+        public static PasteMystLanguage ParseByName(string name)
+        {
+            return null; // TODO
+        }
+
+        public static PasteMystLanguage ParseByExtension(string extension)
+        {
+            return null; // TODO
+        }
 
     }
 

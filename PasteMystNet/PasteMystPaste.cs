@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Text.Json.Serialization;
+using PasteMystNet.Internals;
 
 namespace PasteMystNet
 {
@@ -26,7 +27,10 @@ namespace PasteMystNet
 
         private PasteMystExpiration ParseExpiration(string expiration)
         {
-            return PasteMystExpiration.Unknown; // TODO
+            foreach (PasteMystExpiration item in Enum.GetValues(typeof(PasteMystExpiration)))
+                if (item.GetStringRepresentation() == expiration)
+                    return item;
+            return PasteMystExpiration.Unknown;
         }
         
     }

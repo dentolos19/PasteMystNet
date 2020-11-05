@@ -1,16 +1,16 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
-    <Authors>Dennise Catolos</Authors>
-    <Company>Aprodots</Company>
-    <Copyright>Copyright © 2020</Copyright>
-    <Product>PasteMyst.NET</Product>
-  </PropertyGroup>
+	<PropertyGroup>
+		<OutputType>Exe</OutputType>
+		<TargetFramework>netcoreapp3.1</TargetFramework>
+		<Authors>Dennise Catolos</Authors>
+		<Company>Aprodots</Company>
+		<Copyright>Copyright © 2020</Copyright>
+		<Product>PasteMyst.NET</Product>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\PasteMystNet\PasteMystNet.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\PasteMystNet\PasteMystNet.csproj"/>
+	</ItemGroup>
 
 </Project>

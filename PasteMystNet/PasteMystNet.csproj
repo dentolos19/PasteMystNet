@@ -16,10 +16,10 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<None Remove=".gitattributes" />
-		<None Remove=".gitignore" />
-		<None Remove="LICENSE" />
-		<None Remove="README.md" />
+		<None Remove=".gitattributes"/>
+		<None Remove=".gitignore"/>
+		<None Remove="LICENSE"/>
+		<None Remove="README.md"/>
 		<None Include="..\LICENSE">
 			<Pack>True</Pack>
 			<PackagePath></PackagePath>
@@ -34,7 +34,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="System.Text.Json" Version="4.7.2" />
+		<PackageReference Include="System.Text.Json" Version="4.7.2"/>
 	</ItemGroup>
 
 </Project>

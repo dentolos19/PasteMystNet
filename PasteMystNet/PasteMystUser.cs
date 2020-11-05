@@ -1,4 +1,8 @@
-﻿using System.Text.Json.Serialization;
+﻿using System.Net;
+using System.Net.Http;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+using System.Threading.Tasks;
 
 namespace PasteMystNet
 {
@@ -6,22 +10,35 @@ namespace PasteMystNet
     public class PasteMystUser
     {
 
-        [JsonPropertyName("_id")] public string Id { get; }
-        [JsonPropertyName("username")] public string Username { get; }
-        [JsonPropertyName("avatarUrl")] public string AvatarUrl { get; }
-        [JsonPropertyName("defaultLang")] public string DefaultLanguage { get; }
-        [JsonPropertyName("publicProfile")] public bool HasPublicProfile { get; }
-        [JsonPropertyName("supporterLength")] public long SupporterLength { get; }
-        [JsonIgnore] public bool IsSupporter => SupporterLength != 0;
+        private const string UserExistsEndpoint = "https://paste.myst.rs/api/v2/user/{0}/exists";
+        private const string GetUserEndpoint = "https://paste.myst.rs/api/v2/user/{0}";
 
-        public static bool DoesUserExists(string name)
+        [JsonPropertyName("_id")] public string Id { get; set; }
+        [JsonPropertyName("username")] public string Username { get; set; }
+        [JsonPropertyName("avatarUrl")] public string AvatarUrl { get; set; }
+        [JsonPropertyName("defaultLang")] public string DefaultLanguage { get; set; }
+        [JsonPropertyName("publicProfile")] public bool HasPublicProfile { get; set; }
+        [JsonPropertyName("supporterLength")] public uint SupporterLength { get; set; }
+
+        public static async Task<bool> UserExistsAsync(string name)
         {
-            return false; // TODO
+            using (var client = new HttpClient())
+            {
+                var response = await client.GetAsync(string.Format(UserExistsEndpoint, name));
+                return response.StatusCode == HttpStatusCode.OK;
+            }
         }
 
-        public static PasteMystUser GetUser(string name)
+        public static async Task<PasteMystUser> GetUserAsync(string name)
         {
-            return null; // TODO
+            using (var client = new HttpClient())
+            {
+                var response = await client.GetAsync(string.Format(GetUserEndpoint, name));
+                if (response.StatusCode != HttpStatusCode.OK)
+                    return null;
+                var content = await response.Content.ReadAsStringAsync();
+                return JsonSerializer.Deserialize<PasteMystUser>(content);
+            }
         }
 
     }

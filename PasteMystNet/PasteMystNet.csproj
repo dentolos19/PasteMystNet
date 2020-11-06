@@ -16,10 +16,10 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<None Remove=".gitattributes" />
-		<None Remove=".gitignore" />
-		<None Remove="LICENSE" />
-		<None Remove="README.md" />
+		<None Remove=".gitattributes"/>
+		<None Remove=".gitignore"/>
+		<None Remove="LICENSE"/>
+		<None Remove="README.md"/>
 		<None Include="..\LICENSE">
 			<Pack>True</Pack>
 			<PackagePath></PackagePath>
@@ -27,14 +27,14 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<None Include="Resources\Icon.png">
+		<Resource Include="Resources\Assets\Icon.png">
 			<Pack>True</Pack>
 			<PackagePath></PackagePath>
-		</None>
+		</Resource>
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+		<PackageReference Include="Newtonsoft.Json" Version="12.0.3"/>
 	</ItemGroup>
 
 </Project>

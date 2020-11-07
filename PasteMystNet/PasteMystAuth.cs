@@ -6,18 +6,16 @@ namespace PasteMystNet
     public class PasteMystAuth
     {
 
-        public PasteMystAuth(string username, string key)
+        public PasteMystAuth(string token)
         {
-            Username = username;
-            Key = key;
+            Token = token;
         }
 
-        public string Username { get; }
-        public string Key { get; }
+        public string Token { get; }
 
         internal AuthenticationHeaderValue CreateAuthorization()
         {
-            return new AuthenticationHeaderValue(Username, Key);
+            return new AuthenticationHeaderValue("Basic", Token);
         }
 
     }

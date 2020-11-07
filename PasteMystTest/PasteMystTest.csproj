@@ -1,32 +1,20 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<OutputType>WinExe</OutputType>
+		<OutputType>Exe</OutputType>
 		<TargetFramework>netcoreapp3.1</TargetFramework>
-		<UseWPF>true</UseWPF>
-		<StartupObject>PasteMystTest.App</StartupObject>
+		<StartupObject>PasteMystTest.Program</StartupObject>
 		<Authors>Dennise Catolos</Authors>
 		<Product>PasteMyst.NET</Product>
 		<Copyright>Copyright © 2020</Copyright>
-		<ApplicationIcon>Resources\Icon.ico</ApplicationIcon>
 	</PropertyGroup>
 
 	<ItemGroup>
-		<None Remove="Resources\Assets\Icon.png"/>
-	</ItemGroup>
-
-	<ItemGroup>
-		<PackageReference Include="AvalonEdit" Version="6.0.1"/>
+		<PackageReference Include="ObjectDumper.NET" Version="3.0.20251.1"/>
 	</ItemGroup>
 
 	<ItemGroup>
 		<ProjectReference Include="..\PasteMystNet\PasteMystNet.csproj"/>
-	</ItemGroup>
-
-	<ItemGroup>
-		<Resource Include="Resources\Assets\Icon.png">
-			<Pack>True</Pack>
-		</Resource>
 	</ItemGroup>
 
 </Project>

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -34,36 +35,29 @@ namespace PasteMystNet
 
         private PasteMystExpiration ParseExpiration(string expiration)
         {
-            foreach (PasteMystExpiration item in Enum.GetValues(typeof(PasteMystExpiration)))
-                if (item.GetStringRepresentation() == expiration)
-                    return item;
-            return PasteMystExpiration.Unknown;
+            return Enum.GetValues(typeof(PasteMystExpiration)).Cast<PasteMystExpiration>().FirstOrDefault(item => item.GetStringRepresentation() == expiration);
         }
 
         public static async Task<PasteMystPaste> GetPasteAsync(string id, PasteMystAuth auth = null)
         {
-            using (var client = new HttpClient())
-            {
-                if (auth != null)
-                    client.DefaultRequestHeaders.Authorization = auth.CreateAuthorization();
-                var response = await client.GetAsync(string.Format(GetPasteEndpoint, id));
-                if (response.StatusCode != HttpStatusCode.OK)
-                    return null;
-                var content = await response.Content.ReadAsStringAsync();
-                return JsonConvert.DeserializeObject<PasteMystPaste>(content);
-            }
+            using var client = new HttpClient();
+            if (auth != null)
+                client.DefaultRequestHeaders.Authorization = auth.CreateAuthorization();
+            var response = await client.GetAsync(string.Format(GetPasteEndpoint, id));
+            if (response.StatusCode != HttpStatusCode.OK)
+                return null;
+            var content = await response.Content.ReadAsStringAsync();
+            return JsonConvert.DeserializeObject<PasteMystPaste>(content);
         }
 
         public static async Task<bool> DeletePasteAsync(string id, PasteMystAuth auth)
         {
             if (auth == null)
                 throw new ArgumentNullException(nameof(auth));
-            using (var client = new HttpClient())
-            {
-                client.DefaultRequestHeaders.Authorization = auth.CreateAuthorization();
-                var response = await client.DeleteAsync(string.Format(DeletePasteEndpoint, id));
-                return response.StatusCode == HttpStatusCode.OK;
-            }
+            using var client = new HttpClient();
+            client.DefaultRequestHeaders.Authorization = auth.CreateAuthorization();
+            var response = await client.DeleteAsync(string.Format(DeletePasteEndpoint, id));
+            return response.StatusCode == HttpStatusCode.OK;
         }
         
     }

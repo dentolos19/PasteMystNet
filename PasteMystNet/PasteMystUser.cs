@@ -22,23 +22,19 @@ namespace PasteMystNet
 
         public static async Task<bool> UserExistsAsync(string name)
         {
-            using (var client = new HttpClient())
-            {
-                var response = await client.GetAsync(string.Format(UserExistsEndpoint, name));
-                return response.StatusCode == HttpStatusCode.OK;
-            }
+            using var client = new HttpClient();
+            var response = await client.GetAsync(string.Format(UserExistsEndpoint, name));
+            return response.StatusCode == HttpStatusCode.OK;
         }
 
         public static async Task<PasteMystUser> GetUserAsync(string name)
         {
-            using (var client = new HttpClient())
-            {
-                var response = await client.GetAsync(string.Format(GetUserEndpoint, name));
-                if (response.StatusCode != HttpStatusCode.OK)
-                    return null;
-                var content = await response.Content.ReadAsStringAsync();
-                return JsonConvert.DeserializeObject<PasteMystUser>(content);
-            }
+            using var client = new HttpClient();
+            var response = await client.GetAsync(string.Format(GetUserEndpoint, name));
+            if (response.StatusCode != HttpStatusCode.OK)
+                return null;
+            var content = await response.Content.ReadAsStringAsync();
+            return JsonConvert.DeserializeObject<PasteMystUser>(content);
         }
 
     }

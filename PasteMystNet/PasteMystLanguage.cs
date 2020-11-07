@@ -47,26 +47,22 @@ namespace PasteMystNet
 
         public static async Task<PasteMystLanguage> IdentifyByNameAsync(string name)
         {
-            using (var client = new HttpClient())
-            {
-                var response = await client.GetAsync(string.Format(IdentifyByNameEndpoint, name));
-                if (response.StatusCode != HttpStatusCode.OK)
-                    return null;
-                var content = await response.Content.ReadAsStringAsync();
-                return JsonConvert.DeserializeObject<PasteMystLanguage>(content);
-            }
+            using var client = new HttpClient();
+            var response = await client.GetAsync(string.Format(IdentifyByNameEndpoint, name));
+            if (response.StatusCode != HttpStatusCode.OK)
+                return null;
+            var content = await response.Content.ReadAsStringAsync();
+            return JsonConvert.DeserializeObject<PasteMystLanguage>(content);
         }
 
         public static async Task<PasteMystLanguage> IdentifyByExtensionAsync(string extension)
         {
-            using (var client = new HttpClient())
-            {
-                var response = await client.GetAsync(string.Format(IdentifyByExtensionEndpoint, extension));
-                if (response.StatusCode != HttpStatusCode.OK)
-                    return null;
-                var content = await response.Content.ReadAsStringAsync();
-                return JsonConvert.DeserializeObject<PasteMystLanguage>(content);
-            }
+            using var client = new HttpClient();
+            var response = await client.GetAsync(string.Format(IdentifyByExtensionEndpoint, extension));
+            if (response.StatusCode != HttpStatusCode.OK)
+                return null;
+            var content = await response.Content.ReadAsStringAsync();
+            return JsonConvert.DeserializeObject<PasteMystLanguage>(content);
         }
 
     }

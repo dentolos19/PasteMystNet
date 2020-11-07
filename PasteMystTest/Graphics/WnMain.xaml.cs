@@ -57,13 +57,13 @@ namespace PasteMystTest.Graphics
 
         private async void DetectLanguage(object sender, RoutedEventArgs args)
         {
-            var input = InputBox.Text;
+            var input = LanguageInputBox.Text;
             if (string.IsNullOrEmpty(input))
             {
                 MessageBox.Show("Enter input for detecting languages.", "PasteMyst.NET");
                 return;
             }
-            var method = (string)((ComboBoxItem)MethodBox.SelectedItem).Tag;
+            var method = (string)((ComboBoxItem)IdentificationMethodBox.SelectedItem).Tag;
             PasteMystLanguage language;
             switch (method)
             {
@@ -98,6 +98,20 @@ namespace PasteMystTest.Graphics
         {
             if (LanguagePropertyList.SelectedItem is PropertyItemBinding binding)
                 Clipboard.SetText(binding.Value);
+        }
+
+        private void ToggleCredentialBoxes(object sender, RoutedEventArgs args)
+        {
+            if (CredentialOption.IsChecked == true)
+            {
+                UsernameCredentialBox.IsEnabled = true;
+                KeyCredentialBox.IsEnabled = true;
+            }
+            else
+            {
+                UsernameCredentialBox.IsEnabled = false;
+                KeyCredentialBox.IsEnabled = false;
+            }
         }
 
     }

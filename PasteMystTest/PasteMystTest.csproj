@@ -12,21 +12,21 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <None Remove="Resources\Assets\Icon.png" />
+		<None Remove="Resources\Assets\Icon.png"/>
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="AvalonEdit" Version="6.0.1" />
+		<PackageReference Include="AvalonEdit" Version="6.0.1"/>
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\PasteMystNet\PasteMystNet.csproj" />
+		<ProjectReference Include="..\PasteMystNet\PasteMystNet.csproj"/>
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Resource Include="Resources\Assets\Icon.png">
-	    <Pack>True</Pack>
-	  </Resource>
+		<Resource Include="Resources\Assets\Icon.png">
+			<Pack>True</Pack>
+		</Resource>
 	</ItemGroup>
 
 </Project>

@@ -24,7 +24,7 @@ A simple API wrapper for [PasteMyst](https://paste.myst.rs)! It is really simple
 
 First of all, install the library on your project by entering this command into your package manager console, or just search it in the package manager.
 
-```Install-Package PasteMystNet```
+`Install-Package PasteMystNet`
 
 Follow the code snippet below. There's comments of what different functions or properties do.
 
@@ -44,3 +44,9 @@ var form = new PasteMystForm
 var response = PasteMystService.Post(form); // Posts to server and retrieve info
 Process.Start(Response.Link); // Open posted file in browser
 ```
+
+## Screenshots
+
+![](./.github/screenshots/0.png)
+![](./.github/screenshots/1.png)
+![](./.github/screenshots/2.png)

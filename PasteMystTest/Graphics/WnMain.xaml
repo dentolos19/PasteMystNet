@@ -25,7 +25,7 @@
                             <RowDefinition Height="5"/>
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
-                        <TextBox x:Name="UsernameBox" Grid.Row="0" Text="codemyst"/>
+                        <TextBox x:Name="UsernameBox" Grid.Row="0" Text="virgincode"/>
                         <StackPanel Grid.Row="2" Orientation="Horizontal">
                             <Button Content="Get User" Width="100" Click="GetUserProfile"/>
                         </StackPanel>
@@ -47,7 +47,44 @@
             </StackPanel>
         </TabItem>
         <TabItem Header="Managing Pastes">
-            <!-- TODO -->
+            <StackPanel>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="10"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="10"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="10"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="10"/>
+                    </Grid.RowDefinitions>
+                    <StackPanel Grid.Column="1" Grid.Row="1">
+                        <CheckBox x:Name="CredentialOption" Content="Use Credentials (For Private Authorization)" IsChecked="True" Click="ToggleCredentialBoxes"/>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="100"/>
+                                <ColumnDefinition Width="10"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBox x:Name="UsernameCredentialBox" Grid.Column="0" Text="username"/>
+                            <TextBox x:Name="KeyCredentialBox" Grid.Column="2" Text="key"/>
+                        </Grid>
+                    </StackPanel>
+                </Grid>
+                <Expander Header="Get Paste" Margin="10,0,10,10">
+                    <TextBlock Text="Coming Soon"/>
+                </Expander>
+                <Expander Header="Post Paste" Margin="10,0,10,10">
+                    <TextBlock Text="Coming Soon"/>
+                </Expander>
+                <Expander Header="Edit Paste" Margin="10,0,10,10">
+                    <TextBlock Text="Coming Soon"/>
+                </Expander>
+                <Expander Header="Delete Paste" Margin="10,0,10,10">
+                    <TextBlock Text="Coming Soon"/>
+                </Expander>
+            </StackPanel>
         </TabItem>
         <TabItem Header="Detecting Languages">
             <StackPanel>
@@ -71,11 +108,11 @@
                             <RowDefinition Height="5"/>
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
-                        <ComboBox x:Name="MethodBox" Grid.Row="0" SelectedIndex="0">
+                        <ComboBox x:Name="IdentificationMethodBox" Grid.Row="0" SelectedIndex="0">
                             <ComboBoxItem Content="Identify By Name" Tag="IBN"/>
                             <ComboBoxItem Content="Identify By Extension" Tag="IBE"/>
                         </ComboBox>
-                        <TextBox x:Name="InputBox" Grid.Row="2"/>
+                        <TextBox x:Name="LanguageInputBox" Grid.Row="2" Text="d"/>
                     </Grid>
                 </Grid>
                 <ListView x:Name="LanguagePropertyList" Margin="10,0,10,10">

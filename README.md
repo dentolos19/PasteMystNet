@@ -20,7 +20,7 @@
 
 A simple API wrapper for [PasteMyst](https://paste.myst.rs)! It is really simple to use and works with almost any platform, get started using this library by following the instructions below.
 
-**PLEASE NOTE**: There will be breaking changes with the release of version 1.1.0 of this library as PasteMyst has updated their API to V2. To use the V1 API, please use the versions before version 1.1.0 of this library.
+**PLEASE NOTE**: There will be breaking changes with the release of version 1.1.0 of this library as [PasteMyst](https://paste.myst.rs) has updated their API to V2. To use the V1 API, please use the versions before version 1.1.0 of this library.
 
 First of all, install the library on your project by entering this command into your package manager console, or just search it in the package manager.
 
@@ -28,10 +28,16 @@ First of all, install the library on your project by entering this command into 
 
 Follow the code snippet below. There's comments of what different functions or properties do.
 
+**FOR V2 API (VERSION 1.1.0 & BEYOND)**
+
+[click here for the source code documentation](./PasteMystTest/Program.cs)
+
+**FOR V1 API (BEFORE VERSION 1.1.0)**
+
 ```cs
 using System.Diagnostics;
 using System.IO;
-using PasteMystNet; // Before version 1.1.0
+using PasteMystNet;
 
 var codeContent = File.ReadAllText("test.java"); // Reads file code content
 

@@ -1,6 +1,4 @@
-﻿using System.Net.Http.Headers;
-
-namespace PasteMystNet
+﻿namespace PasteMystNet
 {
 
     public class PasteMystAuth
@@ -12,11 +10,6 @@ namespace PasteMystNet
         }
 
         public string Token { get; }
-
-        internal AuthenticationHeaderValue CreateAuthorization()
-        {
-            return new AuthenticationHeaderValue("Basic", Token);
-        }
 
     }
 

@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -25,6 +27,7 @@ namespace PasteMystNet
         [JsonProperty(PropertyName = "stars")] public uint Stars { get; private set; }
         [JsonProperty(PropertyName = "isPrivate")] public bool IsPrivate { get; private set; }
         [JsonProperty(PropertyName = "isPublic")] public bool IsPublic { get; private set; }
+        [JsonProperty(PropertyName = "encrypted")] public bool IsEncrypted { get; private set; }
         [JsonProperty(PropertyName = "tags")] public string[] Tags { get; private set; }
         [JsonProperty(PropertyName = "pasties")] public PasteMystPasty[] Pasties { get; private set; }
         [JsonProperty(PropertyName = "edits")] public PasteMystEdit[] Edits { get; private set; }
@@ -40,24 +43,37 @@ namespace PasteMystNet
 
         public static async Task<PasteMystPaste> GetPasteAsync(string id, PasteMystAuth auth = null)
         {
-            using var client = new HttpClient();
-            if (auth != null)
-                client.DefaultRequestHeaders.Authorization = auth.CreateAuthorization();
-            var response = await client.GetAsync(string.Format(GetPasteEndpoint, id));
-            if (response.StatusCode != HttpStatusCode.OK)
+            try
+            {
+                var request = WebRequest.Create(string.Format(GetPasteEndpoint, id));
+                request.Method = "GET";
+                if (auth != null)
+                    request.Headers.Add("Authorization", auth.Token);
+                using var response = await request.GetResponseAsync();
+                using var reader = new StreamReader(response.GetResponseStream()!);
+                var content = await reader.ReadToEndAsync();
+                return JsonConvert.DeserializeObject<PasteMystPaste>(content);
+            }
+            catch
+            {
                 return null;
-            var content = await response.Content.ReadAsStringAsync();
-            return JsonConvert.DeserializeObject<PasteMystPaste>(content);
+            }
         }
 
         public static async Task<bool> DeletePasteAsync(string id, PasteMystAuth auth)
         {
-            if (auth == null)
-                throw new ArgumentNullException(nameof(auth));
-            using var client = new HttpClient();
-            client.DefaultRequestHeaders.Authorization = auth.CreateAuthorization();
-            var response = await client.DeleteAsync(string.Format(DeletePasteEndpoint, id));
-            return response.StatusCode == HttpStatusCode.OK;
+            try
+            {
+                var request = WebRequest.Create(string.Format(DeletePasteEndpoint, id));
+                request.Method = "DELETE";
+                request.Headers.Add("Authorization", auth.Token);
+                await request.GetResponseAsync();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
         
     }

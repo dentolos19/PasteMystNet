@@ -44,9 +44,3 @@ var form = new PasteMystForm
 var response = PasteMystService.Post(form); // Posts to server and retrieve info
 Process.Start(Response.Link); // Open posted file in browser
 ```
-
-## Screenshots
-
-![](./.github/screenshots/0.png)
-![](./.github/screenshots/1.png)
-![](./.github/screenshots/2.png)

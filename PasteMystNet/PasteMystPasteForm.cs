@@ -35,8 +35,7 @@ namespace PasteMystNet
             _expiresIn = ExpireDuration.GetStringRepresentation();
             try
             {
-                var json = JsonConvert.SerializeObject(this, Formatting.Indented);
-                var data = Encoding.UTF8.GetBytes(json);
+                var data = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(this));
                 var request = WebRequest.Create(PostPasteEndpoint);
                 request.Method = "POST";
                 request.ContentType = "application/json";
@@ -50,7 +49,7 @@ namespace PasteMystNet
                 var content = await reader.ReadToEndAsync();
                 return JsonConvert.DeserializeObject<PasteMystPaste>(content);
             }
-            catch (Exception error)
+            catch
             {
                 return null;
             }

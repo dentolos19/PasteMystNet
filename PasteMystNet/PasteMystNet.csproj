@@ -8,19 +8,20 @@
 		<Description>A simple .NET API wrapper for PasteMyst!</Description>
 		<RepositoryUrl></RepositoryUrl>
 		<PackageProjectUrl>https://github.com/dentolos19/PasteMystNet</PackageProjectUrl>
-		<Version>1.1.0</Version>
+		<Version>1.1.1</Version>
 		<SignAssembly>true</SignAssembly>
 		<AssemblyOriginatorKeyFile>Properties\AssemblyKey.snk</AssemblyOriginatorKeyFile>
 		<PackageIcon>Icon.png</PackageIcon>
 		<PackageLicenseFile>LICENSE</PackageLicenseFile>
 		<LangVersion>8.0</LangVersion>
+		<ApplicationIcon>Resources\Icon.ico</ApplicationIcon>
 	</PropertyGroup>
 
 	<ItemGroup>
-		<None Remove=".gitattributes"/>
-		<None Remove=".gitignore"/>
-		<None Remove="LICENSE"/>
-		<None Remove="README.md"/>
+		<None Remove=".gitattributes" />
+		<None Remove=".gitignore" />
+		<None Remove="LICENSE" />
+		<None Remove="README.md" />
 		<None Include="..\LICENSE">
 			<Pack>True</Pack>
 			<PackagePath></PackagePath>
@@ -35,7 +36,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Newtonsoft.Json" Version="12.0.3"/>
+		<PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
 	</ItemGroup>
 
 </Project>

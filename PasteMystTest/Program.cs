@@ -27,7 +27,7 @@ namespace PasteMystTest
                     new PasteMystPastyForm
                     {
                         Title = "Example.txt",
-                        Code = "Hello World!"
+                        Code = "Hello World"
                     },
                     new PasteMystPastyForm
                     {
@@ -37,45 +37,68 @@ namespace PasteMystTest
                 }
             };
 
+            PasteMystPaste postResult;
+            PasteMystPaste getResult;
+
             #region Posting Paste
 
-            Console.WriteLine("Posting paste to server...");
-            var postResult = paste.PostPasteAsync(auth).Result;
-            if (postResult == null)
+            try
             {
-                Console.WriteLine("Unable to post paste to server!");
+                Console.WriteLine("Posting paste to server...");
+                postResult = paste.PostPasteAsync(auth).Result;
+                if (postResult == null)
+                {
+                    Console.WriteLine("Unable to post paste to server!");
+                    goto End;
+                }
+                Console.WriteLine("Posted paste to server!");
+                // Console.WriteLine(ObjectDumper.Dump(postResult));
+            }
+            catch (Exception error)
+            {
+                Console.WriteLine($"An error had occurred: {error.Message}");
                 goto End;
             }
-            Console.WriteLine("Posted paste to server!");
-            // Console.WriteLine(ObjectDumper.Dump(postResult));
 
             #endregion
 
             #region Getting Paste
 
-            Console.WriteLine("Retrieving paste info from server...");
-            var getResult = PasteMystPaste.GetPasteAsync(postResult.Id, auth).Result;
-            if (getResult == null)
+            try
             {
-                Console.WriteLine("Unable to get paste info from server!");
+                Console.WriteLine("Retrieving paste info from server...");
+                getResult = PasteMystPaste.GetPasteAsync(postResult.Id, auth).Result;
+                if (getResult == null)
+                {
+                    Console.WriteLine("Unable to get paste info from server!");
+                    goto End;
+                }
+                Console.WriteLine("Retrieved paste info from server!");
+                // Console.WriteLine(ObjectDumper.Dump(getResult));
+            }
+            catch (Exception error)
+            {
+                Console.WriteLine($"An error had occurred: {error.Message}");
                 goto End;
             }
-            Console.WriteLine("Retrieved paste info from server!");
-            // Console.WriteLine(ObjectDumper.Dump(getResult));
 
             #endregion
 
             #region Deleting Paste
 
-            if (auth != null)
+            try
             {
-                Console.WriteLine("Deleting Paste...");
-                if (!PasteMystPaste.DeletePasteAsync(getResult.Id, auth).Result)
+                if (auth != null)
                 {
-                    Console.WriteLine("Unable to delete paste from server!");
-                    goto End;
+                    Console.WriteLine("Deleting Paste...");
+                    _ = PasteMystPaste.DeletePasteAsync(getResult.Id, auth);
+                    Console.WriteLine("Deleted paste from server!");
                 }
-                Console.WriteLine("Deleted paste from server!");
+            }
+            catch (Exception error)
+            {
+                Console.WriteLine($"An error had occurred: {error.Message}");
+                goto End;
             }
 
             #endregion
@@ -106,9 +129,9 @@ namespace PasteMystTest
             Console.WriteLine("User info retrieved from server!");
             // Console.WriteLine(ObjectDumper.Dump(userResult));
 
-        #endregion
+            #endregion
 
-        End:
+            End:
             Console.ReadKey();
             Environment.Exit(Environment.ExitCode);
 

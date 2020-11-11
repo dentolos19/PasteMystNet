@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net;
-using System.Net.Http;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using PasteMystNet.Internals;
@@ -43,36 +41,45 @@ namespace PasteMystNet
 
         public static async Task<PasteMystPaste> GetPasteAsync(string id, PasteMystAuth auth = null)
         {
+            var request = WebRequest.Create(string.Format(GetPasteEndpoint, id));
+            request.Method = "GET";
+            if (auth != null)
+                request.Headers.Add("Authorization", auth.Token);
             try
             {
-                var request = WebRequest.Create(string.Format(GetPasteEndpoint, id));
-                request.Method = "GET";
-                if (auth != null)
-                    request.Headers.Add("Authorization", auth.Token);
                 using var response = await request.GetResponseAsync();
                 using var reader = new StreamReader(response.GetResponseStream()!);
                 var content = await reader.ReadToEndAsync();
                 return JsonConvert.DeserializeObject<PasteMystPaste>(content);
             }
-            catch
+            catch (WebException error)
             {
-                return null;
+                using var reader = new StreamReader(error.Response.GetResponseStream()!);
+                var content = await reader.ReadToEndAsync();
+                if (string.IsNullOrEmpty(content))
+                    throw new Exception("The server returned an exception with unknown reasons.");
+                var response = JsonConvert.DeserializeObject<PasteMystResponse>(content);
+                throw new Exception($"The server returned an exception: {response.Message}");
             }
         }
 
-        public static async Task<bool> DeletePasteAsync(string id, PasteMystAuth auth)
+        public static async Task DeletePasteAsync(string id, PasteMystAuth auth)
         {
+            var request = WebRequest.Create(string.Format(DeletePasteEndpoint, id));
+            request.Method = "DELETE";
+            request.Headers.Add("Authorization", auth.Token);
             try
             {
-                var request = WebRequest.Create(string.Format(DeletePasteEndpoint, id));
-                request.Method = "DELETE";
-                request.Headers.Add("Authorization", auth.Token);
                 await request.GetResponseAsync();
-                return true;
             }
-            catch
+            catch (WebException error)
             {
-                return false;
+                using var reader = new StreamReader(error.Response.GetResponseStream()!);
+                var content = await reader.ReadToEndAsync();
+                if (string.IsNullOrEmpty(content))
+                    throw new Exception("The server returned an exception with unknown reasons.");
+                var response = JsonConvert.DeserializeObject<PasteMystResponse>(content);
+                throw new Exception($"The server returned an exception: {response.Message}");
             }
         }
         

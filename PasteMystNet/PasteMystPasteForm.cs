@@ -29,29 +29,44 @@ namespace PasteMystNet
             if ((Tags != null || Tags?.Length <= 0 || IsPrivate || IsPublic) && auth == null)
                 throw new ArgumentNullException(nameof(auth));
             if (Pasties == null || Pasties.Length <= 0)
-                throw new Exception(); // TODO
+                throw new Exception($"{nameof(Pasties)} must not be null or empty.");
+            foreach (var paste in Pasties)
+            {
+                var pasteId = $"{nameof(Pasties)}[{Array.IndexOf(Pasties, paste)}]";
+                if (string.IsNullOrEmpty(paste.Title))
+                    throw new Exception($"{pasteId} doesn't have title content.");
+                if (string.IsNullOrEmpty(paste.Language))
+                    paste.Language = "Autodetect";
+                if (string.IsNullOrEmpty(paste.Code))
+                    throw new Exception($"{pasteId} doesn't contain code content.");
+            }
             if (Tags != null)
                 _tags = string.Join(",", Tags);
             _expiresIn = ExpireDuration.GetStringRepresentation();
+            var data = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(this));
+            var request = WebRequest.Create(PostPasteEndpoint);
+            request.Method = "POST";
+            request.ContentType = "application/json";
+            request.ContentLength = data.Length;
+            using (var stream = await request.GetRequestStreamAsync())
+                await stream.WriteAsync(data, 0, data.Length);
+            if (auth != null)
+                request.Headers.Add("Authorization", auth.Token);
             try
             {
-                var data = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(this));
-                var request = WebRequest.Create(PostPasteEndpoint);
-                request.Method = "POST";
-                request.ContentType = "application/json";
-                request.ContentLength = data.Length;
-                using (var stream = await request.GetRequestStreamAsync())
-                    await stream.WriteAsync(data, 0, data.Length);
-                if (auth != null)
-                    request.Headers.Add("Authorization", auth.Token);
                 using var response = await request.GetResponseAsync();
                 using var reader = new StreamReader(response.GetResponseStream()!);
                 var content = await reader.ReadToEndAsync();
                 return JsonConvert.DeserializeObject<PasteMystPaste>(content);
             }
-            catch
+            catch (WebException error)
             {
-                return null;
+                using var reader = new StreamReader(error.Response.GetResponseStream()!);
+                var content = await reader.ReadToEndAsync();
+                if (string.IsNullOrEmpty(content))
+                    throw new Exception("The server returned an exception with unknown reasons.");
+                var response = JsonConvert.DeserializeObject<PasteMystResponse>(content);
+                throw new Exception($"The server returned an exception: {response.Message}");
             }
         }
 

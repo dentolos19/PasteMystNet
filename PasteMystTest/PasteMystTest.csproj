@@ -2,11 +2,12 @@
 
 	<PropertyGroup>
 		<OutputType>Exe</OutputType>
-		<TargetFramework>netcoreapp3.1</TargetFramework>
+		<TargetFramework>net5.0</TargetFramework>
 		<StartupObject>PasteMystTest.Program</StartupObject>
 		<Authors>Dennise Catolos</Authors>
 		<Product>PasteMyst.NET</Product>
 		<Copyright>Copyright © 2020</Copyright>
+		<ApplicationIcon>Resources\Icon.ico</ApplicationIcon>
 	</PropertyGroup>
 
 	<ItemGroup>

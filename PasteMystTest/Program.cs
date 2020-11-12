@@ -109,7 +109,7 @@ namespace PasteMystTest
             var langResult = PasteMystLanguage.IdentifyByExtensionAsync("cs").Result;
             if (langResult == null)
             {
-                Console.WriteLine("Unable to retrieve language info from server!");
+                Console.WriteLine("Language does not exist on server!");
                 goto End;
             }
             Console.WriteLine("Retrieved language info from server!");
@@ -123,7 +123,7 @@ namespace PasteMystTest
             var userResult = PasteMystUser.GetUserAsync("virgincode").Result;
             if (userResult == null)
             {
-                Console.WriteLine("Unable to retrieve user info from server!");
+                Console.WriteLine("User does not exist on server!");
                 goto End;
             }
             Console.WriteLine("User info retrieved from server!");

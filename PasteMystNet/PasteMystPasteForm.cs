@@ -43,30 +43,40 @@ namespace PasteMystNet
             if (Tags != null)
                 _tags = string.Join(",", Tags);
             _expiresIn = ExpireDuration.GetStringRepresentation();
-            var data = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(this));
-            var request = WebRequest.Create(PostPasteEndpoint);
-            request.Method = "POST";
-            request.ContentType = "application/json";
-            request.ContentLength = data.Length;
-            using (var stream = await request.GetRequestStreamAsync())
-                await stream.WriteAsync(data, 0, data.Length);
-            if (auth != null)
-                request.Headers.Add("Authorization", auth.Token);
             try
             {
+                var data = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(this));
+                var request = WebRequest.Create(PostPasteEndpoint);
+                request.Method = "POST";
+                request.ContentType = "application/json";
+                request.ContentLength = data.Length;
+                using (var stream = await request.GetRequestStreamAsync())
+                    await stream.WriteAsync(data, 0, data.Length);
+                if (auth != null)
+                    request.Headers.Add("Authorization", auth.Token);
                 using var response = await request.GetResponseAsync();
                 using var reader = new StreamReader(response.GetResponseStream()!);
                 var content = await reader.ReadToEndAsync();
                 return JsonConvert.DeserializeObject<PasteMystPaste>(content);
             }
-            catch (WebException error)
+            catch (Exception error)
             {
-                using var reader = new StreamReader(error.Response.GetResponseStream()!);
-                var content = await reader.ReadToEndAsync();
-                if (string.IsNullOrEmpty(content))
-                    throw new Exception("The server returned an exception with unknown reasons.");
-                var response = JsonConvert.DeserializeObject<PasteMystResponse>(content);
-                throw new Exception($"The server returned an exception: {response.Message}");
+                switch (error)
+                {
+                    case WebException webError:
+                    {
+                        using var reader = new StreamReader(webError.Response.GetResponseStream()!);
+                        var content = await reader.ReadToEndAsync();
+                        if (string.IsNullOrEmpty(content))
+                            throw new Exception("The server returned an exception with unknown reasons.");
+                        var response = JsonConvert.DeserializeObject<PasteMystResponse>(content);
+                        throw new Exception($"The server returned an exception: {response.Message}");
+                    }
+                    case JsonException jsonError:
+                        throw new Exception($"An error occurred during serialization: {jsonError.Message}");
+                    default:
+                        throw;
+                }
             }
         }
 

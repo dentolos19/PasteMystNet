@@ -30,7 +30,8 @@ Follow the code snippet below. There's comments of what different functions or p
 
 There will be breaking changes with the release of version 1.1.0 of this library as [PasteMyst](https://paste.myst.rs) has updated their API to V2. To use the V1 API, please use the versions before version 1.1.0 of this library.
 
-[click here for library example usage](./PasteMystTest/Program.cs)
+[click here for pre-release example usage](./PasteMystTest/Program.cs)
+[click here for version 1.1.0 example usage](https://github.com/dentolos19/PasteMystNet/blob/d48a7d633ec4bf8a36180730aad0b7f9372132c8/PasteMystTest/Program.cs)
 
 **FOR V1 API (BEFORE VERSION 1.1.0)**
 

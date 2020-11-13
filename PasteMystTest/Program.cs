@@ -46,15 +46,10 @@ namespace PasteMystTest
             {
                 Console.WriteLine("Posting paste to server...");
                 postResult = paste.PostPasteAsync(auth).Result;
-                if (postResult == null)
-                {
-                    Console.WriteLine("Unable to post paste to server!");
-                    goto End;
-                }
                 Console.WriteLine("Posted paste to server!");
                 // Console.WriteLine(ObjectDumper.Dump(postResult));
             }
-            catch (Exception error)
+            catch (Exception error) // Returns exception if operation fails
             {
                 Console.WriteLine($"An error had occurred: {error.Message}");
                 goto End;
@@ -68,15 +63,10 @@ namespace PasteMystTest
             {
                 Console.WriteLine("Retrieving paste info from server...");
                 getResult = PasteMystPaste.GetPasteAsync(postResult.Id, auth).Result;
-                if (getResult == null)
-                {
-                    Console.WriteLine("Unable to get paste info from server!");
-                    goto End;
-                }
                 Console.WriteLine("Retrieved paste info from server!");
                 // Console.WriteLine(ObjectDumper.Dump(getResult));
             }
-            catch (Exception error)
+            catch (Exception error) // Returns exception if operation fails
             {
                 Console.WriteLine($"An error had occurred: {error.Message}");
                 goto End;
@@ -95,7 +85,7 @@ namespace PasteMystTest
                     Console.WriteLine("Deleted paste from server!");
                 }
             }
-            catch (Exception error)
+            catch (Exception error) // Returns exception if operation fails
             {
                 Console.WriteLine($"An error had occurred: {error.Message}");
                 goto End;
@@ -107,7 +97,7 @@ namespace PasteMystTest
 
             Console.WriteLine("Retrieving language info from server...");
             var langResult = PasteMystLanguage.IdentifyByExtensionAsync("cs").Result;
-            if (langResult == null)
+            if (langResult == null) // Returns null if operation fails
             {
                 Console.WriteLine("Language does not exist on server!");
                 goto End;
@@ -121,7 +111,7 @@ namespace PasteMystTest
 
             Console.WriteLine("Retrieving user info from server...");
             var userResult = PasteMystUser.GetUserAsync("virgincode").Result;
-            if (userResult == null)
+            if (userResult == null) // Returns null if operation fails
             {
                 Console.WriteLine("User does not exist on server!");
                 goto End;

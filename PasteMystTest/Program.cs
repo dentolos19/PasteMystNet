@@ -16,7 +16,7 @@ namespace PasteMystTest
             Console.Clear();
 
             PasteMystAuth auth = null;
-            auth = new PasteMystAuth("Cud7QrC+hDtFPo7YNfMzsxvqo8GbN24lccRzSj1Rzoo=");
+            // auth = new PasteMystAuth("<token>");
 
             var paste = new PasteMystPasteForm
             {

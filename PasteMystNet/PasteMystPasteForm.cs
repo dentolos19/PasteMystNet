@@ -17,7 +17,7 @@ namespace PasteMystNet
         [JsonProperty(PropertyName = "tags", NullValueHandling = NullValueHandling.Ignore)] private string _tags;
         [JsonProperty(PropertyName = "expiresIn")] private string _expiresIn;
 
-        [JsonProperty(PropertyName = "title")] public string Title { get; set; }
+        [JsonProperty(PropertyName = "title", NullValueHandling = NullValueHandling.Ignore)] public string Title { get; set; }
         [JsonProperty(PropertyName = "isPrivate")] public bool IsPrivate { get; set; }
         [JsonProperty(PropertyName = "isPublic")] public bool IsPublic { get; set; }
         [JsonProperty(PropertyName = "pasties")] public PasteMystPastyForm[] Pasties { get; set; }
@@ -34,7 +34,7 @@ namespace PasteMystNet
             {
                 var pasteId = $"{nameof(Pasties)}[{Array.IndexOf(Pasties, paste)}]";
                 if (string.IsNullOrEmpty(paste.Title))
-                    paste.Title = "";
+                    paste.Title = string.Empty;
                 if (string.IsNullOrEmpty(paste.Language))
                     paste.Language = "Autodetect";
                 if (string.IsNullOrEmpty(paste.Code))

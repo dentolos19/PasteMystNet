@@ -50,7 +50,7 @@ namespace PasteMystTest
                 Console.WriteLine("Posting paste to server...");
                 postResult = paste.PostPasteAsync(auth).Result;
                 Console.WriteLine("Posted paste to server!");
-                Console.WriteLine(ObjectDumper.Dump(postResult));
+                // Console.WriteLine(ObjectDumper.Dump(postResult));
             }
             catch (Exception error) // Returns exception if operation fails
             {

@@ -31,12 +31,12 @@ namespace PasteMystNet
         [JsonProperty(PropertyName = "edits")] public PasteMystEdit[] Edits { get; private set; }
         [JsonIgnore] public bool HasOwner => !string.IsNullOrEmpty(OwnerId);
         [JsonIgnore] public DateTime CreationTime => DateTimeOffset.FromUnixTimeSeconds(_createdAt).DateTime;
-        [JsonIgnore] public PasteMystExpiration ExpireDuration => ParseExpiration(_expiresIn);
+        [JsonIgnore] public PasteMystExpiration ExpireDuration => Enum.GetValues(typeof(PasteMystExpiration)).Cast<PasteMystExpiration>().FirstOrDefault(item => item.GetStringRepresentation() == _expiresIn);
         [JsonIgnore] public DateTime DeletionTime => DateTimeOffset.FromUnixTimeSeconds(_deletesAt).DateTime;
 
-        private PasteMystExpiration ParseExpiration(string expiration)
+        public PasteMystEditForm CreateEditForm()
         {
-            return Enum.GetValues(typeof(PasteMystExpiration)).Cast<PasteMystExpiration>().FirstOrDefault(item => item.GetStringRepresentation() == expiration);
+            return new PasteMystEditForm(this);
         }
 
         public static async Task<PasteMystPaste> GetPasteAsync(string id, PasteMystAuth auth = null)
@@ -100,7 +100,7 @@ namespace PasteMystNet
                 }
             }
         }
-        
+
     }
 
 }

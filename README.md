@@ -30,6 +30,7 @@ Now, follow the instructions below to understand how to use this library in your
 
 There will be breaking changes with the release of version 1.1.0 of this library as [PasteMyst](https://paste.myst.rs) has updated their API to V2. To use the V1 API, please use the versions before version 1.1.0 of this library.
 
+- [click here for version 1.1.2 example usage](https://github.com/dentolos19/PasteMystNet/blob/b1ad056965fc6ebb579114d0fdc124181fcb87cb/PasteMystTest/Program.cs)
 - [click here for version 1.1.1 example usage](https://github.com/dentolos19/PasteMystNet/blob/b060464761e0e866db8222c8cd0dcb392e56ee5c/PasteMystTest/Program.cs)
 - [click here for version 1.1.0 example usage](https://github.com/dentolos19/PasteMystNet/blob/d48a7d633ec4bf8a36180730aad0b7f9372132c8/PasteMystTest/Program.cs)
 

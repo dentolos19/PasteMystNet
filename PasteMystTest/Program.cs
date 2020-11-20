@@ -24,15 +24,18 @@ namespace PasteMystTest
                 ExpireDuration = PasteMystExpiration.OneHour,
                 Pasties = new[]
                 {
-                    new PasteMystPastyForm
+                    new PasteMystPastyForm // Pasty without title gives untitled document with code content
                     {
-                        Title = "Example.txt",
+                        Language = "Plain Text", // Pasty without syntax highlighting
                         Code = "Hello World"
                     },
-                    new PasteMystPastyForm
+                    new PasteMystPastyForm // Pasty without a language definition will be automatically set to "Autodetect"
                     {
-                        Title = "Library.txt",
-                        Code = "Powered By PasteMyst.NET"
+                        Title = "test.py",
+                        Code = "def main():" + "\n" +
+                               "    print('Hello World')" + "\n" +
+                               "\n" +
+                               "main()"
                     }
                 }
             };
@@ -47,7 +50,7 @@ namespace PasteMystTest
                 Console.WriteLine("Posting paste to server...");
                 postResult = paste.PostPasteAsync(auth).Result;
                 Console.WriteLine("Posted paste to server!");
-                // Console.WriteLine(ObjectDumper.Dump(postResult));
+                Console.WriteLine(ObjectDumper.Dump(postResult));
             }
             catch (Exception error) // Returns exception if operation fails
             {

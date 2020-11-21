@@ -14,13 +14,12 @@ namespace PasteMystNet
         private const string IdentifyByNameEndpoint = "https://paste.myst.rs/api/v2/data/language?name={0}";
         private const string IdentifyByExtensionEndpoint = "https://paste.myst.rs/api/v2/data/languageExt?extension={0}";
 
-        [JsonProperty(PropertyName = "color")] private readonly string _color;
-
         [JsonProperty(PropertyName = "name")] public string Name { get; private set; }
         [JsonProperty(PropertyName = "mode")] public string Mode { get; private set; }
         [JsonProperty(PropertyName = "mimes")] public string[] Mimes { get; private set; }
         [JsonProperty(PropertyName = "ext")] public string[] Extensions { get; private set; }
-        [JsonIgnore] public Color Color => ParseColor(_color);
+        [JsonProperty(PropertyName = "color")] public string ColorHex { get; private set; }
+        [JsonIgnore] public Color Color => ParseColor(ColorHex);
 
         private Color ParseColor(string hexadecimal)
         {

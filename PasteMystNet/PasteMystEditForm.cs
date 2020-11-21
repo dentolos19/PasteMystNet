@@ -46,7 +46,7 @@ namespace PasteMystNet
             foreach (var paste in Pasties)
             {
                 var pasteId = $"{nameof(Pasties)}[{Array.IndexOf(Pasties, paste)}]";
-                if (string.IsNullOrEmpty(paste.Title))
+                if (string.IsNullOrWhiteSpace(paste.Title))
                     paste.Title = string.Empty;
                 if (string.IsNullOrEmpty(paste.Language))
                     paste.Language = "Autodetect";

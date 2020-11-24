@@ -29,6 +29,7 @@ namespace PasteMystNet
         [JsonProperty(PropertyName = "tags")] public string[] Tags { get; private set; }
         [JsonProperty(PropertyName = "pasties")] public PasteMystPasty[] Pasties { get; private set; }
         [JsonProperty(PropertyName = "edits")] public PasteMystEdit[] Edits { get; private set; }
+        [JsonIgnore] public string Url => $"https://paste.myst.rs/{Id}";
         [JsonIgnore] public bool HasOwner => !string.IsNullOrEmpty(OwnerId);
         [JsonIgnore] public DateTime CreationTime => DateTimeOffset.FromUnixTimeSeconds(_createdAt).DateTime;
         [JsonIgnore] public PasteMystExpiration ExpireDuration => Enum.GetValues(typeof(PasteMystExpiration)).Cast<PasteMystExpiration>().FirstOrDefault(item => item.GetStringRepresentation() == _expiresIn);

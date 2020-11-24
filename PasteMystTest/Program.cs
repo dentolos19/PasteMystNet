@@ -16,7 +16,7 @@ namespace PasteMystTest
             Console.Clear();
 
             PasteMystAuth auth = null;
-            // auth = new PasteMystAuth("<token>");
+            // auth = new PasteMystAuth("<TOKEN>");
 
             var paste = new PasteMystPasteForm
             {
@@ -24,12 +24,12 @@ namespace PasteMystTest
                 ExpireDuration = PasteMystExpiration.OneHour,
                 Pasties = new[]
                 {
-                    new PasteMystPastyForm // Pasty without title gives untitled document with code content
+                    new PasteMystPastyForm
                     {
                         Language = "Plain Text", // Pasty without syntax highlighting
                         Code = "Hello World!"
                     },
-                    new PasteMystPastyForm // Pasty without a language definition will be automatically set to "Autodetect"
+                    new PasteMystPastyForm // Pasty without a language specification will be automatically set to "Autodetect"
                     {
                         Title = "test.py",
                         Code = "def main():" + "\n" +
@@ -183,7 +183,7 @@ namespace PasteMystTest
 
             #endregion
 
-            #region Getting Users
+            #region Getting Users Info
 
             Console.WriteLine("===================================");
             Console.WriteLine();

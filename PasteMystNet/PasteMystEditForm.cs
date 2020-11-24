@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -28,13 +29,12 @@ namespace PasteMystNet
             _id = paste.Id;
             Title = paste.Title;
             Pasties = paste.Pasties.Select(pasty => new PasteMystPastyForm
-                {
-                    Id = pasty.Id,
-                    Title = pasty.Title,
-                    Language = pasty.Language,
-                    Code = pasty.Code
-                })
-                .ToArray();
+            {
+                Id = pasty.Id,
+                Title = pasty.Title,
+                Language = pasty.Language,
+                Code = pasty.Code
+            }).ToArray();
             if (paste.Tags != null && paste.Tags.Length > 0)
                 Tags = paste.Tags;
         }
@@ -46,7 +46,7 @@ namespace PasteMystNet
             foreach (var paste in Pasties)
             {
                 var pasteId = $"{nameof(Pasties)}[{Array.IndexOf(Pasties, paste)}]";
-                if (string.IsNullOrWhiteSpace(paste.Title))
+                if (string.IsNullOrEmpty(paste.Title))
                     paste.Title = string.Empty;
                 if (string.IsNullOrEmpty(paste.Language))
                     paste.Language = "Autodetect";

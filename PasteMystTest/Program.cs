@@ -11,16 +11,39 @@ namespace PasteMystTest
         {
 
             Console.Title = "PasteMyst.NET";
-            Console.ForegroundColor = ConsoleColor.White;
-            Console.BackgroundColor = ConsoleColor.Black;
+
+            Selection:
             Console.Clear();
+            Console.WriteLine("PasteMyst.NET");
+            Console.WriteLine();
+            Console.WriteLine("[1] Posting, Editing, Getting & Deleting Paste");
+            Console.WriteLine("[2] Identifying Languages");
+            Console.WriteLine("[3] Getting Users Info");
+            Console.WriteLine();
+            Console.Write("> ");
+            var input = Console.ReadKey();
+            Console.WriteLine();
+            Console.WriteLine();
+            switch (input.Key)
+            {
+                case ConsoleKey.D1:
+                    goto SelectionOne;
+                case ConsoleKey.D2:
+                    goto SelectionTwo;
+                case ConsoleKey.D3:
+                    goto SelectionThree;
+                default:
+                    goto Selection;
+            }
+
+            SelectionOne:
 
             PasteMystAuth auth = null;
             // auth = new PasteMystAuth("<TOKEN>");
 
             var paste = new PasteMystPasteForm
             {
-                Title = "PasteMyst.NET Test",
+                Title = "PasteMyst.NET",
                 ExpireDuration = PasteMystExpiration.OneHour,
                 Pasties = new[]
                 {
@@ -40,11 +63,9 @@ namespace PasteMystTest
                 }
             };
 
-            PasteMystPaste postResult;
-            PasteMystPaste editResult;
-            PasteMystPaste getResult;
-
             #region Posting Paste
+
+            PasteMystPaste postResult;
 
             Console.WriteLine("===================================");
             Console.WriteLine();
@@ -71,6 +92,8 @@ namespace PasteMystTest
             #endregion
 
             #region Editing Paste
+
+            PasteMystPaste editResult;
 
             if (auth != null)
             {
@@ -106,6 +129,8 @@ namespace PasteMystTest
             #endregion
 
             #region Getting Paste
+
+            PasteMystPaste getResult;
 
             Console.WriteLine("===================================");
             Console.WriteLine();
@@ -158,7 +183,9 @@ namespace PasteMystTest
 
             }
 
-            #endregion
+        #endregion
+
+            SelectionTwo:
 
             #region Identifying Languages
 
@@ -181,7 +208,9 @@ namespace PasteMystTest
             Console.ReadKey();
             Console.WriteLine();
 
-            #endregion
+        #endregion
+
+            SelectionThree:
 
             #region Getting Users Info
 

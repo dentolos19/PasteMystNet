@@ -24,12 +24,13 @@ First of all, install the library on your project by entering this command into 
 
 `Install-Package PasteMystNet`
 
-For latest versions...
+Instructions on how to use this library for latest versions...
 
 - [click here to view usage wiki page](https://github.com/dentolos19/PasteMystNet/wiki/Usage)
-- [click here for view project sample](./PasteMystTest/Program.cs)
+- [click here to view project sample](./PasteMystTest/Program.cs)
 
-For eariler versions...
+And for eariler versions...
 
 - [click here for version 1.1.1 example usage](https://github.com/dentolos19/PasteMystNet/blob/b060464761e0e866db8222c8cd0dcb392e56ee5c/PasteMystTest/Program.cs)
 - [click here for version 1.1.0 example usage](https://github.com/dentolos19/PasteMystNet/blob/d48a7d633ec4bf8a36180730aad0b7f9372132c8/PasteMystTest/Program.cs)
+- [click here for version 1.0.3 example usage](https://github.com/dentolos19/PasteMystNet/blob/08c5df09549f106a1668d8a7e20959eb913a090a/PasteMystTest/Program.cs)

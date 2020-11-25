@@ -1,9 +1,9 @@
 ﻿using Newtonsoft.Json;
 
-namespace PasteMystNet
+namespace PasteMystNet.Internals
 {
 
-    public class PasteMystResponse
+    internal class PasteMystResponse
     {
 
         [JsonProperty(PropertyName = "statusMessage")] public string Message { get; private set; }

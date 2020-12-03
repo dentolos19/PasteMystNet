@@ -6,6 +6,9 @@ using PasteMystNet.Internals;
 namespace PasteMystNet
 {
 
+    /// <summary>
+    /// This class is used to retrieve user information from server. <seealso href="https://paste.myst.rs/api-docs/user"/>
+    /// </summary>
     public class PasteMystUser
     {
 
@@ -17,13 +20,19 @@ namespace PasteMystNet
         [JsonProperty(PropertyName = "supporterLength")] public uint SupporterLength { get; private set; }
         [JsonIgnore] public bool IsSupporter => SupporterLength != 0;
 
+        /// <summary>
+        /// Checks whether if user exists on server. Returns false when user doesn't exists.
+        /// </summary>
         public static async Task<bool> UserExistsAsync(string name)
         {
             var response = await PasteMystConstants.HttpClient.GetAsync(string.Format(PasteMystConstants.UserExistsEndpoint, name));
             return response.StatusCode == HttpStatusCode.OK;
         }
 
-        public static async Task<PasteMystUser> GetUserAsync(string name)
+        /// <summary>
+        /// Retrieves user's profile information from server. Returns null when user doesn't exists or didn't enable public profile.
+        /// </summary>
+        public static async Task<PasteMystUser?> GetUserAsync(string name)
         {
             var response = await PasteMystConstants.HttpClient.GetAsync(string.Format(PasteMystConstants.GetUserEndpoint, name));
             if (response.StatusCode != HttpStatusCode.OK)

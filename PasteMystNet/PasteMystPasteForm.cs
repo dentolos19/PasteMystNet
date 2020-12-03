@@ -9,6 +9,9 @@ using PasteMystNet.Internals;
 namespace PasteMystNet
 {
 
+    /// <summary>
+    /// This class is used to post paste to server. <seealso href="https://paste.myst.rs/api-docs/paste"/>
+    /// </summary>
     public class PasteMystPasteForm
     {
 
@@ -22,6 +25,9 @@ namespace PasteMystNet
         [JsonIgnore] public string[] Tags { get; set; }
         [JsonIgnore] public PasteMystExpiration ExpireDuration { get; set; } = PasteMystExpiration.Never;
 
+        /// <summary>
+        /// Posts paste to server. If you're uploading the paste to your profile, provide <see cref="PasteMystAuth"/> for authorization.
+        /// </summary>
         public async Task<PasteMystPaste> PostPasteAsync(PasteMystAuth auth = null)
         {
             if ((Tags != null || Tags?.Length <= 0 || IsPrivate || IsPublic) && auth == null)

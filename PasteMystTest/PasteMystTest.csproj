@@ -1,13 +1,18 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
+
 		<OutputType>Exe</OutputType>
 		<TargetFramework>netcoreapp3.1</TargetFramework>
-		<StartupObject>PasteMystTest.Program</StartupObject>
-		<Authors>Dennise Catolos</Authors>
+		<LangVersion>8.0</LangVersion>
+
 		<Product>PasteMyst.NET</Product>
 		<Copyright>Copyright © 2020</Copyright>
+		<Authors>Dennise Catolos</Authors>
+
+		<StartupObject>PasteMystTest.Program</StartupObject>
 		<ApplicationIcon>Resources\Icon.ico</ApplicationIcon>
+
 	</PropertyGroup>
 
 	<ItemGroup>

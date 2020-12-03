@@ -4,6 +4,9 @@ using Newtonsoft.Json;
 namespace PasteMystNet
 {
 
+    /// <summary>
+    /// This class is used to contain and store data. <seealso href="https://paste.myst.rs/api-docs/objects"/>
+    /// </summary>
     public class PasteMystEdit
     {
 

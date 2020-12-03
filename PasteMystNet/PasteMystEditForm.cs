@@ -10,6 +10,9 @@ using PasteMystNet.Internals;
 namespace PasteMystNet
 {
 
+    /// <summary>
+    /// This class is used to patch paste to server. <seealso href="https://paste.myst.rs/api-docs/paste"/>
+    /// </summary>
     public class PasteMystEditForm
     {
 
@@ -37,6 +40,9 @@ namespace PasteMystNet
                 Tags = paste.Tags;
         }
 
+        /// <summary>
+        /// Patches paste to server.
+        /// </summary>
         public async Task<PasteMystPaste> PatchPasteAsync(PasteMystAuth auth)
         {
             if (Pasties == null || Pasties.Length <= 0)

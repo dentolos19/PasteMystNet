@@ -9,6 +9,9 @@ using PasteMystNet.Internals;
 namespace PasteMystNet
 {
 
+    /// <summary>
+    /// This class is used to get &amp; delete paste information from server. <seealso href="https://paste.myst.rs/api-docs/paste"/>
+    /// </summary>
     public class PasteMystPaste
     {
 
@@ -32,11 +35,17 @@ namespace PasteMystNet
         [JsonIgnore] public PasteMystExpiration ExpireDuration => Enum.GetValues(typeof(PasteMystExpiration)).Cast<PasteMystExpiration>().FirstOrDefault(item => item.GetStringRepresentation() == _expiresIn);
         [JsonIgnore] public DateTime DeletionTime => DateTimeOffset.FromUnixTimeSeconds(_deletesAt).DateTime;
 
+        /// <summary>
+        /// Creates a form for editing the current paste. You can only edit pastes owned by your profile.
+        /// </summary>
         public PasteMystEditForm CreateEditForm()
         {
             return new PasteMystEditForm(this);
         }
 
+        /// <summary>
+        /// Retrieves paste from server. If you're accessing a private paste, provide <see cref="PasteMystAuth"/> for authorization.
+        /// </summary>
         public static async Task<PasteMystPaste> GetPasteAsync(string id, PasteMystAuth auth = null)
         {
             try
@@ -71,6 +80,9 @@ namespace PasteMystNet
             }
         }
 
+        /// <summary>
+        /// Deletes paste from server. You can only delete pastes owned by your profile.
+        /// </summary>
         public static async Task DeletePasteAsync(string id, PasteMystAuth auth)
         {
             try

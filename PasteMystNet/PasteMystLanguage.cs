@@ -8,9 +8,12 @@ using PasteMystNet.Internals;
 namespace PasteMystNet
 {
 
+    /// <summary>
+    /// This class is used to retrieve language information from server. <seealso href="https://paste.myst.rs/api-docs/data"/>
+    /// </summary>
     public class PasteMystLanguage
     {
-
+        
         [JsonProperty(PropertyName = "name")] public string Name { get; private set; }
         [JsonProperty(PropertyName = "mode")] public string Mode { get; private set; }
         [JsonProperty(PropertyName = "mimes")] public string[] Mimes { get; private set; }
@@ -41,7 +44,10 @@ namespace PasteMystNet
             return result;
         }
 
-        public static async Task<PasteMystLanguage> IdentifyByNameAsync(string name)
+        /// <summary>
+        /// Identifies the language via name. Returns null when language can't be identified.
+        /// </summary>
+        public static async Task<PasteMystLanguage?> IdentifyByNameAsync(string name)
         {
             var response = await PasteMystConstants.HttpClient.GetAsync(string.Format(PasteMystConstants.IdentifyByNameEndpoint, name));
             if (response.StatusCode != HttpStatusCode.OK)
@@ -50,7 +56,10 @@ namespace PasteMystNet
             return JsonConvert.DeserializeObject<PasteMystLanguage>(content);
         }
 
-        public static async Task<PasteMystLanguage> IdentifyByExtensionAsync(string extension)
+        /// <summary>
+        /// Identifies the language via extension. Returns null when language can't be identified.
+        /// </summary>
+        public static async Task<PasteMystLanguage?> IdentifyByExtensionAsync(string extension)
         {
             var response = await PasteMystConstants.HttpClient.GetAsync(string.Format(PasteMystConstants.IdentifyByExtensionEndpoint, extension));
             if (response.StatusCode != HttpStatusCode.OK)

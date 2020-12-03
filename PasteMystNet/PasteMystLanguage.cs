@@ -46,11 +46,11 @@ namespace PasteMystNet
         }
 
         /// <summary>
-        /// Identifies the language via name. Returns null when language can't be identified.
+        /// Identifies the language via name. Returns <c>null</c> when language can't be identified.
         /// </summary>
         public static async Task<PasteMystLanguage?> IdentifyByNameAsync(string name)
         {
-            var response = await PasteMystConstants.HttpClient.GetAsync(string.Format(PasteMystConstants.IdentifyByNameEndpoint, name));
+            var response = await PasteMystConstants.HttpClient.GetAsync(string.Format(PasteMystConstants.IdentifyByNameEndpoint, Uri.EscapeDataString(name)));
             if (response.StatusCode != HttpStatusCode.OK)
                 return null;
             var content = await response.Content.ReadAsStringAsync();
@@ -58,11 +58,11 @@ namespace PasteMystNet
         }
 
         /// <summary>
-        /// Identifies the language via extension. Returns null when language can't be identified.
+        /// Identifies the language via extension. Returns <c>null</c> when language can't be identified.
         /// </summary>
         public static async Task<PasteMystLanguage?> IdentifyByExtensionAsync(string extension)
         {
-            var response = await PasteMystConstants.HttpClient.GetAsync(string.Format(PasteMystConstants.IdentifyByExtensionEndpoint, extension));
+            var response = await PasteMystConstants.HttpClient.GetAsync(string.Format(PasteMystConstants.IdentifyByExtensionEndpoint, Uri.EscapeDataString(extension)));
             if (response.StatusCode != HttpStatusCode.OK)
                 return null;
             var content = await response.Content.ReadAsStringAsync();

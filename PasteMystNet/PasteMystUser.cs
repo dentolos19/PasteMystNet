@@ -22,15 +22,16 @@ namespace PasteMystNet
         [JsonIgnore] public bool IsSupporter => SupporterLength != 0;
 
         /// <summary>
-        /// Checks whether if user exists on server. Returns false when user doesn't exists.
+        /// Checks whether if user exists on server.
         /// </summary>
         public static async Task<bool> UserExistsAsync(string name)
         {
             var response = await PasteMystConstants.HttpClient.GetAsync(string.Format(PasteMystConstants.UserExistsEndpoint, name));
+            return response.StatusCode == HttpStatusCode.OK;
         }
 
         /// <summary>
-        /// Retrieves user's profile information from server. Returns null when user doesn't exists or didn't enable public profile.
+        /// Retrieves user's profile information from server. Returns <c>null</c> when user doesn't exists or didn't enable public profile.
         /// </summary>
         public static async Task<PasteMystUser?> GetUserAsync(string name)
         {

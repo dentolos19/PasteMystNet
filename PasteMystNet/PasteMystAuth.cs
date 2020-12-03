@@ -1,6 +1,9 @@
 namespace PasteMystNet
 {
 
+    /// <summary>
+    /// This class is used to contain the authorization token for interacting pastes with owners.
+    /// </summary>
     public class PasteMystAuth
     {
 
@@ -10,6 +13,11 @@ namespace PasteMystNet
         }
 
         public string Token { get; }
+
+        public override string ToString()
+        {
+            return Token;
+        }
 
     }
 

@@ -1,3 +1,4 @@
+using System;
 using System.Net;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
@@ -7,7 +8,7 @@ namespace PasteMystNet
 {
 
     /// <summary>
-    /// This class is used to retrieve user information from server. <seealso href="https://paste.myst.rs/api-docs/user"/>
+    /// This class is used to retrieve &amp; contain user information from server. <seealso href="https://paste.myst.rs/api-docs/user"/>
     /// </summary>
     public class PasteMystUser
     {
@@ -26,7 +27,6 @@ namespace PasteMystNet
         public static async Task<bool> UserExistsAsync(string name)
         {
             var response = await PasteMystConstants.HttpClient.GetAsync(string.Format(PasteMystConstants.UserExistsEndpoint, name));
-            return response.StatusCode == HttpStatusCode.OK;
         }
 
         /// <summary>
@@ -39,6 +39,24 @@ namespace PasteMystNet
                 return null;
             var content = await response.Content.ReadAsStringAsync();
             return JsonConvert.DeserializeObject<PasteMystUser>(content);
+        }
+
+        public override string ToString()
+        {
+            try
+            {
+                return JsonConvert.SerializeObject(this, Formatting.Indented);
+            }
+            catch (Exception error)
+            {
+                switch (error)
+                {
+                    case JsonException jsonError:
+                        throw new Exception($"An error occurred during serialization: {jsonError.Message}");
+                    default:
+                        throw;
+                }
+            }
         }
 
     }

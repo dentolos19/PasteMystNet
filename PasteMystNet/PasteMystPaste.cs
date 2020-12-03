@@ -10,7 +10,7 @@ namespace PasteMystNet
 {
 
     /// <summary>
-    /// This class is used to get &amp; delete paste information from server. <seealso href="https://paste.myst.rs/api-docs/paste"/>
+    /// This class is used to get, delete &amp; contain paste information from server. <seealso href="https://paste.myst.rs/api-docs/paste"/>
     /// </summary>
     public class PasteMystPaste
     {
@@ -105,6 +105,24 @@ namespace PasteMystNet
                         var response = JsonConvert.DeserializeObject<PasteMystResponse>(content);
                         throw new Exception($"The server returned an exception: {response.Message}");
                     }
+                    default:
+                        throw;
+                }
+            }
+        }
+
+        public override string ToString()
+        {
+            try
+            {
+                return JsonConvert.SerializeObject(this, Formatting.Indented);
+            }
+            catch (Exception error)
+            {
+                switch (error)
+                {
+                    case JsonException jsonError:
+                        throw new Exception($"An error occurred during serialization: {jsonError.Message}");
                     default:
                         throw;
                 }

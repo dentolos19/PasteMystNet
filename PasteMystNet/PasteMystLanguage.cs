@@ -1,3 +1,4 @@
+using System;
 using System.Drawing;
 using System.Globalization;
 using System.Net;
@@ -9,7 +10,7 @@ namespace PasteMystNet
 {
 
     /// <summary>
-    /// This class is used to retrieve language information from server. <seealso href="https://paste.myst.rs/api-docs/data"/>
+    /// This class is used to retrieve &amp; contain language information from server. <seealso href="https://paste.myst.rs/api-docs/data"/>
     /// </summary>
     public class PasteMystLanguage
     {
@@ -66,6 +67,24 @@ namespace PasteMystNet
                 return null;
             var content = await response.Content.ReadAsStringAsync();
             return JsonConvert.DeserializeObject<PasteMystLanguage>(content);
+        }
+
+        public override string ToString()
+        {
+            try
+            {
+                return JsonConvert.SerializeObject(this, Formatting.Indented);
+            }
+            catch (Exception error)
+            {
+                switch (error)
+                {
+                    case JsonException jsonError:
+                        throw new Exception($"An error occurred during serialization: {jsonError.Message}");
+                    default:
+                        throw;
+                }
+            }
         }
 
     }

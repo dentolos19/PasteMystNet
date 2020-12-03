@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -12,8 +12,6 @@ namespace PasteMystNet
 
     public class PasteMystEditForm
     {
-
-        private const string PatchPasteEndpoint = "https://paste.myst.rs/api/v2/paste/{0}";
 
         [JsonProperty(PropertyName = "tags", NullValueHandling = NullValueHandling.Ignore)] private string _tags;
         [JsonIgnore] private readonly string _id;
@@ -58,7 +56,7 @@ namespace PasteMystNet
             try
             {
                 var data = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(this));
-                var request = WebRequest.Create(string.Format(PatchPasteEndpoint, _id));
+                var request = WebRequest.Create(string.Format(PasteMystConstants.PatchPasteEndpoint, _id));
                 request.Method = "PATCH";
                 request.Headers.Add("Authorization", auth.Token);
                 request.ContentType = "application/json";

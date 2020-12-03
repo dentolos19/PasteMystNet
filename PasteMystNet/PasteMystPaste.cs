@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -11,9 +11,6 @@ namespace PasteMystNet
 
     public class PasteMystPaste
     {
-
-        private const string GetPasteEndpoint = "https://paste.myst.rs/api/v2/paste/{0}";
-        private const string DeletePasteEndpoint = "https://paste.myst.rs/api/v2/paste/{0}";
 
         [JsonProperty(PropertyName = "createdAt")] private readonly long _createdAt;
         [JsonProperty(PropertyName = "expiresIn")] private readonly string _expiresIn;
@@ -44,7 +41,7 @@ namespace PasteMystNet
         {
             try
             {
-                var request = WebRequest.Create(string.Format(GetPasteEndpoint, id));
+                var request = WebRequest.Create(string.Format(PasteMystConstants.GetPasteEndpoint, id));
                 request.Method = "GET";
                 if (auth != null)
                     request.Headers.Add("Authorization", auth.Token);
@@ -78,7 +75,7 @@ namespace PasteMystNet
         {
             try
             {
-                var request = WebRequest.Create(string.Format(DeletePasteEndpoint, id));
+                var request = WebRequest.Create(string.Format(PasteMystConstants.DeletePasteEndpoint, id));
                 request.Method = "DELETE";
                 request.Headers.Add("Authorization", auth.Token);
                 await request.GetResponseAsync();

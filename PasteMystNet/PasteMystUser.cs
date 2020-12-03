@@ -1,4 +1,4 @@
-﻿using System.Net;
+using System.Net;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using PasteMystNet.Internals;
@@ -8,9 +8,6 @@ namespace PasteMystNet
 
     public class PasteMystUser
     {
-
-        private const string UserExistsEndpoint = "https://paste.myst.rs/api/v2/user/{0}/exists";
-        private const string GetUserEndpoint = "https://paste.myst.rs/api/v2/user/{0}";
 
         [JsonProperty(PropertyName = "_id")] public string Id { get; private set; }
         [JsonProperty(PropertyName = "username")] public string Username { get; private set; }
@@ -22,13 +19,13 @@ namespace PasteMystNet
 
         public static async Task<bool> UserExistsAsync(string name)
         {
-            var response = await PasteMystSingleton.Instance.HttpClient.GetAsync(string.Format(UserExistsEndpoint, name));
+            var response = await PasteMystConstants.HttpClient.GetAsync(string.Format(PasteMystConstants.UserExistsEndpoint, name));
             return response.StatusCode == HttpStatusCode.OK;
         }
 
         public static async Task<PasteMystUser> GetUserAsync(string name)
         {
-            var response = await PasteMystSingleton.Instance.HttpClient.GetAsync(string.Format(GetUserEndpoint, name));
+            var response = await PasteMystConstants.HttpClient.GetAsync(string.Format(PasteMystConstants.GetUserEndpoint, name));
             if (response.StatusCode != HttpStatusCode.OK)
                 return null;
             var content = await response.Content.ReadAsStringAsync();

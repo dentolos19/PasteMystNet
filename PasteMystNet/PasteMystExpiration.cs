@@ -1,4 +1,4 @@
-﻿using PasteMystNet.Internals;
+using PasteMystNet.Internals;
 
 namespace PasteMystNet
 {

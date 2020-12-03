@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.IO;
 using System.Net;
 using System.Text;
@@ -11,8 +11,6 @@ namespace PasteMystNet
 
     public class PasteMystPasteForm
     {
-
-        private const string PostPasteEndpoint = "https://paste.myst.rs/api/v2/paste";
 
         [JsonProperty(PropertyName = "tags", NullValueHandling = NullValueHandling.Ignore)] private string _tags;
         [JsonProperty(PropertyName = "expiresIn")] private string _expiresIn;
@@ -46,7 +44,7 @@ namespace PasteMystNet
             try
             {
                 var data = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(this));
-                var request = WebRequest.Create(PostPasteEndpoint);
+                var request = WebRequest.Create(PasteMystConstants.PostPasteEndpoint);
                 request.Method = "POST";
                 request.ContentType = "application/json";
                 request.ContentLength = data.Length;

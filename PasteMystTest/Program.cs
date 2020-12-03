@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using PasteMystNet;
 
 namespace PasteMystTest
@@ -11,8 +11,11 @@ namespace PasteMystTest
         {
 
             Console.Title = "PasteMyst.NET";
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.BackgroundColor = ConsoleColor.Black;
 
             Selection:
+
             Console.Clear();
             Console.WriteLine("PasteMyst.NET");
             Console.WriteLine();
@@ -182,8 +185,8 @@ namespace PasteMystTest
                 Console.WriteLine();
 
             }
-
-        #endregion
+            
+            #endregion
 
             SelectionTwo:
 

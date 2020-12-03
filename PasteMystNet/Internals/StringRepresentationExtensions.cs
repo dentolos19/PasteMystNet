@@ -1,4 +1,4 @@
-﻿namespace PasteMystNet.Internals
+namespace PasteMystNet.Internals
 {
 
     internal static class StringRepresentationExtensions

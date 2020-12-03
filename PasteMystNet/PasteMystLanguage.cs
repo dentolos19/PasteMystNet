@@ -1,4 +1,4 @@
-﻿using System.Drawing;
+using System.Drawing;
 using System.Globalization;
 using System.Net;
 using System.Threading.Tasks;
@@ -10,9 +10,6 @@ namespace PasteMystNet
 
     public class PasteMystLanguage
     {
-
-        private const string IdentifyByNameEndpoint = "https://paste.myst.rs/api/v2/data/language?name={0}";
-        private const string IdentifyByExtensionEndpoint = "https://paste.myst.rs/api/v2/data/languageExt?extension={0}";
 
         [JsonProperty(PropertyName = "name")] public string Name { get; private set; }
         [JsonProperty(PropertyName = "mode")] public string Mode { get; private set; }
@@ -46,7 +43,7 @@ namespace PasteMystNet
 
         public static async Task<PasteMystLanguage> IdentifyByNameAsync(string name)
         {
-            var response = await PasteMystSingleton.Instance.HttpClient.GetAsync(string.Format(IdentifyByNameEndpoint, name));
+            var response = await PasteMystConstants.HttpClient.GetAsync(string.Format(PasteMystConstants.IdentifyByNameEndpoint, name));
             if (response.StatusCode != HttpStatusCode.OK)
                 return null;
             var content = await response.Content.ReadAsStringAsync();
@@ -55,7 +52,7 @@ namespace PasteMystNet
 
         public static async Task<PasteMystLanguage> IdentifyByExtensionAsync(string extension)
         {
-            var response = await PasteMystSingleton.Instance.HttpClient.GetAsync(string.Format(IdentifyByExtensionEndpoint, extension));
+            var response = await PasteMystConstants.HttpClient.GetAsync(string.Format(PasteMystConstants.IdentifyByExtensionEndpoint, extension));
             if (response.StatusCode != HttpStatusCode.OK)
                 return null;
             var content = await response.Content.ReadAsStringAsync();

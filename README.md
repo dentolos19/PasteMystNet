@@ -9,7 +9,7 @@
 
 A simple .NET API wrapper for PasteMyst!
 
-[![](https://img.shields.io/nuget/v/PasteMystNet?label=Available%20On%20NuGet&logo=nuget&style=for-the-badge)](https://www.nuget.org/packages/PasteMystNet)
+[![](https://img.shields.io/nuget/v/PasteMystNet?label=NuGet&logo=nuget&style=for-the-badge)](https://www.nuget.org/packages/PasteMystNet)
 
   </tr>
 </table>

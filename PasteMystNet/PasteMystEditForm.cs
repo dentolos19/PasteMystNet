@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -22,8 +23,8 @@ namespace PasteMystNet
         [JsonProperty(PropertyName = "title")] public string Title { get; set; }
         [JsonProperty(PropertyName = "isPrivate", NullValueHandling = NullValueHandling.Ignore)] public bool? IsPrivate { get; set; }
         [JsonProperty(PropertyName = "isPublic", NullValueHandling = NullValueHandling.Ignore)] public bool? IsPublic { get; set; }
-        [JsonProperty(PropertyName = "pasties")] public PasteMystPastyForm[] Pasties { get; set; }
-        [JsonIgnore] public string[] Tags { get; set; }
+        [JsonProperty(PropertyName = "pasties")] public List<PasteMystPastyForm> Pasties { get; private set; }
+        [JsonIgnore] public List<string> Tags { get; private set; } = new List<string>();
 
         internal PasteMystEditForm(PasteMystPaste paste)
         {
@@ -35,9 +36,9 @@ namespace PasteMystNet
                 Title = pasty.Title,
                 Language = pasty.Language,
                 Code = pasty.Code
-            }).ToArray();
+            }).ToList();
             if (paste.Tags != null && paste.Tags.Length > 0)
-                Tags = paste.Tags;
+                Tags = paste.Tags.ToList();
         }
 
         /// <summary>
@@ -45,11 +46,11 @@ namespace PasteMystNet
         /// </summary>
         public async Task<PasteMystPaste> PatchPasteAsync(PasteMystAuth auth)
         {
-            if (Pasties == null || Pasties.Length <= 0)
+            if (Pasties == null || Pasties.Count <= 0)
                 throw new Exception($"{nameof(Pasties)} must not be null or empty.");
             foreach (var paste in Pasties)
             {
-                var pasteId = $"{nameof(Pasties)}[{Array.IndexOf(Pasties, paste)}]";
+                var pasteId = $"{nameof(Pasties)}[{Pasties.IndexOf(paste)}]";
                 if (string.IsNullOrEmpty(paste.Title))
                     paste.Title = string.Empty;
                 if (string.IsNullOrEmpty(paste.Language))
@@ -57,7 +58,7 @@ namespace PasteMystNet
                 if (string.IsNullOrEmpty(paste.Code))
                     throw new Exception($"{pasteId} doesn't contain code content.");
             }
-            if (Tags != null && Tags.Length > 0)
+            if (Tags != null && Tags.Count > 0)
                 _tags = string.Join(",", Tags);
             try
             {

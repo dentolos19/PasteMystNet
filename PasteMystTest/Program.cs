@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using PasteMystNet;
 
 namespace PasteMystTest
@@ -48,7 +49,7 @@ namespace PasteMystTest
             {
                 Title = "PasteMyst.NET",
                 ExpireDuration = PasteMystExpiration.OneHour,
-                Pasties = new[]
+                Pasties = new List<PasteMystPastyForm>
                 {
                     new PasteMystPastyForm
                     {
@@ -63,8 +64,14 @@ namespace PasteMystTest
                                "\n" +
                                "main()"
                     }
-                }
+                },
             };
+
+            if (auth != null)
+            {
+                paste.Tags.Add("dotnet");
+                paste.Tags.Add("visualstudio");
+            }
 
             #region Posting Paste
 
@@ -96,13 +103,13 @@ namespace PasteMystTest
 
             #region Editing Paste
 
-            PasteMystPaste editResult;
-
             if (auth != null)
             {
 
                 Console.WriteLine("===================================");
                 Console.WriteLine();
+
+                PasteMystPaste editResult;
 
                 try
                 {
@@ -110,6 +117,7 @@ namespace PasteMystTest
                     form.Title += " (Edited)";
                     form.IsPublic = true;
                     form.Pasties[0].Code += " This is an edit.";
+                    form.Tags.Add("edited");
                     Console.WriteLine("Patching paste to server...");
                     editResult = form.PatchPasteAsync(auth).Result;
                     Console.WriteLine("Patched paste to server!");

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Text;
@@ -21,22 +22,22 @@ namespace PasteMystNet
         [JsonProperty(PropertyName = "title", NullValueHandling = NullValueHandling.Ignore)] public string Title { get; set; }
         [JsonProperty(PropertyName = "isPrivate")] public bool IsPrivate { get; set; }
         [JsonProperty(PropertyName = "isPublic")] public bool IsPublic { get; set; }
-        [JsonProperty(PropertyName = "pasties")] public PasteMystPastyForm[] Pasties { get; set; }
-        [JsonIgnore] public string[] Tags { get; set; }
+        [JsonProperty(PropertyName = "pasties")] public List<PasteMystPastyForm> Pasties { get; set; } = new List<PasteMystPastyForm>();
+        [JsonIgnore] public List<string> Tags { get; set; } = new List<string>();
         [JsonIgnore] public PasteMystExpiration ExpireDuration { get; set; } = PasteMystExpiration.Never;
 
         /// <summary>
-        /// Posts paste to server. If you're uploading the paste to your profile, provide <see cref="PasteMystAuth"/> for authorization.
+        /// Posts paste to server. If you're uploading a paste to your profile, provide <see cref="PasteMystAuth"/> for authorization.
         /// </summary>
         public async Task<PasteMystPaste> PostPasteAsync(PasteMystAuth auth = null)
         {
-            if ((Tags != null || Tags?.Length <= 0 || IsPrivate || IsPublic) && auth == null)
+            if ((Tags?.Count > 0 || IsPrivate || IsPublic) && auth == null)
                 throw new ArgumentNullException(nameof(auth));
-            if (Pasties == null || Pasties.Length <= 0)
+            if (Pasties == null || Pasties.Count <= 0)
                 throw new Exception($"{nameof(Pasties)} must not be null or empty.");
             foreach (var paste in Pasties)
             {
-                var pasteId = $"{nameof(Pasties)}[{Array.IndexOf(Pasties, paste)}]";
+                var pasteId = $"{nameof(Pasties)}[{Pasties.IndexOf(paste)}]";
                 if (string.IsNullOrEmpty(paste.Title))
                     paste.Title = string.Empty;
                 if (string.IsNullOrEmpty(paste.Language))

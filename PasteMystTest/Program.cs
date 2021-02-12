@@ -12,7 +12,7 @@ namespace PasteMystTest
         {
 
             Console.Title = "PasteMyst.NET";
-            Console.ForegroundColor = ConsoleColor.Green;
+            Console.ForegroundColor = ConsoleColor.White;
             Console.BackgroundColor = ConsoleColor.Black;
 
             Selection:

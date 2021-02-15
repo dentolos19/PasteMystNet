@@ -14,37 +14,22 @@ namespace PasteMystTest
             Console.Title = "PasteMyst.NET";
             Console.ForegroundColor = ConsoleColor.White;
             Console.BackgroundColor = ConsoleColor.Black;
-
-            Selection:
-
             Console.Clear();
-            Console.WriteLine("PasteMyst.NET");
-            Console.WriteLine();
-            Console.WriteLine("[1] Posting, Editing, Getting & Deleting Paste");
-            Console.WriteLine("[2] Identifying Languages");
-            Console.WriteLine("[3] Getting Users Info");
-            Console.WriteLine();
-            Console.Write("> ");
-            var input = Console.ReadKey();
-            Console.WriteLine();
-            Console.WriteLine();
-            switch (input.Key)
-            {
-                case ConsoleKey.D1:
-                    goto SelectionOne;
-                case ConsoleKey.D2:
-                    goto SelectionTwo;
-                case ConsoleKey.D3:
-                    goto SelectionThree;
-                default:
-                    goto Selection;
-            }
-
-            SelectionOne:
 
             PasteMystAuth auth = null;
-            // auth = new PasteMystAuth("<TOKEN>");
-
+            
+            Console.WriteLine("PasteMyst.NET");
+            Console.WriteLine();
+            
+            Console.WriteLine("Enter your auth token... Leave blank to set empty.");
+            Console.Write("> ");
+            var input = Console.ReadLine();
+            if (!string.IsNullOrEmpty(input))
+            {
+                auth = new PasteMystAuth(input);
+            }
+            Console.WriteLine();
+            
             var paste = new PasteMystPasteForm
             {
                 Title = "PasteMyst.NET",
@@ -195,9 +180,7 @@ namespace PasteMystTest
             }
             
             #endregion
-
-            SelectionTwo:
-
+            
             #region Identifying Languages
 
             Console.WriteLine("===================================");
@@ -225,10 +208,8 @@ namespace PasteMystTest
             Console.ReadKey();
             Console.WriteLine();
 
-        #endregion
-
-            SelectionThree:
-
+            #endregion
+            
             #region Getting Users Info
 
             Console.WriteLine("===================================");
@@ -253,13 +234,13 @@ namespace PasteMystTest
             Console.WriteLine(ObjectDumper.Dump(userResult));
 
             #endregion
-
+            
             End:
             Console.WriteLine();
             Console.WriteLine("====== PRESS ANY KEY TO EXIT ======");
             Console.ReadKey();
             Environment.Exit(Environment.ExitCode);
-
+            
         }
 
     }

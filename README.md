@@ -16,9 +16,10 @@ A simple .NET API wrapper for PasteMyst!
 
 A simple API wrapper for [PasteMyst](https://paste.myst.rs)! It is really simple to use and works with almost any platform, get started using this library by following the instructions below.
 
-First of all, install the library on your project by entering this command into your package manager console, or just search it in the package manager.
+First of all, install the library on your project by entering this command respectively.
 
-`Install-Package PasteMystNet`
+- .NET CLI: `dotnet add package PasteMystNet`
+- Package Manager: `Install-Package PasteMystNet`
 
 Instructions on how to use this library for latest versions...
 

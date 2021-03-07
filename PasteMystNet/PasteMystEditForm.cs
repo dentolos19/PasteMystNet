@@ -37,7 +37,7 @@ namespace PasteMystNet
                 Language = pasty.Language,
                 Code = pasty.Code
             }).ToList();
-            if (paste.Tags != null && paste.Tags.Length > 0)
+            if (paste.Tags.Length > 0)
                 Tags = paste.Tags.ToList();
         }
 
@@ -58,7 +58,7 @@ namespace PasteMystNet
                 if (string.IsNullOrEmpty(paste.Code))
                     throw new Exception($"{pasteId} doesn't contain code content.");
             }
-            if (Tags != null && Tags.Count > 0)
+            if (Tags.Count > 0)
                 _tags = string.Join(",", Tags);
             try
             {

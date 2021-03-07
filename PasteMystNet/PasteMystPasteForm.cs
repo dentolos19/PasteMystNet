@@ -31,7 +31,7 @@ namespace PasteMystNet
         /// </summary>
         public async Task<PasteMystPaste> PostPasteAsync(PasteMystAuth auth = null)
         {
-            if ((Tags?.Count > 0 || IsPrivate || IsPublic) && auth == null)
+            if ((Tags.Count > 0 || IsPrivate || IsPublic) && auth == null)
                 throw new ArgumentNullException(nameof(auth));
             if (Pasties == null || Pasties.Count <= 0)
                 throw new Exception($"{nameof(Pasties)} must not be null or empty.");

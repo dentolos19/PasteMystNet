@@ -24,7 +24,7 @@ First of all, install the library on your project by entering this command respe
 Instructions on how to use this library for latest versions...
 
 - [click here to view usage wiki page](https://github.com/dentolos19/PasteMystNet/wiki/Usage)
-- [click here to view project sample](./PasteMystTest/Program.cs)
+- [click here to view tests sample](./PasteMystNet.Tests/Operations.cs)
 
 And for eariler versions...
 

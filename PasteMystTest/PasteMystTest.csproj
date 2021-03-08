@@ -16,11 +16,11 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="ObjectDumper.NET" Version="3.0.20251.1"/>
+		<PackageReference Include="ObjectDumper.NET" Version="3.0.20251.1" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\PasteMystNet\PasteMystNet.csproj"/>
+	  <ProjectReference Include="..\PasteMystNet\PasteMystNet.csproj" />
 	</ItemGroup>
 
 </Project>

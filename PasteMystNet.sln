@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.30114.105
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PasteMystNet", "PasteMystNet\PasteMystNet.csproj", "{AD8BEEDC-4AAC-47EA-8412-312D9380F5D6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PasteMystTest", "PasteMystTest\PasteMystTest.csproj", "{16AD6A08-EBC3-4A35-B306-3FCA486FE179}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PasteMystNet.Tests", "PasteMystNet.Tests\PasteMystNet.Tests.csproj", "{F90F6F2B-03B8-4101-893C-9591EBA3C439}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{AD8BEEDC-4AAC-47EA-8412-312D9380F5D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AD8BEEDC-4AAC-47EA-8412-312D9380F5D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AD8BEEDC-4AAC-47EA-8412-312D9380F5D6}.Release|Any CPU.Build.0 = Release|Any CPU
-		{16AD6A08-EBC3-4A35-B306-3FCA486FE179}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{16AD6A08-EBC3-4A35-B306-3FCA486FE179}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{16AD6A08-EBC3-4A35-B306-3FCA486FE179}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{16AD6A08-EBC3-4A35-B306-3FCA486FE179}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F90F6F2B-03B8-4101-893C-9591EBA3C439}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F90F6F2B-03B8-4101-893C-9591EBA3C439}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F90F6F2B-03B8-4101-893C-9591EBA3C439}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F90F6F2B-03B8-4101-893C-9591EBA3C439}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

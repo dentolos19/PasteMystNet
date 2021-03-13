@@ -1,18 +1,17 @@
-<table>
-  <tr>
-    <td align="center" width="25%">
-      <img src="./.github/icon.png">
-    </td>
-    <td align="center" width="75%">
+<div align="center">
 
-# PasteMystNet
+<img src="./.github/icon.png" width="200"/>
 
-A simple .NET API wrapper for PasteMyst!
+</div>
 
-[![](https://img.shields.io/nuget/v/PasteMystNet?label=NuGet&logo=nuget&style=for-the-badge)](https://www.nuget.org/packages/PasteMystNet)
+<h1 align="center">PasteMystNet</h1>
+<div align="center">
 
-  </tr>
-</table>
+[![](https://img.shields.io/badge/Powered%20By-.NET-blue?logo=microsoft&style=flat-square)](https://dotnet.microsoft.com)
+[![](https://img.shields.io/badge/Made%20With-Rider-blue?logo=jetbrains&style=flat-square)](https://www.jetbrains.com/rider)
+[![](https://img.shields.io/nuget/v/PasteMystNet?label=NuGet&logo=nuget&style=flat-square)](https://www.nuget.org/packages/PasteMystNet)
+
+</div>
 
 A simple API wrapper for [PasteMyst](https://paste.myst.rs)! It is really simple to use and works with almost any platform, get started using this library by following the instructions below.
 

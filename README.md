@@ -1,10 +1,11 @@
 <div align="center">
 
-<img src="./.github/icon.png" width="200"/>
+<img src="./.github/icon.png" width="100"/>
 
 </div>
 
 <h1 align="center">PasteMystNet</h1>
+
 <div align="center">
 
 [![](https://img.shields.io/badge/Powered%20By-.NET-blue?logo=microsoft&style=flat-square)](https://dotnet.microsoft.com)

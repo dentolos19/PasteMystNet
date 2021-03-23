@@ -38,29 +38,29 @@ namespace PasteMystNet.Tests
         }
         
         [Test]
-        public static async Task TestPastePoster()
+        public static async Task PostPasteTest()
         {
             _ = await TemplateForm.PostPasteAsync();
         }
 
         [Test]
-        public static async Task TestPasteGetter()
+        public static async Task GetPasteTest()
         {
             _ = await PasteMystPaste.GetPasteAsync("4jec5of5");
         }
 
         [Test]
-        public static async Task TestLanguageIdentifier()
+        public static async Task LanguageDataTest()
         {
-            _ = await PasteMystLanguage.IdentifyByExtensionAsync("cs");
-            _ = await PasteMystLanguage.IdentifyByNameAsync("C#");
+            Assert.IsNotNull(await PasteMystLanguage.IdentifyByExtensionAsync("cs"));
+            Assert.IsNotNull(await PasteMystLanguage.IdentifyByNameAsync("C#"));
         }
 
         [Test]
-        public static async Task TestUserGetter()
+        public static async Task UserDataTest()
         {
             _ = await PasteMystUser.UserExistsAsync("codemyst");
-            _ = await PasteMystUser.GetUserAsync("codemyst");
+            Assert.IsNotNull(await PasteMystUser.GetUserAsync("codemyst"));
         }
 
     }

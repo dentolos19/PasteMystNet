@@ -23,8 +23,8 @@ namespace PasteMystNet
         [JsonProperty(PropertyName = "title")] public string Title { get; set; }
         [JsonProperty(PropertyName = "isPrivate", NullValueHandling = NullValueHandling.Ignore)] public bool? IsPrivate { get; set; }
         [JsonProperty(PropertyName = "isPublic", NullValueHandling = NullValueHandling.Ignore)] public bool? IsPublic { get; set; }
-        [JsonProperty(PropertyName = "pasties")] public List<PasteMystPastyForm> Pasties { get; private set; }
-        [JsonIgnore] public List<string> Tags { get; private set; } = new List<string>();
+        [JsonProperty(PropertyName = "pasties")] public List<PasteMystPastyForm> Pasties { get; set; }
+        [JsonIgnore] public List<string> Tags { get; set; } = new List<string>();
 
         internal PasteMystEditForm(PasteMystPaste paste)
         {

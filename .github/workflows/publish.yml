@@ -1,0 +1,21 @@
+name: Automatic Package Publishing
+on: [workflow_dispatch]
+jobs:
+  task:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2.3.2
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1.7.2
+      with:
+        dotnet-version: 5.0.x
+    - name: Restore Dependencies
+      run: dotnet restore
+    - name: Build Project
+      run: dotnet build --no-restore
+    - name: Pack Package
+      run: dotnet pack --no-build --output ./output
+    - name: Push To GitHub Packages
+      run: dotnet nuget push ./output/*.nupkg --source https://nuget.pkg.github.com/dentolos19/index.json --api-key ${ACCESS_TOKEN} --skip-duplicate
+      env:
+        ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}

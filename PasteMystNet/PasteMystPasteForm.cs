@@ -22,8 +22,8 @@ namespace PasteMystNet
         [JsonProperty(PropertyName = "title", NullValueHandling = NullValueHandling.Ignore)] public string Title { get; set; }
         [JsonProperty(PropertyName = "isPrivate")] public bool IsPrivate { get; set; }
         [JsonProperty(PropertyName = "isPublic")] public bool IsPublic { get; set; }
-        [JsonProperty(PropertyName = "pasties")] public List<PasteMystPastyForm> Pasties { get; set; } = new List<PasteMystPastyForm>();
-        [JsonIgnore] public List<string> Tags { get; set; } = new List<string>();
+        [JsonProperty(PropertyName = "pasties")] public IList<PasteMystPastyForm>? Pasties { get; set; } = new List<PasteMystPastyForm>();
+        [JsonIgnore] public IList<string>? Tags { get; set; } = new List<string>();
         [JsonIgnore] public PasteMystExpiration ExpireDuration { get; set; } = PasteMystExpiration.Never;
 
         /// <summary>
@@ -31,7 +31,9 @@ namespace PasteMystNet
         /// </summary>
         public async Task<PasteMystPaste> PostPasteAsync(PasteMystAuth auth = null)
         {
-            if ((Tags.Count > 0 || IsPrivate || IsPublic) && auth == null)
+            if ((IsPrivate || IsPublic) && auth == null)
+                throw new ArgumentNullException(nameof(auth));
+            if (Tags != null && Tags.Count > 0 && auth == null)
                 throw new ArgumentNullException(nameof(auth));
             if (Pasties == null || Pasties.Count <= 0)
                 throw new Exception($"{nameof(Pasties)} must not be null or empty.");

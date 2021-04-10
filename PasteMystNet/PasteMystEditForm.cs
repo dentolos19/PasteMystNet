@@ -23,8 +23,8 @@ namespace PasteMystNet
         [JsonProperty(PropertyName = "title")] public string Title { get; set; }
         [JsonProperty(PropertyName = "isPrivate", NullValueHandling = NullValueHandling.Ignore)] public bool? IsPrivate { get; set; }
         [JsonProperty(PropertyName = "isPublic", NullValueHandling = NullValueHandling.Ignore)] public bool? IsPublic { get; set; }
-        [JsonProperty(PropertyName = "pasties")] public List<PasteMystPastyForm> Pasties { get; set; }
-        [JsonIgnore] public List<string> Tags { get; set; } = new List<string>();
+        [JsonProperty(PropertyName = "pasties")] public IList<PasteMystPastyForm>? Pasties { get; set; }
+        [JsonIgnore] public IList<string>? Tags { get; set; } = new List<string>();
 
         internal PasteMystEditForm(PasteMystPaste paste)
         {
@@ -58,6 +58,7 @@ namespace PasteMystNet
                 if (string.IsNullOrEmpty(paste.Code))
                     throw new Exception($"{pasteId} doesn't contain code content.");
             }
+            Tags ??= new List<string>();
             if (Tags.Count > 0)
                 _tags = string.Join(",", Tags);
             try

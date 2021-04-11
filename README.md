@@ -4,7 +4,7 @@
 
 </div>
 
-<h1 align="center">PasteMystNet</h1>
+<h1 align="center">PasteMyst.NET</h1>
 
 <div align="center">
 

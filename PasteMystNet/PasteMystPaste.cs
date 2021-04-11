@@ -16,7 +16,6 @@ namespace PasteMystNet
     {
 
         [JsonProperty(PropertyName = "createdAt")] private readonly long _createdAt;
-        [JsonProperty(PropertyName = "expiresIn")] private readonly string _expiresIn;
         [JsonProperty(PropertyName = "deletesAt")] private readonly long _deletesAt;
 
         [JsonProperty(PropertyName = "_id")] public string Id { get; private set; }
@@ -29,10 +28,10 @@ namespace PasteMystNet
         [JsonProperty(PropertyName = "tags")] public string[] Tags { get; private set; }
         [JsonProperty(PropertyName = "pasties")] public PasteMystPasty[] Pasties { get; private set; }
         [JsonProperty(PropertyName = "edits")] public PasteMystEdit[] Edits { get; private set; }
+        [JsonProperty(PropertyName = "expiresIn")] public string ExpireDuration { get; private set; }
         [JsonIgnore] public string Url => PasteMystConstants.BaseEndpoint + $"/{Id}";
         [JsonIgnore] public bool HasOwner => !string.IsNullOrEmpty(OwnerId);
         [JsonIgnore] public DateTime CreationTime => DateTimeOffset.FromUnixTimeSeconds(_createdAt).DateTime;
-        [JsonIgnore] public PasteMystExpiration ExpireDuration => Enum.GetValues(typeof(PasteMystExpiration)).Cast<PasteMystExpiration>().FirstOrDefault(item => item.GetStringRepresentation() == _expiresIn);
         [JsonIgnore] public DateTime DeletionTime => DateTimeOffset.FromUnixTimeSeconds(_deletesAt).DateTime;
 
         /// <summary>

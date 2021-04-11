@@ -17,14 +17,13 @@ namespace PasteMystNet
     {
 
         [JsonProperty(PropertyName = "tags", NullValueHandling = NullValueHandling.Ignore)] private string _tags;
-        [JsonProperty(PropertyName = "expiresIn")] private string _expiresIn;
 
         [JsonProperty(PropertyName = "title", NullValueHandling = NullValueHandling.Ignore)] public string Title { get; set; }
         [JsonProperty(PropertyName = "isPrivate")] public bool IsPrivate { get; set; }
         [JsonProperty(PropertyName = "isPublic")] public bool IsPublic { get; set; }
         [JsonProperty(PropertyName = "pasties")] public IList<PasteMystPastyForm>? Pasties { get; set; } = new List<PasteMystPastyForm>();
+        [JsonProperty(PropertyName = "expiresIn")] public string ExpireDuration { get; set; } = PasteMystExpirations.Never;
         [JsonIgnore] public IList<string>? Tags { get; set; } = new List<string>();
-        [JsonIgnore] public PasteMystExpiration ExpireDuration { get; set; } = PasteMystExpiration.Never;
 
         /// <summary>
         /// Posts paste to server. If you're uploading a paste to your profile, provide <see cref="PasteMystAuth"/> for authorization.
@@ -49,7 +48,6 @@ namespace PasteMystNet
             }
             if (Tags != null)
                 _tags = string.Join(",", Tags);
-            _expiresIn = ExpireDuration.GetStringRepresentation();
             try
             {
                 var data = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(this));

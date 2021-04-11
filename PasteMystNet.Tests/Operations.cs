@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using NUnit.Framework;
 
@@ -18,7 +19,7 @@ namespace PasteMystNet.Tests
             TemplateForm = new PasteMystPasteForm
             {
                 Title = "PasteMyst.NET",
-                ExpireDuration = PasteMystExpiration.OneHour,
+                ExpireDuration = PasteMystExpirations.OneHour,
                 Pasties = new List<PasteMystPastyForm>
                 {
                     new()
@@ -39,35 +40,42 @@ namespace PasteMystNet.Tests
         }
         
         [Test]
-        public static async Task PostPasteTest()
+        public static void PostPasteTest()
         {
-            _ = await TemplateForm.PostPasteAsync();
-        }
-
-        [Test]
-        public static async Task PatchPasteTest()
-        {
-            if (UserAuth is null)
-                return;
-            var paste = await TemplateForm.PostPasteAsync(UserAuth);
-            var edit = paste.CreateEditForm();
-            edit.Title += " (Edited)";
-            _ = await edit.PatchPasteAsync(UserAuth);
+            Assert.DoesNotThrowAsync(async () => _ = await TemplateForm.PostPasteAsync());
         }
         
         [Test]
-        public static async Task GetPasteTest()
+        public static void GetPasteTest()
         {
-            _ = await PasteMystPaste.GetPasteAsync("4jec5of5");
+            Assert.DoesNotThrowAsync(async () => _ = await PasteMystPaste.GetPasteAsync("4jec5of5"));
         }
 
         [Test]
-        public static async Task DeletePasteTest()
+        public static void PatchPasteTest()
         {
             if (UserAuth is null)
                 return;
-            var paste = await TemplateForm.PostPasteAsync(UserAuth);
-            await PasteMystPaste.DeletePasteAsync(paste.Id, UserAuth);
+            Assert.DoesNotThrowAsync(async () =>
+            {
+                var before = await TemplateForm.PostPasteAsync(UserAuth);
+                var edit = before.CreateEditForm();
+                edit.Title += " (Edited)";
+                _ = await edit.PatchPasteAsync(UserAuth);
+            });
+        }
+
+        [Test]
+        public static void DeletePasteTest()
+        {
+            if (UserAuth is null)
+                return;
+            Assert.ThrowsAsync<Exception>(async () =>
+            {
+                var paste = await TemplateForm.PostPasteAsync(UserAuth);
+                await PasteMystPaste.DeletePasteAsync(paste.Id, UserAuth);
+                _ = await PasteMystPaste.GetPasteAsync(paste.Id);
+            });
         }
 
         [Test]

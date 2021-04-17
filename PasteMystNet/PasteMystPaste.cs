@@ -19,15 +19,15 @@ namespace PasteMystNet
         [JsonProperty(PropertyName = "deletesAt")] private readonly long _deletesAt;
 
         [JsonProperty(PropertyName = "_id")] public string Id { get; private set; }
-        [JsonProperty(PropertyName = "ownerId")] public string OwnerId { get; private set; }
+        [JsonProperty(PropertyName = "ownerId")] public string? OwnerId { get; private set; }
         [JsonProperty(PropertyName = "title")] public string Title { get; private set; }
         [JsonProperty(PropertyName = "stars")] public uint Stars { get; private set; }
         [JsonProperty(PropertyName = "isPrivate")] public bool IsPrivate { get; private set; }
         [JsonProperty(PropertyName = "isPublic")] public bool IsPublic { get; private set; }
         [JsonProperty(PropertyName = "encrypted")] public bool IsEncrypted { get; private set; }
-        [JsonProperty(PropertyName = "tags")] public string[] Tags { get; private set; }
+        [JsonProperty(PropertyName = "tags")] public string[]? Tags { get; private set; }
         [JsonProperty(PropertyName = "pasties")] public PasteMystPasty[] Pasties { get; private set; }
-        [JsonProperty(PropertyName = "edits")] public PasteMystEdit[] Edits { get; private set; }
+        [JsonProperty(PropertyName = "edits")] public PasteMystEdit[]? Edits { get; private set; }
         [JsonProperty(PropertyName = "expiresIn")] public string ExpireDuration { get; private set; }
         [JsonIgnore] public string Url => PasteMystConstants.BaseEndpoint + $"/{Id}";
         [JsonIgnore] public bool HasOwner => !string.IsNullOrEmpty(OwnerId);
@@ -45,7 +45,7 @@ namespace PasteMystNet
         /// <summary>
         /// Retrieves paste from server. If you're accessing a private paste, provide <see cref="PasteMystAuth"/> for authorization.
         /// </summary>
-        public static async Task<PasteMystPaste> GetPasteAsync(string id, PasteMystAuth auth = null)
+        public static async Task<PasteMystPaste?> GetPasteAsync(string id, PasteMystAuth? auth = null)
         {
             try
             {
@@ -69,7 +69,7 @@ namespace PasteMystNet
                         if (string.IsNullOrEmpty(content))
                             throw new Exception("The server returned an exception with unknown reasons.");
                         var response = JsonConvert.DeserializeObject<PasteMystResponse>(content);
-                        throw new Exception($"The server returned an exception: {response.Message}");
+                        throw new Exception(response == null ? "The server returned an exception with unknown reasons." : $"The server returned an exception: {response.Message}");
                     }
                     case JsonException jsonError:
                         throw new Exception($"An error occurred during serialization: {jsonError.Message}");
@@ -102,7 +102,7 @@ namespace PasteMystNet
                         if (string.IsNullOrEmpty(content))
                             throw new Exception("The server returned an exception with unknown reasons.");
                         var response = JsonConvert.DeserializeObject<PasteMystResponse>(content);
-                        throw new Exception($"The server returned an exception: {response.Message}");
+                        throw new Exception(response == null ? "The server returned an exception with unknown reasons." : $"The server returned an exception: {response.Message}");
                     }
                     default:
                         throw;

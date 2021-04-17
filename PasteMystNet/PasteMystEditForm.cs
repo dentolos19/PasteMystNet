@@ -17,7 +17,7 @@ namespace PasteMystNet
     public class PasteMystEditForm
     {
 
-        [JsonProperty(PropertyName = "tags", NullValueHandling = NullValueHandling.Ignore)] private string _tags;
+        [JsonProperty(PropertyName = "tags", NullValueHandling = NullValueHandling.Ignore)] private string? _tags;
         [JsonIgnore] private readonly string _id;
 
         [JsonProperty(PropertyName = "title")] public string Title { get; set; }
@@ -44,7 +44,7 @@ namespace PasteMystNet
         /// <summary>
         /// Patches paste to server.
         /// </summary>
-        public async Task<PasteMystPaste> PatchPasteAsync(PasteMystAuth auth)
+        public async Task<PasteMystPaste?> PatchPasteAsync(PasteMystAuth auth)
         {
             if (Pasties == null || Pasties.Count <= 0)
                 throw new Exception($"{nameof(Pasties)} must not be null or empty.");
@@ -87,7 +87,7 @@ namespace PasteMystNet
                         if (string.IsNullOrEmpty(content))
                             throw new Exception("The server returned an exception with unknown reasons.");
                         var response = JsonConvert.DeserializeObject<PasteMystResponse>(content);
-                        throw new Exception($"The server returned an exception: {response.Message}");
+                        throw new Exception(response == null ? "The server returned an exception with unknown reasons." : $"The server returned an exception: {response.Message}");
                     }
                     case JsonException jsonError:
                         throw new Exception($"An error occurred during serialization: {jsonError.Message}");

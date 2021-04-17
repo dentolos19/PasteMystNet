@@ -19,6 +19,7 @@ namespace PasteMystNet
         [JsonProperty(PropertyName = "defaultLang")] public string DefaultLanguage { get; private set; }
         [JsonProperty(PropertyName = "publicProfile")] public bool HasPublicProfile { get; private set; }
         [JsonProperty(PropertyName = "supporterLength")] public uint SupporterLength { get; private set; }
+        [JsonIgnore] public string ProfileUrl => PasteMystConstants.BaseEndpoint + "/users/" + Username;
         [JsonIgnore] public bool IsSupporter => SupporterLength != 0;
 
         /// <summary>

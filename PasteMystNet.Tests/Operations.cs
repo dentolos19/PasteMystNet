@@ -10,45 +10,53 @@ namespace PasteMystNet.Tests
     internal static class Operations
     {
 
-        private static PasteMystAuth UserAuth { get; set; }
-        private static PasteMystPasteForm TemplateForm { get; set; }
-
-        [SetUp]
-        public static void SetupTests()
+        private static PasteMystAuth UserAuth { get; }
+        private static PasteMystPasteForm TemplateForm { get; } = new()
         {
-            TemplateForm = new PasteMystPasteForm
+            Title = "PasteMyst.NET",
+            ExpireDuration = PasteMystExpirations.OneHour,
+            Pasties = new List<PasteMystPastyForm>
             {
-                Title = "PasteMyst.NET",
-                ExpireDuration = PasteMystExpirations.OneHour,
-                Pasties = new List<PasteMystPastyForm>
+                new()
                 {
-                    new()
-                    {
-                        Language = "Plain Text",
-                        Code = "Hello World!"
-                    },
-                    new()
-                    {
-                        Title = "test.py",
-                        Code = "def main():" + "\n" +
-                               "    print('Hello World')" + "\n" +
-                               "\n" +
-                               "main()"
-                    }
+                    Language = "Plain Text",
+                    Code = "Hello World!"
                 },
-            };
-        }
-        
+                new()
+                {
+                    Title = "test.py",
+                    Code = "def main():" + "\n" +
+                           "    print('Hello World')" + "\n" +
+                           "\n" +
+                           "main()"
+                }
+            },
+        };
+
         [Test]
         public static void PostPasteTest()
         {
-            Assert.DoesNotThrowAsync(async () => _ = await TemplateForm.PostPasteAsync());
+            Assert.DoesNotThrowAsync(async () =>
+            {
+                var paste = await TemplateForm.PostPasteAsync();
+                Assert.IsNotNull(paste);
+                Console.WriteLine("=====> PASTE <=====");
+                Console.WriteLine(ObjectDumper.Dump(paste));
+                Console.WriteLine();
+            });
         }
         
         [Test]
         public static void GetPasteTest()
         {
-            Assert.DoesNotThrowAsync(async () => _ = await PasteMystPaste.GetPasteAsync("4jec5of5"));
+            Assert.DoesNotThrowAsync(async () =>
+            {
+                var paste = await PasteMystPaste.GetPasteAsync("4jec5of5");
+                Assert.IsNotNull(paste);
+                Console.WriteLine("=====> PASTE <=====");
+                Console.WriteLine(ObjectDumper.Dump(paste));
+                Console.WriteLine();
+            });
         }
 
         [Test]
@@ -58,10 +66,18 @@ namespace PasteMystNet.Tests
                 return;
             Assert.DoesNotThrowAsync(async () =>
             {
-                var before = await TemplateForm.PostPasteAsync(UserAuth);
-                var edit = before.CreateEditForm();
+                var paste = await TemplateForm.PostPasteAsync(UserAuth);
+                Assert.IsNotNull(paste);
+                Console.WriteLine("=====> PASTE <=====");
+                Console.WriteLine(ObjectDumper.Dump(paste));
+                Console.WriteLine();
+                var edit = paste.CreateEditForm();
                 edit.Title += " (Edited)";
-                _ = await edit.PatchPasteAsync(UserAuth);
+                var editedPaste = await edit.PatchPasteAsync(UserAuth);
+                Assert.IsNotNull(editedPaste);
+                Console.WriteLine("=====> EDITED PASTE <=====");
+                Console.WriteLine(ObjectDumper.Dump(editedPaste));
+                Console.WriteLine();
             });
         }
 
@@ -73,6 +89,7 @@ namespace PasteMystNet.Tests
             Assert.ThrowsAsync<Exception>(async () =>
             {
                 var paste = await TemplateForm.PostPasteAsync(UserAuth);
+                Assert.IsNotNull(paste);
                 await PasteMystPaste.DeletePasteAsync(paste.Id, UserAuth);
                 _ = await PasteMystPaste.GetPasteAsync(paste.Id);
             });
@@ -81,15 +98,30 @@ namespace PasteMystNet.Tests
         [Test]
         public static async Task LanguageDataTest()
         {
-            Assert.IsNotNull(await PasteMystLanguage.IdentifyByExtensionAsync("cs"));
-            Assert.IsNotNull(await PasteMystLanguage.IdentifyByNameAsync("C#"));
+            var identifyStep1 = await PasteMystLanguage.IdentifyByExtensionAsync("cs");
+            Assert.IsNotNull(identifyStep1);
+            Console.WriteLine("=====> IDENTIFY STEP 1 <=====");
+            Console.WriteLine(ObjectDumper.Dump(identifyStep1));
+            Console.WriteLine();
+            var identifyStep2 = await PasteMystLanguage.IdentifyByNameAsync("C#");
+            Assert.IsNotNull(identifyStep2);
+            Console.WriteLine("=====> IDENTIFY STEP 2 <=====");
+            Console.WriteLine(ObjectDumper.Dump(identifyStep2));
+            Console.WriteLine();
         }
 
         [Test]
-        public static async Task UserDataTest()
+        [TestCase("codemyst")]
+        [TestCase("virgincode")]
+        public static async Task UserDataTest(string username)
         {
-            _ = await PasteMystUser.UserExistsAsync("codemyst");
-            Assert.IsNotNull(await PasteMystUser.GetUserAsync("codemyst"));
+            Assert.IsTrue(await PasteMystUser.UserExistsAsync(username));
+            var user = await PasteMystUser.GetUserAsync(username);
+            Assert.IsNotNull(user);
+            Console.WriteLine("=====> USER <=====");
+            Console.WriteLine(ObjectDumper.Dump(user));
+            Console.WriteLine();
+            
         }
 
     }

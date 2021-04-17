@@ -8,13 +8,16 @@
 
 		<PackageIcon>Icon.png</PackageIcon>
 		<Product>PasteMyst.NET</Product>
+		<Authors>Dennise Catolos</Authors>
 		<Version>1.1.4</Version>
 		<Copyright>Copyright © 2021</Copyright>
-		<Authors>Dennise Catolos</Authors>
 		<Description>A simple .NET API wrapper for PasteMyst!</Description>
 
 		<PackageProjectUrl>https://github.com/dentolos19/PasteMystNet</PackageProjectUrl>
 		<PackageLicenseFile>LICENSE</PackageLicenseFile>
+
+		<RepositoryUrl>https://github.com/dentolos19/PasteMystNet</RepositoryUrl>
+		<RepositoryUrl>git</RepositoryUrl>
 
 	</PropertyGroup>
 
@@ -33,7 +36,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+		<PackageReference Include="Newtonsoft.Json" Version="13.0.1"/>
 	</ItemGroup>
 
 </Project>

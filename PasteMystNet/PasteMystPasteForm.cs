@@ -16,9 +16,9 @@ namespace PasteMystNet
     public class PasteMystPasteForm
     {
 
-        [JsonProperty(PropertyName = "tags", NullValueHandling = NullValueHandling.Ignore)] private string _tags;
+        [JsonProperty(PropertyName = "tags", NullValueHandling = NullValueHandling.Ignore)] private string? _tags;
 
-        [JsonProperty(PropertyName = "title", NullValueHandling = NullValueHandling.Ignore)] public string Title { get; set; }
+        [JsonProperty(PropertyName = "title", NullValueHandling = NullValueHandling.Ignore)] public string? Title { get; set; }
         [JsonProperty(PropertyName = "isPrivate")] public bool IsPrivate { get; set; }
         [JsonProperty(PropertyName = "isPublic")] public bool IsPublic { get; set; }
         [JsonProperty(PropertyName = "pasties")] public IList<PasteMystPastyForm>? Pasties { get; set; } = new List<PasteMystPastyForm>();
@@ -28,7 +28,7 @@ namespace PasteMystNet
         /// <summary>
         /// Posts paste to server. If you're uploading a paste to your profile, provide <see cref="PasteMystAuth"/> for authorization.
         /// </summary>
-        public async Task<PasteMystPaste> PostPasteAsync(PasteMystAuth auth = null)
+        public async Task<PasteMystPaste?> PostPasteAsync(PasteMystAuth? auth = null)
         {
             if ((IsPrivate || IsPublic) && auth == null)
                 throw new ArgumentNullException(nameof(auth));
@@ -75,7 +75,7 @@ namespace PasteMystNet
                         if (string.IsNullOrEmpty(content))
                             throw new Exception("The server returned an exception with unknown reasons.");
                         var response = JsonConvert.DeserializeObject<PasteMystResponse>(content);
-                        throw new Exception($"The server returned an exception: {response.Message}");
+                        throw new Exception(response == null ? "The server returned an exception with unknown reasons." : $"The server returned an exception: {response.Message}");
                     }
                     case JsonException jsonError:
                         throw new Exception($"An error occurred during serialization: {jsonError.Message}");

@@ -2,7 +2,7 @@ namespace PasteMystNet
 {
 
     /// <summary>
-    /// This class contains valid expiration signatures.
+    /// This class contains pre-defined expiration signatures.
     /// </summary>
     public static class PasteMystExpirations
     {

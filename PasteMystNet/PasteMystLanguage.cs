@@ -10,8 +10,9 @@ namespace PasteMystNet
 {
 
     /// <summary>
-    /// This class is used to retrieve &amp; contain language information from server. <seealso href="https://paste.myst.rs/api-docs/data"/>
+    /// This class is used to retrieve &amp; contain language information from server.
     /// </summary>
+    /// <seealso href="https://paste.myst.rs/api-docs/data"/>
     public class PasteMystLanguage
     {
         

@@ -2,7 +2,7 @@ namespace PasteMystNet
 {
 
     /// <summary>
-    /// This class is used to contain the authorization token for interacting pastes with owners.
+    /// This class is used to contain the authorization token for interacting with private pastes.
     /// </summary>
     public class PasteMystAuth
     {

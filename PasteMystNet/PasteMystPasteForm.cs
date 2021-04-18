@@ -11,8 +11,9 @@ namespace PasteMystNet
 {
 
     /// <summary>
-    /// This class is used to post paste to server. <seealso href="https://paste.myst.rs/api-docs/paste"/>
+    /// This class is used to post paste to server.
     /// </summary>
+    /// <seealso href="https://paste.myst.rs/api-docs/paste"/>
     public class PasteMystPasteForm
     {
 

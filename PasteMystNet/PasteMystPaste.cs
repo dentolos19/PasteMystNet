@@ -10,13 +10,11 @@ namespace PasteMystNet
 {
 
     /// <summary>
-    /// This class is used to get, delete &amp; contain paste information from server. <seealso href="https://paste.myst.rs/api-docs/paste"/>
+    /// This class is used to get, delete &amp; contain paste information from server. 
     /// </summary>
+    /// <seealso href="https://paste.myst.rs/api-docs/paste"/>
     public class PasteMystPaste
     {
-
-        [JsonProperty(PropertyName = "createdAt")] private readonly long _createdAt;
-        [JsonProperty(PropertyName = "deletesAt")] private readonly long _deletesAt;
 
         [JsonProperty(PropertyName = "_id")] public string Id { get; private set; }
         [JsonProperty(PropertyName = "ownerId")] public string? OwnerId { get; private set; }
@@ -29,10 +27,12 @@ namespace PasteMystNet
         [JsonProperty(PropertyName = "pasties")] public PasteMystPasty[] Pasties { get; private set; }
         [JsonProperty(PropertyName = "edits")] public PasteMystEdit[]? Edits { get; private set; }
         [JsonProperty(PropertyName = "expiresIn")] public string ExpireDuration { get; private set; }
+        [JsonProperty(PropertyName = "createdAt")] public long CreationUnixTime { get; private set; }
+        [JsonProperty(PropertyName = "deletesAt")] public long DeletionUnixTime { get; private set; }
         [JsonIgnore] public string Url => PasteMystConstants.BaseEndpoint + $"/{Id}";
         [JsonIgnore] public bool HasOwner => !string.IsNullOrEmpty(OwnerId);
-        [JsonIgnore] public DateTime CreationTime => DateTimeOffset.FromUnixTimeSeconds(_createdAt).DateTime;
-        [JsonIgnore] public DateTime DeletionTime => DateTimeOffset.FromUnixTimeSeconds(_deletesAt).DateTime;
+        [JsonIgnore] public DateTime CreationTime => DateTimeOffset.FromUnixTimeSeconds(CreationUnixTime).DateTime;
+        [JsonIgnore] public DateTime DeletionTime => DateTimeOffset.FromUnixTimeSeconds(DeletionUnixTime).DateTime;
 
         /// <summary>
         /// Creates a form for editing the current paste. You can only edit pastes owned by your profile.

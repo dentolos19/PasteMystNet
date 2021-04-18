@@ -8,8 +8,9 @@ namespace PasteMystNet
 {
 
     /// <summary>
-    /// This class is used to retrieve &amp; contain user information from server. <seealso href="https://paste.myst.rs/api-docs/user"/>
+    /// This class is used to retrieve &amp; contain user information from server.
     /// </summary>
+    /// <seealso href="https://paste.myst.rs/api-docs/user"/>
     public class PasteMystUser
     {
 

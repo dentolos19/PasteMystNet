@@ -1,19 +1,17 @@
+using Newtonsoft.Json;
+using PasteMystNet.Internals;
 using System;
 using System.Net;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
-using PasteMystNet.Internals;
 
 namespace PasteMystNet
 {
-
     /// <summary>
     /// This class is used to retrieve &amp; contain user information from server.
     /// </summary>
     /// <seealso href="https://paste.myst.rs/api-docs/user"/>
     public class PasteMystUser
     {
-
         [JsonProperty(PropertyName = "_id")] public string Id { get; private set; }
         [JsonProperty(PropertyName = "username")] public string Username { get; private set; }
         [JsonProperty(PropertyName = "avatarUrl")] public string AvatarUrl { get; private set; }
@@ -61,7 +59,5 @@ namespace PasteMystNet
                 }
             }
         }
-
     }
-
 }

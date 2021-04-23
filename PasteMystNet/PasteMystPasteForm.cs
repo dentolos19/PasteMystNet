@@ -1,22 +1,20 @@
+using Newtonsoft.Json;
+using PasteMystNet.Internals;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
-using PasteMystNet.Internals;
 
 namespace PasteMystNet
 {
-
     /// <summary>
     /// This class is used to post paste to server.
     /// </summary>
     /// <seealso href="https://paste.myst.rs/api-docs/paste"/>
     public class PasteMystPasteForm
     {
-
         [JsonProperty(PropertyName = "tags", NullValueHandling = NullValueHandling.Ignore)] private string? _tags;
 
         [JsonProperty(PropertyName = "title", NullValueHandling = NullValueHandling.Ignore)] public string? Title { get; set; }
@@ -70,14 +68,14 @@ namespace PasteMystNet
                 switch (error)
                 {
                     case WebException webError:
-                    {
-                        using var reader = new StreamReader(webError.Response.GetResponseStream()!);
-                        var content = await reader.ReadToEndAsync();
-                        if (string.IsNullOrEmpty(content))
-                            throw new Exception("The server returned an exception with unknown reasons.");
-                        var response = JsonConvert.DeserializeObject<PasteMystResponse>(content);
-                        throw new Exception(response == null ? "The server returned an exception with unknown reasons." : $"The server returned an exception: {response.Message}");
-                    }
+                        {
+                            using var reader = new StreamReader(webError.Response.GetResponseStream()!);
+                            var content = await reader.ReadToEndAsync();
+                            if (string.IsNullOrEmpty(content))
+                                throw new Exception("The server returned an exception with unknown reasons.");
+                            var response = JsonConvert.DeserializeObject<PasteMystResponse>(content);
+                            throw new Exception(response == null ? "The server returned an exception with unknown reasons." : $"The server returned an exception: {response.Message}");
+                        }
                     case JsonException jsonError:
                         throw new Exception($"An error occurred during serialization: {jsonError.Message}");
                     default:
@@ -85,7 +83,5 @@ namespace PasteMystNet
                 }
             }
         }
-
     }
-
 }

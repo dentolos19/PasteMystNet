@@ -1,16 +1,15 @@
-﻿using System;
+﻿using NUnit.Framework;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using NUnit.Framework;
 
 namespace PasteMystNet.Tests
 {
-
     [TestFixture]
     internal static class Operations
     {
-
         private static PasteMystAuth UserAuth { get; }
+
         private static PasteMystPasteForm TemplateForm { get; } = new()
         {
             Title = "PasteMyst.NET",
@@ -45,7 +44,7 @@ namespace PasteMystNet.Tests
                 Console.WriteLine();
             });
         }
-        
+
         [Test]
         public static void GetPasteTest()
         {
@@ -121,9 +120,6 @@ namespace PasteMystNet.Tests
             Console.WriteLine("=====> USER <=====");
             Console.WriteLine(ObjectDumper.Dump(user));
             Console.WriteLine();
-            
         }
-
     }
-
 }

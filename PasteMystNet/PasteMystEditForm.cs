@@ -1,3 +1,5 @@
+using Newtonsoft.Json;
+using PasteMystNet.Internals;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -5,28 +7,15 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
-using PasteMystNet.Internals;
 
 namespace PasteMystNet
 {
-
     /// <summary>
     /// This class is used to patch paste to server.
     /// </summary>
     /// <seealso href="https://paste.myst.rs/api-docs/paste"/>
     public class PasteMystEditForm
     {
-
-        [JsonProperty(PropertyName = "tags", NullValueHandling = NullValueHandling.Ignore)] private string? _tags;
-        [JsonIgnore] private readonly string _id;
-
-        [JsonProperty(PropertyName = "title")] public string Title { get; set; }
-        [JsonProperty(PropertyName = "isPrivate", NullValueHandling = NullValueHandling.Ignore)] public bool? IsPrivate { get; set; }
-        [JsonProperty(PropertyName = "isPublic", NullValueHandling = NullValueHandling.Ignore)] public bool? IsPublic { get; set; }
-        [JsonProperty(PropertyName = "pasties")] public IList<PasteMystPastyForm>? Pasties { get; set; }
-        [JsonIgnore] public IList<string>? Tags { get; set; } = new List<string>();
-
         internal PasteMystEditForm(PasteMystPaste paste)
         {
             _id = paste.Id;
@@ -38,9 +27,18 @@ namespace PasteMystNet
                 Language = pasty.Language,
                 Code = pasty.Code
             }).ToList();
-            if (paste.Tags.Length > 0)
+            if (paste.Tags != null && paste.Tags.Length > 0)
                 Tags = paste.Tags.ToList();
         }
+
+        [JsonProperty(PropertyName = "tags", NullValueHandling = NullValueHandling.Ignore)] private string? _tags;
+        [JsonIgnore] private readonly string _id;
+
+        [JsonProperty(PropertyName = "title")] public string Title { get; set; }
+        [JsonProperty(PropertyName = "isPrivate", NullValueHandling = NullValueHandling.Ignore)] public bool? IsPrivate { get; set; }
+        [JsonProperty(PropertyName = "isPublic", NullValueHandling = NullValueHandling.Ignore)] public bool? IsPublic { get; set; }
+        [JsonProperty(PropertyName = "pasties")] public IList<PasteMystPastyForm>? Pasties { get; set; }
+        [JsonIgnore] public IList<string>? Tags { get; set; } = new List<string>();
 
         /// <summary>
         /// Patches paste to server.
@@ -82,14 +80,14 @@ namespace PasteMystNet
                 switch (error)
                 {
                     case WebException webError:
-                    {
-                        using var reader = new StreamReader(webError.Response.GetResponseStream()!);
-                        var content = await reader.ReadToEndAsync();
-                        if (string.IsNullOrEmpty(content))
-                            throw new Exception("The server returned an exception with unknown reasons.");
-                        var response = JsonConvert.DeserializeObject<PasteMystResponse>(content);
-                        throw new Exception(response == null ? "The server returned an exception with unknown reasons." : $"The server returned an exception: {response.Message}");
-                    }
+                        {
+                            using var reader = new StreamReader(webError.Response.GetResponseStream()!);
+                            var content = await reader.ReadToEndAsync();
+                            if (string.IsNullOrEmpty(content))
+                                throw new Exception("The server returned an exception with unknown reasons.");
+                            var response = JsonConvert.DeserializeObject<PasteMystResponse>(content);
+                            throw new Exception(response == null ? "The server returned an exception with unknown reasons." : $"The server returned an exception: {response.Message}");
+                        }
                     case JsonException jsonError:
                         throw new Exception($"An error occurred during serialization: {jsonError.Message}");
                     default:
@@ -97,7 +95,5 @@ namespace PasteMystNet
                 }
             }
         }
-
     }
-
 }

@@ -1,21 +1,19 @@
+using Newtonsoft.Json;
+using PasteMystNet.Internals;
 using System;
 using System.Drawing;
 using System.Globalization;
 using System.Net;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
-using PasteMystNet.Internals;
 
 namespace PasteMystNet
 {
-
     /// <summary>
     /// This class is used to retrieve &amp; contain language information from server.
     /// </summary>
     /// <seealso href="https://paste.myst.rs/api-docs/data"/>
     public class PasteMystLanguage
     {
-        
         [JsonProperty(PropertyName = "name")] public string Name { get; private set; }
         [JsonProperty(PropertyName = "mode")] public string Mode { get; private set; }
         [JsonProperty(PropertyName = "mimes")] public string[] Mimes { get; private set; }
@@ -87,7 +85,5 @@ namespace PasteMystNet
                 }
             }
         }
-
     }
-
 }

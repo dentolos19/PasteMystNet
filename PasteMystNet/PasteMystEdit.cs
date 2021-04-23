@@ -1,16 +1,14 @@
-using System;
 using Newtonsoft.Json;
+using System;
 
 namespace PasteMystNet
 {
-
     /// <summary>
     /// This class is used to contain and store data.
     /// </summary>
     /// <seealso href="https://paste.myst.rs/api-docs/objects"/>
     public class PasteMystEdit
     {
-
         [JsonProperty(PropertyName = "editType")] private readonly string _editType;
         [JsonProperty(PropertyName = "editedAt")] private readonly long _editedAt;
 
@@ -20,7 +18,5 @@ namespace PasteMystNet
         [JsonProperty(PropertyName = "edit")] public string Edit { get; private set; }
         [JsonIgnore] public PasteMystEditType EditType => (PasteMystEditType)Enum.Parse(typeof(PasteMystEditType), _editType);
         [JsonIgnore] public DateTime EditedTime => DateTimeOffset.FromUnixTimeSeconds(_editedAt).DateTime;
-
     }
-
 }

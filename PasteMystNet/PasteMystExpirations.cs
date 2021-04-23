@@ -1,10 +1,12 @@
 namespace PasteMystNet
 {
+
     /// <summary>
     /// This class contains pre-defined expiration signatures.
     /// </summary>
     public static class PasteMystExpirations
     {
+
         /// <summary>The paste will never expire.</summary>
         public const string Never = "never";
 
@@ -31,5 +33,7 @@ namespace PasteMystNet
 
         /// <summary>The paste will expire in one year.</summary>
         public const string OneYear = "1y";
+
     }
+
 }

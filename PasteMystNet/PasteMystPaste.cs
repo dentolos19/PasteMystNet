@@ -7,12 +7,14 @@ using System.Threading.Tasks;
 
 namespace PasteMystNet
 {
+
     /// <summary>
     /// This class is used to get, delete &amp; contain paste information from server.
     /// </summary>
     /// <seealso href="https://paste.myst.rs/api-docs/paste"/>
     public class PasteMystPaste
     {
+
         [JsonProperty(PropertyName = "_id")] public string Id { get; private set; }
         [JsonProperty(PropertyName = "ownerId")] public string? OwnerId { get; private set; }
         [JsonProperty(PropertyName = "title")] public string Title { get; private set; }
@@ -26,11 +28,11 @@ namespace PasteMystNet
         [JsonProperty(PropertyName = "expiresIn")] public string ExpireDuration { get; private set; }
         [JsonProperty(PropertyName = "createdAt")] public long CreationUnixTime { get; private set; }
         [JsonProperty(PropertyName = "deletesAt")] public long DeletionUnixTime { get; private set; }
-        [JsonIgnore] public string Url => PasteMystConstants.BaseEndpoint + $"/{Id}";
+        [JsonIgnore] public string Url => Constants.BaseEndpoint + $"/{Id}";
         [JsonIgnore] public bool HasOwner => !string.IsNullOrEmpty(OwnerId);
         [JsonIgnore] public DateTime CreationTime => DateTimeOffset.FromUnixTimeSeconds(CreationUnixTime).DateTime;
-        [JsonIgnore] public DateTime DeletionTime => DateTimeOffset.FromUnixTimeSeconds(DeletionUnixTime).DateTime;
-
+        [JsonIgnore] public DateTime? DeletionTime => DeletionUnixTime <= 0 ? null : DateTimeOffset.FromUnixTimeSeconds(DeletionUnixTime).DateTime;
+        
         /// <summary>
         /// Creates a form for editing the current paste. You can only edit pastes owned by your profile.
         /// </summary>
@@ -46,7 +48,7 @@ namespace PasteMystNet
         {
             try
             {
-                var request = WebRequest.Create(string.Format(PasteMystConstants.GetPasteEndpoint, id));
+                var request = WebRequest.Create(string.Format(Constants.GetPasteEndpoint, id));
                 request.Method = "GET";
                 if (auth != null)
                     request.Headers.Add("Authorization", auth.Token);
@@ -65,7 +67,7 @@ namespace PasteMystNet
                             var content = await reader.ReadToEndAsync();
                             if (string.IsNullOrEmpty(content))
                                 throw new Exception("The server returned an exception with unknown reasons.");
-                            var response = JsonConvert.DeserializeObject<PasteMystResponse>(content);
+                            var response = JsonConvert.DeserializeObject<Response>(content);
                             throw new Exception(response == null ? "The server returned an exception with unknown reasons." : $"The server returned an exception: {response.Message}");
                         }
                     case JsonException jsonError:
@@ -83,7 +85,7 @@ namespace PasteMystNet
         {
             try
             {
-                var request = WebRequest.Create(string.Format(PasteMystConstants.DeletePasteEndpoint, id));
+                var request = WebRequest.Create(string.Format(Constants.DeletePasteEndpoint, id));
                 request.Method = "DELETE";
                 request.Headers.Add("Authorization", auth.Token);
                 await request.GetResponseAsync();
@@ -98,7 +100,7 @@ namespace PasteMystNet
                             var content = await reader.ReadToEndAsync();
                             if (string.IsNullOrEmpty(content))
                                 throw new Exception("The server returned an exception with unknown reasons.");
-                            var response = JsonConvert.DeserializeObject<PasteMystResponse>(content);
+                            var response = JsonConvert.DeserializeObject<Response>(content);
                             throw new Exception(response == null ? "The server returned an exception with unknown reasons." : $"The server returned an exception: {response.Message}");
                         }
                     default:
@@ -124,5 +126,7 @@ namespace PasteMystNet
                 }
             }
         }
+
     }
+
 }

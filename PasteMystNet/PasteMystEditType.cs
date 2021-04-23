@@ -1,10 +1,12 @@
 namespace PasteMystNet
 {
+
     /// <summary>
     /// This enum expresses the type of edit made on a paste.
     /// </summary>
     public enum PasteMystEditType
     {
+
         /// <summary>The paste's title was edited.</summary>
         PasteTitleEdited,
 
@@ -22,5 +24,7 @@ namespace PasteMystNet
 
         /// <summary>A pasty was removed from the paste.</summary>
         PastyRemoved
+
     }
+
 }

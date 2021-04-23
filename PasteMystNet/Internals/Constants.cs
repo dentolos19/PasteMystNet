@@ -2,8 +2,10 @@ using System.Net.Http;
 
 namespace PasteMystNet.Internals
 {
-    internal static class PasteMystConstants
+
+    internal static class Constants
     {
+
         public static string BaseEndpoint { get; } = "https://paste.myst.rs";
 
         public static string PostPasteEndpoint { get; } = BaseEndpoint + "/api/v2/paste";
@@ -17,6 +19,8 @@ namespace PasteMystNet.Internals
         public static string UserExistsEndpoint { get; } = BaseEndpoint + "/api/v2/user/{0}/exists";
         public static string GetUserEndpoint { get; } = BaseEndpoint + "/api/v2/user/{0}";
 
-        public static HttpClient HttpClient { get; } = new HttpClient();
+        public static HttpClient HttpClient { get; } = new();
+
     }
+
 }

@@ -5,9 +5,11 @@ using System.Threading.Tasks;
 
 namespace PasteMystNet.Tests
 {
+
     [TestFixture]
     internal static class Operations
     {
+
         private static PasteMystAuth UserAuth { get; }
 
         private static PasteMystPasteForm TemplateForm { get; } = new()
@@ -121,5 +123,7 @@ namespace PasteMystNet.Tests
             Console.WriteLine(ObjectDumper.Dump(user));
             Console.WriteLine();
         }
+
     }
+
 }

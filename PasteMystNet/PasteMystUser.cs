@@ -6,19 +6,21 @@ using System.Threading.Tasks;
 
 namespace PasteMystNet
 {
+
     /// <summary>
     /// This class is used to retrieve &amp; contain user information from server.
     /// </summary>
     /// <seealso href="https://paste.myst.rs/api-docs/user"/>
     public class PasteMystUser
     {
+
         [JsonProperty(PropertyName = "_id")] public string Id { get; private set; }
         [JsonProperty(PropertyName = "username")] public string Username { get; private set; }
         [JsonProperty(PropertyName = "avatarUrl")] public string AvatarUrl { get; private set; }
         [JsonProperty(PropertyName = "defaultLang")] public string DefaultLanguage { get; private set; }
         [JsonProperty(PropertyName = "publicProfile")] public bool HasPublicProfile { get; private set; }
         [JsonProperty(PropertyName = "supporterLength")] public uint SupporterLength { get; private set; }
-        [JsonIgnore] public string ProfileUrl => PasteMystConstants.BaseEndpoint + "/users/" + Username;
+        [JsonIgnore] public string ProfileUrl => Constants.BaseEndpoint + "/users/" + Username;
         [JsonIgnore] public bool IsSupporter => SupporterLength != 0;
 
         /// <summary>
@@ -26,7 +28,7 @@ namespace PasteMystNet
         /// </summary>
         public static async Task<bool> UserExistsAsync(string name)
         {
-            var response = await PasteMystConstants.HttpClient.GetAsync(string.Format(PasteMystConstants.UserExistsEndpoint, name));
+            var response = await Constants.HttpClient.GetAsync(string.Format(Constants.UserExistsEndpoint, name));
             return response.StatusCode == HttpStatusCode.OK;
         }
 
@@ -35,7 +37,7 @@ namespace PasteMystNet
         /// </summary>
         public static async Task<PasteMystUser?> GetUserAsync(string name)
         {
-            var response = await PasteMystConstants.HttpClient.GetAsync(string.Format(PasteMystConstants.GetUserEndpoint, name));
+            var response = await Constants.HttpClient.GetAsync(string.Format(Constants.GetUserEndpoint, name));
             if (response.StatusCode != HttpStatusCode.OK)
                 return null;
             var content = await response.Content.ReadAsStringAsync();
@@ -59,5 +61,7 @@ namespace PasteMystNet
                 }
             }
         }
+
     }
+
 }

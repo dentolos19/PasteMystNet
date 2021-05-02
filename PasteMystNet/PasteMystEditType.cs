@@ -1,9 +1,7 @@
 namespace PasteMystNet
 {
 
-    /// <summary>
-    /// This enum expresses the type of edit made on a paste.
-    /// </summary>
+    /// <summary>This enum expresses the type of edit made on a paste.</summary>
     public enum PasteMystEditType
     {
 

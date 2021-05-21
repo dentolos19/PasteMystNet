@@ -10,8 +10,7 @@ namespace PasteMystNet.Tests
     internal static class Operations
     {
 
-        private static PasteMystAuth UserAuth { get; }
-
+        private static PasteMystAuth AuthToken { get; }
         private static PasteMystPasteForm TemplateForm { get; } = new()
         {
             Title = "PasteMyst.NET",
@@ -31,7 +30,7 @@ namespace PasteMystNet.Tests
                            "\n" +
                            "main()"
                 }
-            },
+            }
         };
 
         [Test]
@@ -63,18 +62,18 @@ namespace PasteMystNet.Tests
         [Test]
         public static void PatchPasteTest()
         {
-            if (UserAuth is null)
+            if (AuthToken is null)
                 return;
             Assert.DoesNotThrowAsync(async () =>
             {
-                var paste = await TemplateForm.PostPasteAsync(UserAuth);
+                var paste = await TemplateForm.PostPasteAsync(AuthToken);
                 Assert.IsNotNull(paste);
                 Console.WriteLine("=====> PASTE <=====");
                 Console.WriteLine(ObjectDumper.Dump(paste));
                 Console.WriteLine();
                 var edit = paste.CreateEditForm();
                 edit.Title += " (Edited)";
-                var editedPaste = await edit.PatchPasteAsync(UserAuth);
+                var editedPaste = await edit.PatchPasteAsync(AuthToken);
                 Assert.IsNotNull(editedPaste);
                 Console.WriteLine("=====> EDITED PASTE <=====");
                 Console.WriteLine(ObjectDumper.Dump(editedPaste));
@@ -85,13 +84,13 @@ namespace PasteMystNet.Tests
         [Test]
         public static void DeletePasteTest()
         {
-            if (UserAuth is null)
+            if (AuthToken is null)
                 return;
             Assert.ThrowsAsync<Exception>(async () =>
             {
-                var paste = await TemplateForm.PostPasteAsync(UserAuth);
+                var paste = await TemplateForm.PostPasteAsync(AuthToken);
                 Assert.IsNotNull(paste);
-                await PasteMystPaste.DeletePasteAsync(paste.Id, UserAuth);
+                await PasteMystPaste.DeletePasteAsync(paste.Id, AuthToken);
                 _ = await PasteMystPaste.GetPasteAsync(paste.Id);
             });
         }
@@ -99,15 +98,15 @@ namespace PasteMystNet.Tests
         [Test]
         public static async Task LanguageDataTest()
         {
-            var identifyStep1 = await PasteMystLanguage.IdentifyByExtensionAsync("cs");
-            Assert.IsNotNull(identifyStep1);
-            Console.WriteLine("=====> IDENTIFY STEP 1 <=====");
-            Console.WriteLine(ObjectDumper.Dump(identifyStep1));
+            var identifyPart1 = await PasteMystLanguage.IdentifyByExtensionAsync("cs");
+            Assert.IsNotNull(identifyPart1);
+            Console.WriteLine("=====> IDENTITY PART 1 <=====");
+            Console.WriteLine(ObjectDumper.Dump(identifyPart1));
             Console.WriteLine();
-            var identifyStep2 = await PasteMystLanguage.IdentifyByNameAsync("C#");
-            Assert.IsNotNull(identifyStep2);
-            Console.WriteLine("=====> IDENTIFY STEP 2 <=====");
-            Console.WriteLine(ObjectDumper.Dump(identifyStep2));
+            var identifyPart2 = await PasteMystLanguage.IdentifyByNameAsync("C#");
+            Assert.IsNotNull(identifyPart2);
+            Console.WriteLine("=====> IDENTIFY PART 2 <=====");
+            Console.WriteLine(ObjectDumper.Dump(identifyPart2));
             Console.WriteLine();
         }
 
@@ -122,6 +121,19 @@ namespace PasteMystNet.Tests
             Console.WriteLine("=====> USER <=====");
             Console.WriteLine(ObjectDumper.Dump(user));
             Console.WriteLine();
+            if (AuthToken is not null)
+            {
+                var self = await PasteMystUser.GetSelfAsync(AuthToken);
+                Assert.IsNotNull(user);
+                Console.WriteLine("=====> SELF <=====");
+                Console.WriteLine(ObjectDumper.Dump(self));
+                Console.WriteLine();
+                var selfPastes = await PasteMystUser.GetSelfPastesAsync(AuthToken);
+                Assert.IsNotNull(user);
+                Console.WriteLine("=====> SELF PASTES <=====");
+                Console.WriteLine(ObjectDumper.Dump(selfPastes));
+                Console.WriteLine();
+            }
         }
 
     }

@@ -9,7 +9,7 @@
 		<PackageIcon>Icon.png</PackageIcon>
 		<Product>PasteMyst.NET</Product>
 		<Authors>Dennise Catolos</Authors>
-		<Version>1.1.4</Version>
+		<Version>1.1.5</Version>
 		<Copyright>Copyright © 2021</Copyright>
 		<Description>A simple .NET API wrapper for PasteMyst!</Description>
 

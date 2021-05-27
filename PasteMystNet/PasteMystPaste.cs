@@ -16,7 +16,7 @@ namespace PasteMystNet
         [JsonProperty(PropertyName = "_id")] public string Id { get; private set; }
         [JsonProperty(PropertyName = "ownerId")] public string? OwnerId { get; private set; }
         [JsonProperty(PropertyName = "title")] public string Title { get; private set; }
-        [JsonProperty(PropertyName = "stars")] public uint Stars { get; private set; }
+        [JsonProperty(PropertyName = "stars")] public int Stars { get; private set; }
         [JsonProperty(PropertyName = "isPrivate")] public bool IsPrivate { get; private set; }
         [JsonProperty(PropertyName = "isPublic")] public bool IsPublic { get; private set; }
         [JsonProperty(PropertyName = "encrypted")] public bool IsEncrypted { get; private set; }

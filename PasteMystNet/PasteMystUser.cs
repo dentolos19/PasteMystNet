@@ -19,7 +19,7 @@ namespace PasteMystNet
         [JsonProperty(PropertyName = "avatarUrl")] public string AvatarUrl { get; private set; }
         [JsonProperty(PropertyName = "defaultLang")] public string DefaultLanguage { get; private set; }
         [JsonProperty(PropertyName = "publicProfile")] public bool HasPublicProfile { get; private set; }
-        [JsonProperty(PropertyName = "supporterLength")] public uint SupporterLength { get; private set; }
+        [JsonProperty(PropertyName = "supporterLength")] public int SupporterLength { get; private set; }
         [JsonProperty(PropertyName = "contributor")] public bool IsContributor { get; private set; }
         [JsonIgnore] public string ProfileUrl => Constants.ApiBaseEndpoint + "/users/" + Username;
         [JsonIgnore] public bool IsSupporter => SupporterLength != 0;

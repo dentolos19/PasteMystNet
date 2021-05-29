@@ -7,9 +7,7 @@ using System.Threading.Tasks;
 
 namespace PasteMystNet
 {
-
-    /// <summary>This class is used to get, delete &amp; contain paste information from server.</summary>
-    /// <seealso href="https://paste.myst.rs/api-docs/paste"/>
+    
     public class PasteMystPaste
     {
 
@@ -31,13 +29,11 @@ namespace PasteMystNet
         [JsonIgnore] public DateTime CreationTime => DateTimeOffset.FromUnixTimeSeconds(CreationUnixTime).DateTime;
         [JsonIgnore] public DateTime? DeletionTime => DeletionUnixTime <= 0 ? null : DateTimeOffset.FromUnixTimeSeconds(DeletionUnixTime).DateTime;
         
-        /// <summary>Creates a form for editing the current paste. You can only edit pastes owned by your profile.</summary>
         public PasteMystEditForm CreateEditForm()
         {
             return new(this);
         }
-
-        /// <summary>Retrieves paste from server. If you're accessing a private paste, provide <see cref="PasteMystAuth"/> for authorization.</summary>
+        
         public static async Task<PasteMystPaste?> GetPasteAsync(string id, PasteMystAuth? auth = null)
         {
             try
@@ -71,8 +67,7 @@ namespace PasteMystNet
                 }
             }
         }
-
-        /// <summary>Deletes paste from server. You can only delete pastes owned by your profile.</summary>
+        
         public static async Task DeletePasteAsync(string id, PasteMystAuth auth)
         {
             try

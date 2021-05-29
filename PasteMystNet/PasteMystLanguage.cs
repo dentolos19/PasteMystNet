@@ -7,9 +7,7 @@ using System.Threading.Tasks;
 
 namespace PasteMystNet
 {
-
-    /// <summary>This class is used to retrieve &amp; contain language information from server.</summary>
-    /// <seealso href="https://paste.myst.rs/api-docs/data"/>
+    
     public class PasteMystLanguage
     {
 
@@ -19,8 +17,7 @@ namespace PasteMystNet
         [JsonProperty(PropertyName = "ext")] public string[] Extensions { get; private set; }
         [JsonProperty(PropertyName = "color")] public string ColorHex { get; private set; }
         [JsonIgnore] public Color Color => Utilities.ParseColor(ColorHex);
-
-        /// <summary>Identifies the language via name. Returns <c>null</c> when language can't be identified.</summary>
+        
         public static async Task<PasteMystLanguage?> IdentifyByNameAsync(string name)
         {
             var response = await Constants.HttpClient.GetAsync(string.Format(Constants.IdentifyByNameEndpoint, Uri.EscapeDataString(name)));
@@ -29,8 +26,7 @@ namespace PasteMystNet
             var content = await response.Content.ReadAsStringAsync();
             return JsonConvert.DeserializeObject<PasteMystLanguage>(content);
         }
-
-        /// <summary>Identifies the language via extension. Returns <c>null</c> when language can't be identified.</summary>
+        
         public static async Task<PasteMystLanguage?> IdentifyByExtensionAsync(string extension)
         {
             var response = await Constants.HttpClient.GetAsync(string.Format(Constants.IdentifyByExtensionEndpoint, Uri.EscapeDataString(extension)));

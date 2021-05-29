@@ -1,7 +1,6 @@
 namespace PasteMystNet
 {
-
-    /// <summary>This class is used to contain the authorization token for accessing private pastes.</summary>
+    
     public class PasteMystAuth
     {
 
@@ -9,8 +8,7 @@ namespace PasteMystNet
         {
             Token = token;
         }
-
-        /// <summary>The authentication token for accessing private pastes.</summary>
+        
         public string Token { get; }
 
         public override string ToString()

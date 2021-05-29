@@ -1,7 +1,6 @@
 namespace PasteMystNet
 {
-
-    /// <summary>This class contains pre-defined expiration signatures.</summary>
+    
     public static class PasteMystExpirations
     {
 

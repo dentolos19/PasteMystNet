@@ -9,9 +9,7 @@ using System.Threading.Tasks;
 
 namespace PasteMystNet
 {
-
-    /// <summary>This class is used to post paste to server.</summary>
-    /// <seealso href="https://paste.myst.rs/api-docs/paste"/>
+    
     public class PasteMystPasteForm
     {
 
@@ -23,8 +21,7 @@ namespace PasteMystNet
         [JsonProperty(PropertyName = "pasties")] public IList<PasteMystPastyForm>? Pasties { get; set; } = new List<PasteMystPastyForm>();
         [JsonProperty(PropertyName = "expiresIn")] public string ExpireDuration { get; set; } = PasteMystExpirations.Never;
         [JsonIgnore] public IList<string>? Tags { get; set; } = new List<string>();
-
-        /// <summary>Posts paste to server. If you're uploading a private paste to your profile, provide <see cref="PasteMystAuth"/> for authorization.</summary>
+        
         public async Task<PasteMystPaste?> PostPasteAsync(PasteMystAuth? auth = null)
         {
             if ((IsPrivate || IsPublic) && auth == null)

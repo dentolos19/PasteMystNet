@@ -10,7 +10,7 @@ namespace PasteMystNet.Tests
     internal static class Operations
     {
 
-        private static PasteMystAuth AuthToken { get; }
+        private static PasteMystAuth? AuthToken { get; }
         private static PasteMystPasteForm TemplateForm { get; } = new()
         {
             Title = "PasteMyst.NET",
@@ -123,12 +123,12 @@ namespace PasteMystNet.Tests
             Console.WriteLine();
             if (AuthToken is not null)
             {
-                var self = await PasteMystUser.GetSelfAsync(AuthToken);
+                var self = await PasteMystUser.GetUserAsync(AuthToken);
                 Assert.IsNotNull(user);
                 Console.WriteLine("=====> SELF <=====");
                 Console.WriteLine(ObjectDumper.Dump(self));
                 Console.WriteLine();
-                var selfPastes = await PasteMystUser.GetSelfPastesAsync(AuthToken);
+                var selfPastes = await PasteMystUser.GetUserPastesAsync(AuthToken);
                 Assert.IsNotNull(user);
                 Console.WriteLine("=====> SELF PASTES <=====");
                 Console.WriteLine(ObjectDumper.Dump(selfPastes));

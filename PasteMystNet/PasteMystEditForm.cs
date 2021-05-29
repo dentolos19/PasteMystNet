@@ -10,9 +10,7 @@ using System.Threading.Tasks;
 
 namespace PasteMystNet
 {
-
-    /// <summary>This class is used to patch paste to server.</summary>
-    /// <seealso href="https://paste.myst.rs/api-docs/paste"/>
+    
     public class PasteMystEditForm
     {
 
@@ -39,8 +37,7 @@ namespace PasteMystNet
         [JsonProperty(PropertyName = "isPublic", NullValueHandling = NullValueHandling.Ignore)] public bool? IsPublic { get; set; }
         [JsonProperty(PropertyName = "pasties")] public IList<PasteMystPastyForm>? Pasties { get; set; }
         [JsonIgnore] public IList<string>? Tags { get; set; } = new List<string>();
-
-        /// <summary>Patches paste to server.</summary>
+        
         public async Task<PasteMystPaste?> PatchPasteAsync(PasteMystAuth auth)
         {
             if (Pasties is not { Count: > 0 })

@@ -26,7 +26,7 @@ namespace PasteMystNet
         [JsonProperty(PropertyName = "expiresIn")] public string ExpireDuration { get; private set; }
         [JsonProperty(PropertyName = "createdAt")] public long CreationUnixTime { get; private set; }
         [JsonProperty(PropertyName = "deletesAt")] public long DeletionUnixTime { get; private set; }
-        [JsonIgnore] public string Url => Constants.BaseEndpoint + $"/{Id}";
+        [JsonIgnore] public string Url => Constants.WebsiteUrl + $"/{Id}";
         [JsonIgnore] public bool HasOwner => !string.IsNullOrEmpty(OwnerId);
         [JsonIgnore] public DateTime CreationTime => DateTimeOffset.FromUnixTimeSeconds(CreationUnixTime).DateTime;
         [JsonIgnore] public DateTime? DeletionTime => DeletionUnixTime <= 0 ? null : DateTimeOffset.FromUnixTimeSeconds(DeletionUnixTime).DateTime;

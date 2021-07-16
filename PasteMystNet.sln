@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PasteMystNet", "PasteMystNe
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PasteMystNet.Tests", "PasteMystNet.Tests\PasteMystNet.Tests.csproj", "{F90F6F2B-03B8-4101-893C-9591EBA3C439}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{AFBB1E4F-7C62-4301-9068-4B0C9C3EB6EA}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Repository Files", "Repository Files", "{AFBB1E4F-7C62-4301-9068-4B0C9C3EB6EA}"
 	ProjectSection(SolutionItems) = preProject
 		LICENSE = LICENSE
 		README.md = README.md

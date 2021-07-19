@@ -38,7 +38,7 @@ namespace PasteMystNet
         [JsonProperty(PropertyName = "pasties")] public IList<PasteMystPastyForm>? Pasties { get; set; }
         [JsonIgnore] public IList<string>? Tags { get; set; } = new List<string>();
         
-        public async Task<PasteMystPaste?> PatchPasteAsync(PasteMystAuth auth)
+        public async Task<PasteMystPaste?> PatchPasteAsync(PasteMystToken auth)
         {
             if (Pasties is not { Count: > 0 })
                 throw new Exception($"{nameof(Pasties)} must not be null or empty.");

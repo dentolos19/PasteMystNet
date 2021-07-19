@@ -40,7 +40,7 @@ namespace PasteMystNet
             return JsonConvert.DeserializeObject<PasteMystUser>(content);
         }
         
-        public static async Task<PasteMystUser?> GetUserAsync(PasteMystAuth auth)
+        public static async Task<PasteMystUser?> GetUserAsync(PasteMystToken auth)
         {
             try
             {
@@ -73,7 +73,7 @@ namespace PasteMystNet
             }
         }
 
-        public static async Task<string[]?> GetUserPastesAsync(PasteMystAuth auth)
+        public static async Task<string[]?> GetUserPastesAsync(PasteMystToken auth)
         {
             try
             {
@@ -106,8 +106,8 @@ namespace PasteMystNet
             }
         }
 
-        [Obsolete] public static async Task<PasteMystUser?> GetSelfAsync(PasteMystAuth auth) { return await GetUserAsync(auth); }
-        [Obsolete] public static async Task<string[]?> GetSelfPastesAsync(PasteMystAuth auth) { return await GetUserPastesAsync(auth); }
+        [Obsolete] public static async Task<PasteMystUser?> GetSelfAsync(PasteMystToken auth) { return await GetUserAsync(auth); }
+        [Obsolete] public static async Task<string[]?> GetSelfPastesAsync(PasteMystToken auth) { return await GetUserPastesAsync(auth); }
 
         public override string ToString()
         {

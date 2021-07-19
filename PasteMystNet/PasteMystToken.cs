@@ -1,10 +1,10 @@
 namespace PasteMystNet
 {
     
-    public class PasteMystAuth
+    public class PasteMystToken
     {
 
-        public PasteMystAuth(string token)
+        public PasteMystToken(string token)
         {
             Token = token;
         }

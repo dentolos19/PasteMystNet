@@ -22,7 +22,7 @@ namespace PasteMystNet
         [JsonProperty(PropertyName = "expiresIn")] public string ExpireDuration { get; set; } = PasteMystExpirations.Never;
         [JsonIgnore] public IList<string>? Tags { get; set; } = new List<string>();
         
-        public async Task<PasteMystPaste?> PostPasteAsync(PasteMystAuth? auth = null)
+        public async Task<PasteMystPaste?> PostPasteAsync(PasteMystToken? auth = null)
         {
             if ((IsPrivate || IsPublic) && auth == null)
                 throw new ArgumentNullException(nameof(auth));

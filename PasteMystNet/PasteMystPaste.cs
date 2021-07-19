@@ -34,7 +34,7 @@ namespace PasteMystNet
             return new(this);
         }
         
-        public static async Task<PasteMystPaste?> GetPasteAsync(string id, PasteMystAuth? auth = null)
+        public static async Task<PasteMystPaste?> GetPasteAsync(string id, PasteMystToken? auth = null)
         {
             try
             {
@@ -68,7 +68,7 @@ namespace PasteMystNet
             }
         }
         
-        public static async Task DeletePasteAsync(string id, PasteMystAuth auth)
+        public static async Task DeletePasteAsync(string id, PasteMystToken auth)
         {
             try
             {

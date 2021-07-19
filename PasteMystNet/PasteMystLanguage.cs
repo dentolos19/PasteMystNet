@@ -17,8 +17,8 @@ namespace PasteMystNet
         [JsonProperty(PropertyName = "ext")] public string[] Extensions { get; private set; }
         [JsonProperty(PropertyName = "color")] public string ColorHex { get; private set; }
         [JsonIgnore] public Color Color => Utilities.ParseColor(ColorHex);
-        
-        public static async Task<PasteMystLanguage?> IdentifyByNameAsync(string name)
+
+        public static async Task<PasteMystLanguage?> GetLanguageByNameAsync(string name)
         {
             var response = await Constants.HttpClient.GetAsync(string.Format(Constants.IdentifyByNameEndpoint, Uri.EscapeDataString(name)));
             if (response.StatusCode != HttpStatusCode.OK)
@@ -27,7 +27,7 @@ namespace PasteMystNet
             return JsonConvert.DeserializeObject<PasteMystLanguage>(content);
         }
         
-        public static async Task<PasteMystLanguage?> IdentifyByExtensionAsync(string extension)
+        public static async Task<PasteMystLanguage?> GetLanguageByExtensionAsync(string extension)
         {
             var response = await Constants.HttpClient.GetAsync(string.Format(Constants.IdentifyByExtensionEndpoint, Uri.EscapeDataString(extension)));
             if (response.StatusCode != HttpStatusCode.OK)
@@ -35,6 +35,9 @@ namespace PasteMystNet
             var content = await response.Content.ReadAsStringAsync();
             return JsonConvert.DeserializeObject<PasteMystLanguage>(content);
         }
+        
+        [Obsolete] public static async Task<PasteMystLanguage?> IdentifyByNameAsync(string name) { return await GetLanguageByNameAsync(name); }
+        [Obsolete] public static async Task<PasteMystLanguage?> IdentifyByExtensionAsync(string extension) { return await GetLanguageByExtensionAsync(extension); }
 
         public override string ToString()
         {

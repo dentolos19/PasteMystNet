@@ -22,12 +22,12 @@ namespace PasteMystNet
         [JsonProperty(PropertyName = "expiresIn")] public string ExpireDuration { get; set; } = PasteMystExpirations.Never;
         [JsonIgnore] public IList<string>? Tags { get; set; } = new List<string>();
         
-        public async Task<PasteMystPaste?> PostPasteAsync(PasteMystToken? auth = null)
+        public async Task<PasteMystPaste?> PostPasteAsync(PasteMystToken? token = null)
         {
-            if ((IsPrivate || IsPublic) && auth == null)
-                throw new ArgumentNullException(nameof(auth));
-            if (Tags is { Count: > 0 } && auth == null)
-                throw new ArgumentNullException(nameof(auth));
+            if ((IsPrivate || IsPublic) && token == null)
+                throw new ArgumentNullException(nameof(token));
+            if (Tags is { Count: > 0 } && token == null)
+                throw new ArgumentNullException(nameof(token));
             if (Pasties is not { Count: > 0 })
                 throw new Exception($"{nameof(Pasties)} must not be null or empty.");
             foreach (var paste in Pasties)
@@ -51,8 +51,8 @@ namespace PasteMystNet
                 request.ContentLength = data.Length;
                 using (var stream = await request.GetRequestStreamAsync())
                     await stream.WriteAsync(data, 0, data.Length);
-                if (auth != null)
-                    request.Headers.Add("Authorization", auth.Token);
+                if (token != null)
+                    request.Headers.Add("Authorization", token.Token);
                 using var response = await request.GetResponseAsync();
                 using var reader = new StreamReader(response.GetResponseStream()!);
                 var content = await reader.ReadToEndAsync();

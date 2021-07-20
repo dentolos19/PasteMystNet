@@ -36,9 +36,6 @@ namespace PasteMystNet
             return JsonConvert.DeserializeObject<PasteMystLanguage>(content);
         }
         
-        [Obsolete] public static async Task<PasteMystLanguage?> IdentifyByNameAsync(string name) { return await GetLanguageByNameAsync(name); }
-        [Obsolete] public static async Task<PasteMystLanguage?> IdentifyByExtensionAsync(string extension) { return await GetLanguageByExtensionAsync(extension); }
-
         public override string ToString()
         {
             try
@@ -56,6 +53,11 @@ namespace PasteMystNet
                 }
             }
         }
+
+        /// TODO: remove obsolete methods
+        
+        [Obsolete] public static async Task<PasteMystLanguage?> IdentifyByNameAsync(string name) { return await GetLanguageByNameAsync(name); }
+        [Obsolete] public static async Task<PasteMystLanguage?> IdentifyByExtensionAsync(string extension) { return await GetLanguageByExtensionAsync(extension); }
 
     }
 

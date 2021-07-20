@@ -125,12 +125,12 @@ namespace PasteMystNet.Tests
             {
                 var self = await PasteMystUser.GetUserAsync(AuthToken);
                 Assert.IsNotNull(user);
-                Console.WriteLine("=====> SELF <=====");
+                Console.WriteLine("=====> TOKEN USER <=====");
                 Console.WriteLine(ObjectDumper.Dump(self));
                 Console.WriteLine();
                 var selfPastes = await PasteMystUser.GetUserPastesAsync(AuthToken);
                 Assert.IsNotNull(user);
-                Console.WriteLine("=====> SELF PASTES <=====");
+                Console.WriteLine("=====> TOKEN USER PASTES <=====");
                 Console.WriteLine(ObjectDumper.Dump(selfPastes));
                 Console.WriteLine();
             }

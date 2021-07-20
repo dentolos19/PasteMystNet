@@ -34,14 +34,14 @@ namespace PasteMystNet
             return new(this);
         }
         
-        public static async Task<PasteMystPaste?> GetPasteAsync(string id, PasteMystToken? auth = null)
+        public static async Task<PasteMystPaste?> GetPasteAsync(string id, PasteMystToken? token = null)
         {
             try
             {
                 var request = WebRequest.Create(string.Format(Constants.GetPasteEndpoint, id));
                 request.Method = "GET";
-                if (auth != null)
-                    request.Headers.Add("Authorization", auth.Token);
+                if (token != null)
+                    request.Headers.Add("Authorization", token.Token);
                 using var response = await request.GetResponseAsync();
                 using var reader = new StreamReader(response.GetResponseStream()!);
                 var content = await reader.ReadToEndAsync();
@@ -68,13 +68,13 @@ namespace PasteMystNet
             }
         }
         
-        public static async Task DeletePasteAsync(string id, PasteMystToken auth)
+        public static async Task DeletePasteAsync(string id, PasteMystToken token)
         {
             try
             {
                 var request = WebRequest.Create(string.Format(Constants.DeletePasteEndpoint, id));
                 request.Method = "DELETE";
-                request.Headers.Add("Authorization", auth.Token);
+                request.Headers.Add("Authorization", token.Token);
                 await request.GetResponseAsync();
             }
             catch (Exception error)

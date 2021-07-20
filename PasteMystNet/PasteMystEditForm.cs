@@ -38,7 +38,7 @@ namespace PasteMystNet
         [JsonProperty(PropertyName = "pasties")] public IList<PasteMystPastyForm>? Pasties { get; set; }
         [JsonIgnore] public IList<string>? Tags { get; set; } = new List<string>();
         
-        public async Task<PasteMystPaste?> PatchPasteAsync(PasteMystToken auth)
+        public async Task<PasteMystPaste?> PatchPasteAsync(PasteMystToken token)
         {
             if (Pasties is not { Count: > 0 })
                 throw new Exception($"{nameof(Pasties)} must not be null or empty.");
@@ -60,7 +60,7 @@ namespace PasteMystNet
                 var data = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(this));
                 var request = WebRequest.Create(string.Format(Constants.PatchPasteEndpoint, _id));
                 request.Method = "PATCH";
-                request.Headers.Add("Authorization", auth.Token);
+                request.Headers.Add("Authorization", token.Token);
                 request.ContentType = "application/json";
                 request.ContentLength = data.Length;
                 using (var stream = await request.GetRequestStreamAsync())

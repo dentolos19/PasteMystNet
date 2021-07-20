@@ -40,13 +40,13 @@ namespace PasteMystNet
             return JsonConvert.DeserializeObject<PasteMystUser>(content);
         }
         
-        public static async Task<PasteMystUser?> GetUserAsync(PasteMystToken auth)
+        public static async Task<PasteMystUser?> GetUserAsync(PasteMystToken token)
         {
             try
             {
                 var request = WebRequest.Create(Constants.GetSelfEndpoint);
                 request.Method = "GET";
-                request.Headers.Add("Authorization", auth.Token);
+                request.Headers.Add("Authorization", token.Token);
                 using var response = await request.GetResponseAsync();
                 using var reader = new StreamReader(response.GetResponseStream()!);
                 var content = await reader.ReadToEndAsync();
@@ -73,13 +73,13 @@ namespace PasteMystNet
             }
         }
 
-        public static async Task<string[]?> GetUserPastesAsync(PasteMystToken auth)
+        public static async Task<string[]?> GetUserPastesAsync(PasteMystToken token)
         {
             try
             {
                 var request = WebRequest.Create(Constants.GetSelfPastesEndpoint);
                 request.Method = "GET";
-                request.Headers.Add("Authorization", auth.Token);
+                request.Headers.Add("Authorization", token.Token);
                 using var response = await request.GetResponseAsync();
                 using var reader = new StreamReader(response.GetResponseStream()!);
                 var content = await reader.ReadToEndAsync();
@@ -106,9 +106,6 @@ namespace PasteMystNet
             }
         }
 
-        [Obsolete] public static async Task<PasteMystUser?> GetSelfAsync(PasteMystToken auth) { return await GetUserAsync(auth); }
-        [Obsolete] public static async Task<string[]?> GetSelfPastesAsync(PasteMystToken auth) { return await GetUserPastesAsync(auth); }
-
         public override string ToString()
         {
             try
@@ -126,6 +123,11 @@ namespace PasteMystNet
                 }
             }
         }
+
+        // TODO: remove obsolete methods
+
+        [Obsolete] public static async Task<PasteMystUser?> GetSelfAsync(PasteMystToken token) { return await GetUserAsync(token); }
+        [Obsolete] public static async Task<string[]?> GetSelfPastesAsync(PasteMystToken token) { return await GetUserPastesAsync(token); }
 
     }
 

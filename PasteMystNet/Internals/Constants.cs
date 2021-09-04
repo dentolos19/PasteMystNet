@@ -16,7 +16,7 @@ namespace PasteMystNet.Internals
 
         public static string IdentifyByNameEndpoint => BaseEndpoint + "/data/language?name={0}";
         public static string IdentifyByExtensionEndpoint => BaseEndpoint + "/data/languageExt?extension={0}";
-            
+
         public static string UserExistsEndpoint => BaseEndpoint + "/user/{0}/exists";
         public static string GetUserEndpoint => BaseEndpoint + "/user/{0}";
         public static string GetSelfEndpoint => BaseEndpoint + "/user/self";

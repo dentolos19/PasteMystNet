@@ -4,14 +4,12 @@
 
 		<TargetFramework>netstandard2.0</TargetFramework>
 		<LangVersion>9.0</LangVersion>
-		<Nullable>enable</Nullable>
 
 		<PackageIcon>Icon.png</PackageIcon>
-		<Product>PasteMyst.NET</Product>
+		<Version>1.1.7</Version>
 		<Authors>Dennise Catolos</Authors>
-		<Version>1.1.6</Version>
-		<Copyright>Copyright © 2021</Copyright>
 		<Description>A simple .NET API wrapper for PasteMyst!</Description>
+		<Copyright>Copyright © 2021</Copyright>
 
 		<PackageProjectUrl>https://github.com/dentolos19/PasteMystNet</PackageProjectUrl>
 		<PackageLicenseFile>LICENSE</PackageLicenseFile>

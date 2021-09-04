@@ -1,15 +1,15 @@
 namespace PasteMystNet
 {
-    
+
     public class PasteMystToken
     {
+
+        public string Token { get; }
 
         public PasteMystToken(string token)
         {
             Token = token;
         }
-        
-        public string Token { get; }
 
         public override string ToString()
         {

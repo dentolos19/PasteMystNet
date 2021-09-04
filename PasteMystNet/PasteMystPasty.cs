@@ -2,7 +2,7 @@ using Newtonsoft.Json;
 
 namespace PasteMystNet
 {
-    
+
     public class PasteMystPasty
     {
 

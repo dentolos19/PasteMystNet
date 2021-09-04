@@ -1,14 +1,14 @@
-using Newtonsoft.Json;
 using System;
+using Newtonsoft.Json;
 
 namespace PasteMystNet
 {
-    
+
     public class PasteMystEdit
     {
 
-        [JsonProperty(PropertyName = "editType")] private readonly string _editType;
         [JsonProperty(PropertyName = "editedAt")] private readonly long _editedAt;
+        [JsonProperty(PropertyName = "editType")] private readonly string _editType;
 
         [JsonProperty(PropertyName = "_id")] public string Id { get; private set; }
         [JsonProperty(PropertyName = "editId")] public string EditId { get; private set; }

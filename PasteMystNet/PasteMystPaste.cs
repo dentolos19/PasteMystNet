@@ -1,13 +1,13 @@
-using Newtonsoft.Json;
-using PasteMystNet.Internals;
 using System;
 using System.IO;
 using System.Net;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
+using PasteMystNet.Internals;
 
 namespace PasteMystNet
 {
-    
+
     public class PasteMystPaste
     {
 
@@ -28,12 +28,12 @@ namespace PasteMystNet
         [JsonIgnore] public bool HasOwner => !string.IsNullOrEmpty(OwnerId);
         [JsonIgnore] public DateTime CreationTime => DateTimeOffset.FromUnixTimeSeconds(CreationUnixTime).DateTime;
         [JsonIgnore] public DateTime? DeletionTime => DeletionUnixTime <= 0 ? null : DateTimeOffset.FromUnixTimeSeconds(DeletionUnixTime).DateTime;
-        
+
         public PasteMystEditForm CreateEditForm()
         {
-            return new(this);
+            return new PasteMystEditForm(this);
         }
-        
+
         public static async Task<PasteMystPaste?> GetPasteAsync(string id, PasteMystToken? token = null)
         {
             try
@@ -52,14 +52,14 @@ namespace PasteMystNet
                 switch (error)
                 {
                     case WebException webError:
-                        {
-                            using var reader = new StreamReader(webError.Response.GetResponseStream()!);
-                            var content = await reader.ReadToEndAsync();
-                            if (string.IsNullOrEmpty(content))
-                                throw new Exception("The server returned an exception with unknown reasons.");
-                            var response = JsonConvert.DeserializeObject<Response>(content);
-                            throw new Exception(response == null ? "The server returned an exception with unknown reasons." : $"The server returned an exception: {response.Message}");
-                        }
+                    {
+                        using var reader = new StreamReader(webError.Response.GetResponseStream()!);
+                        var content = await reader.ReadToEndAsync();
+                        if (string.IsNullOrEmpty(content))
+                            throw new Exception("The server returned an exception with unknown reasons.");
+                        var response = JsonConvert.DeserializeObject<Response>(content);
+                        throw new Exception(response == null ? "The server returned an exception with unknown reasons." : $"The server returned an exception: {response.Message}");
+                    }
                     case JsonException jsonError:
                         throw new Exception($"An error occurred during serialization: {jsonError.Message}");
                     default:
@@ -67,7 +67,7 @@ namespace PasteMystNet
                 }
             }
         }
-        
+
         public static async Task DeletePasteAsync(string id, PasteMystToken token)
         {
             try
@@ -82,14 +82,14 @@ namespace PasteMystNet
                 switch (error)
                 {
                     case WebException webError:
-                        {
-                            using var reader = new StreamReader(webError.Response.GetResponseStream()!);
-                            var content = await reader.ReadToEndAsync();
-                            if (string.IsNullOrEmpty(content))
-                                throw new Exception("The server returned an exception with unknown reasons.");
-                            var response = JsonConvert.DeserializeObject<Response>(content);
-                            throw new Exception(response == null ? "The server returned an exception with unknown reasons." : $"The server returned an exception: {response.Message}");
-                        }
+                    {
+                        using var reader = new StreamReader(webError.Response.GetResponseStream()!);
+                        var content = await reader.ReadToEndAsync();
+                        if (string.IsNullOrEmpty(content))
+                            throw new Exception("The server returned an exception with unknown reasons.");
+                        var response = JsonConvert.DeserializeObject<Response>(content);
+                        throw new Exception(response == null ? "The server returned an exception with unknown reasons." : $"The server returned an exception: {response.Message}");
+                    }
                     default:
                         throw;
                 }

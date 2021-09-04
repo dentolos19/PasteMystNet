@@ -1,7 +1,7 @@
-﻿using NUnit.Framework;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using NUnit.Framework;
 
 namespace PasteMystNet.Tests
 {
@@ -10,7 +10,8 @@ namespace PasteMystNet.Tests
     internal static class Operations
     {
 
-        private static PasteMystToken? AuthToken { get; }
+        private static PasteMystToken AuthToken { get; }
+
         private static PasteMystPasteForm TemplateForm { get; } = new()
         {
             Title = "PasteMyst.NET",
@@ -25,10 +26,7 @@ namespace PasteMystNet.Tests
                 new()
                 {
                     Title = "test.py",
-                    Code = "def main():" + "\n" +
-                           "    print('Hello World')" + "\n" +
-                           "\n" +
-                           "main()"
+                    Code = "def main():" + "\n" + "    print('Hello World')" + "\n" + "\n" + "main()"
                 }
             }
         };
@@ -98,15 +96,15 @@ namespace PasteMystNet.Tests
         [Test]
         public static async Task LanguageDataTest()
         {
-            var identifyPart1 = await PasteMystLanguage.GetLanguageByExtensionAsync("cs");
-            Assert.IsNotNull(identifyPart1);
-            Console.WriteLine("=====> IDENTITY PART 1 <=====");
-            Console.WriteLine(ObjectDumper.Dump(identifyPart1));
+            var languagePart1 = await PasteMystLanguage.GetLanguageByExtensionAsync("cs");
+            Assert.IsNotNull(languagePart1);
+            Console.WriteLine("=====> LANGUAGE PART 1 <=====");
+            Console.WriteLine(ObjectDumper.Dump(languagePart1));
             Console.WriteLine();
-            var identifyPart2 = await PasteMystLanguage.GetLanguageByNameAsync("C#");
-            Assert.IsNotNull(identifyPart2);
-            Console.WriteLine("=====> IDENTIFY PART 2 <=====");
-            Console.WriteLine(ObjectDumper.Dump(identifyPart2));
+            var languagePart2 = await PasteMystLanguage.GetLanguageByNameAsync("C#");
+            Assert.IsNotNull(languagePart2);
+            Console.WriteLine("=====> LANGUAGE PART 2 <=====");
+            Console.WriteLine(ObjectDumper.Dump(languagePart2));
             Console.WriteLine();
         }
 

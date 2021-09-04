@@ -1,13 +1,13 @@
-using Newtonsoft.Json;
-using PasteMystNet.Internals;
 using System;
 using System.Drawing;
 using System.Net;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
+using PasteMystNet.Internals;
 
 namespace PasteMystNet
 {
-    
+
     public class PasteMystLanguage
     {
 
@@ -26,7 +26,7 @@ namespace PasteMystNet
             var content = await response.Content.ReadAsStringAsync();
             return JsonConvert.DeserializeObject<PasteMystLanguage>(content);
         }
-        
+
         public static async Task<PasteMystLanguage?> GetLanguageByExtensionAsync(string extension)
         {
             var response = await Constants.HttpClient.GetAsync(string.Format(Constants.IdentifyByExtensionEndpoint, Uri.EscapeDataString(extension)));
@@ -35,7 +35,7 @@ namespace PasteMystNet
             var content = await response.Content.ReadAsStringAsync();
             return JsonConvert.DeserializeObject<PasteMystLanguage>(content);
         }
-        
+
         public override string ToString()
         {
             try
@@ -53,11 +53,6 @@ namespace PasteMystNet
                 }
             }
         }
-
-        /// TODO: remove obsolete methods
-        
-        [Obsolete] public static async Task<PasteMystLanguage?> IdentifyByNameAsync(string name) { return await GetLanguageByNameAsync(name); }
-        [Obsolete] public static async Task<PasteMystLanguage?> IdentifyByExtensionAsync(string extension) { return await GetLanguageByExtensionAsync(extension); }
 
     }
 

@@ -1,14 +1,14 @@
-using Newtonsoft.Json;
-using PasteMystNet.Internals;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
+using PasteMystNet.Internals;
 
 namespace PasteMystNet
 {
-    
+
     public class PasteMystUser
     {
 
@@ -24,13 +24,13 @@ namespace PasteMystNet
 
         [JsonProperty(PropertyName = "stars")] public string[]? Stars { get; private set; }
         [JsonProperty(PropertyName = "serviceIds")] public IDictionary<string, string>? ServiceIds { get; private set; }
-        
+
         public static async Task<bool> UserExistsAsync(string name)
         {
             var response = await Constants.HttpClient.GetAsync(string.Format(Constants.UserExistsEndpoint, name));
             return response.StatusCode == HttpStatusCode.OK;
         }
-        
+
         public static async Task<PasteMystUser?> GetUserAsync(string name)
         {
             var response = await Constants.HttpClient.GetAsync(string.Format(Constants.GetUserEndpoint, name));
@@ -39,7 +39,7 @@ namespace PasteMystNet
             var content = await response.Content.ReadAsStringAsync();
             return JsonConvert.DeserializeObject<PasteMystUser>(content);
         }
-        
+
         public static async Task<PasteMystUser?> GetUserAsync(PasteMystToken token)
         {
             try
@@ -123,11 +123,6 @@ namespace PasteMystNet
                 }
             }
         }
-
-        // TODO: remove obsolete methods
-
-        [Obsolete] public static async Task<PasteMystUser?> GetSelfAsync(PasteMystToken token) { return await GetUserAsync(token); }
-        [Obsolete] public static async Task<string[]?> GetSelfPastesAsync(PasteMystToken token) { return await GetUserPastesAsync(token); }
 
     }
 

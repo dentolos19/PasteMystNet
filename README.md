@@ -6,7 +6,7 @@
 
 PasteMystNet is a simple API wrapper for [PasteMyst](https://paste.myst.rs)! It is really simple to use and works with [any .NET platform](https://github.com/dotnet/standard/blob/master/docs/versions/netstandard2.0.md#platform-support), get started using this library by following the instructions below.
 
-> **NOTE**: I messed up on the versioning scheme but I will continue doing it because I want consistency. So be sure to take note of the changelogs of each version!
+> **NOTE**: I messed up on the versioning scheme but I will continue doing it until the library is updated to 1.2.0. Sorry for the inconvience!
 
 ## Usage
 

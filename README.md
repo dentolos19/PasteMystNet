@@ -3,7 +3,7 @@
 [![](https://img.shields.io/badge/Powered%20By-.NET-blue?logo=microsoft&style=flat-square)](https://dotnet.microsoft.com)
 [![](https://img.shields.io/badge/Made%20With-Visual%20Studio-blue?logo=visual-studio&style=flat-square)](https://visualstudio.microsoft.com)
 
-PasteMystNet is a simple API wrapper for [PasteMyst](https://paste.myst.rs)! It is really simple to use and works with [any .NET platform](https://github.com/dotnet/standard/blob/master/docs/versions/netstandard2.0.md#platform-support), get started using this library by following the instructions below.
+A simple API wrapper for [PasteMyst](https://paste.myst.rs)! It is really simple to use and works with [any .NET platform](https://github.com/dotnet/standard/blob/master/docs/versions/netstandard2.0.md#platform-support), get started using this library by following the instructions below.
 
 > **NOTE**: I messed up on the versioning scheme, currently it is 1.**MAJOR**.**MINOR** (like Minecraft, lol), but I will continue doing it because I want consistency.
 

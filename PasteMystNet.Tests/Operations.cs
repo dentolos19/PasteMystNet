@@ -69,9 +69,9 @@ namespace PasteMystNet.Tests
                 Console.WriteLine("=====> PASTE <=====");
                 Console.WriteLine(ObjectDumper.Dump(paste));
                 Console.WriteLine();
-                var edit = paste.CreateEditForm();
-                edit.Title += " (Edited)";
-                var editedPaste = await edit.PatchPasteAsync(AuthToken);
+                var editForm = paste.CreateEditForm();
+                editForm.Title += " (Edited)";
+                var editedPaste = await editForm.PatchPasteAsync(AuthToken);
                 Assert.IsNotNull(editedPaste);
                 Console.WriteLine("=====> EDITED PASTE <=====");
                 Console.WriteLine(ObjectDumper.Dump(editedPaste));

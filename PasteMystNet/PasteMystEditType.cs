@@ -1,4 +1,4 @@
-namespace PasteMystNet
+﻿namespace PasteMystNet
 {
 
     public enum PasteMystEditType

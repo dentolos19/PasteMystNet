@@ -1,7 +1,7 @@
-namespace PasteMystNet
+﻿namespace PasteMystNet
 {
 
-    public static class PasteMystExpirations
+    public class PasteMystExpirations
     {
 
         public const string Never = "never";

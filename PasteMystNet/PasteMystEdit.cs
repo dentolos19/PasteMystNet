@@ -1,5 +1,5 @@
-using System;
-using Newtonsoft.Json;
+﻿using System;
+using System.Text.Json.Serialization;
 
 namespace PasteMystNet
 {
@@ -7,13 +7,13 @@ namespace PasteMystNet
     public class PasteMystEdit
     {
 
-        [JsonProperty(PropertyName = "editedAt")] private readonly long _editedAt;
-        [JsonProperty(PropertyName = "editType")] private readonly string _editType;
+        [JsonPropertyName("editedAt")] private readonly long _editedAt;
+        [JsonPropertyName("editType")] private readonly string _editType;
 
-        [JsonProperty(PropertyName = "_id")] public string Id { get; private set; }
-        [JsonProperty(PropertyName = "editId")] public string EditId { get; private set; }
-        [JsonProperty(PropertyName = "metadata")] public string[] Metadata { get; private set; }
-        [JsonProperty(PropertyName = "edit")] public string Edit { get; private set; }
+        [JsonPropertyName("_id")] public string Id { get; init; }
+        [JsonPropertyName("editId")] public string EditId { get; init; }
+        [JsonPropertyName("metadata")] public string[] Metadata { get; init; }
+        [JsonPropertyName("edit")] public string Edit { get; init; }
         [JsonIgnore] public PasteMystEditType EditType => (PasteMystEditType)Enum.Parse(typeof(PasteMystEditType), _editType);
         [JsonIgnore] public DateTime EditedTime => DateTimeOffset.FromUnixTimeSeconds(_editedAt).DateTime;
 

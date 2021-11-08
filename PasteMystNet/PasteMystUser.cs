@@ -1,10 +1,10 @@
-using System;
-using System.Collections.Generic;
-using System.IO;
+﻿using System.Collections.Generic;
 using System.Net;
+using System.Net.Http;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
-using PasteMystNet.Internals;
+using PasteMystNet.Core;
 
 namespace PasteMystNet
 {
@@ -12,116 +12,54 @@ namespace PasteMystNet
     public class PasteMystUser
     {
 
-        [JsonProperty(PropertyName = "_id")] public string Id { get; private set; }
-        [JsonProperty(PropertyName = "username")] public string Username { get; private set; }
-        [JsonProperty(PropertyName = "avatarUrl")] public string AvatarUrl { get; private set; }
-        [JsonProperty(PropertyName = "defaultLang")] public string DefaultLanguage { get; private set; }
-        [JsonProperty(PropertyName = "publicProfile")] public bool HasPublicProfile { get; private set; }
-        [JsonProperty(PropertyName = "supporterLength")] public int SupporterLength { get; private set; }
-        [JsonProperty(PropertyName = "contributor")] public bool IsContributor { get; private set; }
+        [JsonPropertyName("_id")] public string Id { get; init; }
+        [JsonPropertyName("username")] public string Username { get; init; }
+        [JsonPropertyName("avatarUrl")] public string AvatarUrl { get; init; }
+        [JsonPropertyName("defaultLang")] public string DefaultLanguage { get; init; }
+        [JsonPropertyName("publicProfile")] public bool IsPublicProfile { get; init; }
+        [JsonPropertyName("supporterLength")] public int SupporterLength { get; init; }
+        [JsonPropertyName("contributor")] public bool IsContributor { get; init; }
         [JsonIgnore] public string ProfileUrl => Constants.WebsiteUrl + "/users/" + Username;
         [JsonIgnore] public bool IsSupporter => SupporterLength > 0;
 
-        [JsonProperty(PropertyName = "stars")] public string[]? Stars { get; private set; }
-        [JsonProperty(PropertyName = "serviceIds")] public IDictionary<string, string>? ServiceIds { get; private set; }
+        [JsonPropertyName("stars")] public string[]? Stars { get; private set; }
+        [JsonPropertyName("serviceIds")] public IDictionary<string, string>? ServiceIds { get; private set; }
 
-        public static async Task<bool> UserExistsAsync(string name)
+        public static async Task<bool> UserExistsAsync(string username)
         {
-            var response = await Constants.HttpClient.GetAsync(string.Format(Constants.UserExistsEndpoint, name));
+            var response = await Constants.HttpClient.GetAsync(string.Format(Constants.UserExistsEndpoint, username));
             return response.StatusCode == HttpStatusCode.OK;
         }
 
-        public static async Task<PasteMystUser?> GetUserAsync(string name)
+        public static async Task<PasteMystUser?> GetUserAsync(string username)
         {
-            var response = await Constants.HttpClient.GetAsync(string.Format(Constants.GetUserEndpoint, name));
+            var response = await Constants.HttpClient.GetAsync(string.Format(Constants.GetUserEndpoint, username));
             if (response.StatusCode != HttpStatusCode.OK)
                 return null;
             var content = await response.Content.ReadAsStringAsync();
-            return JsonConvert.DeserializeObject<PasteMystUser>(content);
+            return JsonSerializer.Deserialize<PasteMystUser>(content);
         }
 
         public static async Task<PasteMystUser?> GetUserAsync(PasteMystToken token)
         {
-            try
-            {
-                var request = WebRequest.Create(Constants.GetSelfEndpoint);
-                request.Method = "GET";
-                request.Headers.Add("Authorization", token.Token);
-                using var response = await request.GetResponseAsync();
-                using var reader = new StreamReader(response.GetResponseStream()!);
-                var content = await reader.ReadToEndAsync();
-                return JsonConvert.DeserializeObject<PasteMystUser>(content);
-            }
-            catch (Exception error)
-            {
-                switch (error)
-                {
-                    case WebException webError:
-                    {
-                        using var reader = new StreamReader(webError.Response.GetResponseStream()!);
-                        var content = await reader.ReadToEndAsync();
-                        if (string.IsNullOrEmpty(content))
-                            throw new Exception("The server returned an exception with unknown reasons.");
-                        var response = JsonConvert.DeserializeObject<Response>(content);
-                        throw new Exception(response == null ? "The server returned an exception with unknown reasons." : $"The server returned an exception: {response.Message}");
-                    }
-                    case JsonException jsonError:
-                        throw new Exception($"An error occurred during serialization: {jsonError.Message}");
-                    default:
-                        throw;
-                }
-            }
+            using var client = new HttpClient();
+            client.DefaultRequestHeaders.TryAddWithoutValidation("Authorization", token.ToString());
+            var response = await client.GetAsync(Constants.GetSelfEndpoint);
+            if (response.StatusCode != HttpStatusCode.OK)
+                return null;
+            var content = await response.Content.ReadAsStringAsync();
+            return JsonSerializer.Deserialize<PasteMystUser>(content);
         }
 
         public static async Task<string[]?> GetUserPastesAsync(PasteMystToken token)
         {
-            try
-            {
-                var request = WebRequest.Create(Constants.GetSelfPastesEndpoint);
-                request.Method = "GET";
-                request.Headers.Add("Authorization", token.Token);
-                using var response = await request.GetResponseAsync();
-                using var reader = new StreamReader(response.GetResponseStream()!);
-                var content = await reader.ReadToEndAsync();
-                return JsonConvert.DeserializeObject<string[]>(content);
-            }
-            catch (Exception error)
-            {
-                switch (error)
-                {
-                    case WebException webError:
-                    {
-                        using var reader = new StreamReader(webError.Response.GetResponseStream()!);
-                        var content = await reader.ReadToEndAsync();
-                        if (string.IsNullOrEmpty(content))
-                            throw new Exception("The server returned an exception with unknown reasons.");
-                        var response = JsonConvert.DeserializeObject<Response>(content);
-                        throw new Exception(response == null ? "The server returned an exception with unknown reasons." : $"The server returned an exception: {response.Message}");
-                    }
-                    case JsonException jsonError:
-                        throw new Exception($"An error occurred during serialization: {jsonError.Message}");
-                    default:
-                        throw;
-                }
-            }
-        }
-
-        public override string ToString()
-        {
-            try
-            {
-                return JsonConvert.SerializeObject(this, Formatting.Indented);
-            }
-            catch (Exception error)
-            {
-                switch (error)
-                {
-                    case JsonException jsonError:
-                        throw new Exception($"An error occurred during serialization: {jsonError.Message}");
-                    default:
-                        throw;
-                }
-            }
+            using var client = new HttpClient();
+            client.DefaultRequestHeaders.TryAddWithoutValidation("Authorization", token.ToString());
+            var response = await client.GetAsync(Constants.GetSelfPastesEndpoint);
+            if (response.StatusCode != HttpStatusCode.OK)
+                return null;
+            var content = await response.Content.ReadAsStringAsync();
+            return JsonSerializer.Deserialize<string[]>(content);
         }
 
     }

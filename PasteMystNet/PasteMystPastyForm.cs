@@ -1,4 +1,4 @@
-using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace PasteMystNet
 {
@@ -6,10 +6,11 @@ namespace PasteMystNet
     public class PasteMystPastyForm
     {
 
-        [JsonProperty(PropertyName = "_id", NullValueHandling = NullValueHandling.Ignore)] internal string Id { get; set; }
-        [JsonProperty(PropertyName = "title")] public string Title { get; set; }
-        [JsonProperty(PropertyName = "language")] public string Language { get; set; }
-        [JsonProperty(PropertyName = "code")] public string Code { get; set; }
+        [JsonPropertyName("_id")] internal string? Id { get; set; } // TODO: ignore null value
+
+        [JsonPropertyName("title")] public string Title { get; set; } = string.Empty;
+        [JsonPropertyName("language")] public string Language { get; set; } = "Autodetect";
+        [JsonPropertyName("code")] public string Code { get; set; }
 
     }
 

@@ -1,10 +1,9 @@
-﻿using System;
+﻿using PasteMystNet.Core;
+using System;
 using System.Drawing;
-using System.Net;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Net.Http;
 using System.Threading.Tasks;
-using PasteMystNet.Core;
+using Newtonsoft.Json;
 
 namespace PasteMystNet
 {
@@ -12,29 +11,29 @@ namespace PasteMystNet
     public class PasteMystLanguage
     {
 
-        [JsonPropertyName("name")] public string Name { get; init; }
-        [JsonPropertyName("mode")] public string Mode { get; init; }
-        [JsonPropertyName("mimes")] public string[] Mimes { get; init; }
-        [JsonPropertyName("ext")] public string[] Extensions { get; init; }
-        [JsonPropertyName("color")] public string ColorHex { get; init; }
-        [JsonIgnore] public Color Color => Utilities.ParseColorHex(ColorHex);
+        [JsonProperty("name")] public string Name { get; init; }
+        [JsonProperty("mode")] public string Mode { get; init; }
+        [JsonProperty("mimes")] public string[] Mimes { get; init; }
+        [JsonProperty("ext")] public string[] Extensions { get; init; }
+        [JsonProperty("color")] public string ColorHex { get; init; }
+        [JsonIgnore] public Color Color => ColorHex.ParseAsColorHex();
 
-        public static async Task<PasteMystLanguage?> GetLanguageByNameAsync(string name)
+        public static async Task<PasteMystLanguage> GetLanguageByNameAsync(string name)
         {
-            var response = await Constants.HttpClient.GetAsync(string.Format(Constants.GetLanguageByNameEndpoint, Uri.EscapeDataString(name)));
-            if (response.StatusCode != HttpStatusCode.OK)
-                return null;
-            var content = await response.Content.ReadAsStringAsync();
-            return JsonSerializer.Deserialize<PasteMystLanguage>(content);
+            using var httpClient = new HttpClient();
+            var response = await httpClient.GetAsync(string.Format(Constants.GetLanguageByNameEndpoint, Uri.EscapeDataString(name)));
+            response.EnsureSuccessStatusCode();
+            var responseContent = await response.Content.ReadAsStringAsync();
+            return JsonConvert.DeserializeObject<PasteMystLanguage>(responseContent);
         }
 
-        public static async Task<PasteMystLanguage?> GetLanguageByExtensionAsync(string extension)
+        public static async Task<PasteMystLanguage> GetLanguageByExtensionAsync(string extension)
         {
-            var response = await Constants.HttpClient.GetAsync(string.Format(Constants.GetLanguageByExtensionEndpoint, Uri.EscapeDataString(extension)));
-            if (response.StatusCode != HttpStatusCode.OK)
-                return null;
-            var content = await response.Content.ReadAsStringAsync();
-            return JsonSerializer.Deserialize<PasteMystLanguage>(content);
+            using var httpClient = new HttpClient();
+            var response = await httpClient.GetAsync(string.Format(Constants.GetLanguageByExtensionEndpoint, Uri.EscapeDataString(extension)));
+            response.EnsureSuccessStatusCode();
+            var responseContent = await response.Content.ReadAsStringAsync();
+            return JsonConvert.DeserializeObject<PasteMystLanguage>(responseContent);
         }
 
     }

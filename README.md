@@ -11,6 +11,5 @@ Install the library in your project.
 
 * .NET CLI: `dotnet add package PasteMystNet`
 * Package Manager CLI: `Install-Package PasteMystNet`
-* Package Manager GUI: Your project > Manage NuGet Packages > Search `PasteMystNet` > Install the first package
 
 The [usage wiki](https://github.com/dentolos19/PasteMystNet/wiki/Usage) gives you examples on using this library, but you can also check out the [unit tests project](./PasteMystNet.Tests).

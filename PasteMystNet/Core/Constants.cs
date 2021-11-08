@@ -1,6 +1,4 @@
-﻿using System.Net.Http;
-
-namespace PasteMystNet.Core
+﻿namespace PasteMystNet.Core
 {
 
     public static class Constants
@@ -27,10 +25,6 @@ namespace PasteMystNet.Core
         public static string GetUserEndpoint => BaseEndpoint + "/user/{0}";
         public static string GetSelfEndpoint => BaseEndpoint + "/user/self";
         public static string GetSelfPastesEndpoint => BaseEndpoint + "/user/self/pastes";
-
-        // single instances
-
-        public static HttpClient HttpClient { get; } = new();
 
     }
 

@@ -1,17 +1,14 @@
 using System;
 using System.Threading.Tasks;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 
 namespace PasteMystNet.Tests
 {
 
-    [TestClass]
     public class DataTests
     {
 
-        [TestMethod]
-        [DataTestMethod]
-        [DataRow("C#")]
+        [TestCase("C#")]
         public async Task GetLanguageByNameTest(string name)
         {
             var language = await PasteMystLanguage.GetLanguageByNameAsync(name);
@@ -20,9 +17,7 @@ namespace PasteMystNet.Tests
             Console.WriteLine(dump);
         }
 
-        [TestMethod]
-        [DataTestMethod]
-        [DataRow("cs")]
+        [TestCase("cs")]
         public async Task GetLanguageByExtensionTest(string extension)
         {
             var language = await PasteMystLanguage.GetLanguageByExtensionAsync(extension);

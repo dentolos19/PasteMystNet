@@ -1,11 +1,10 @@
-﻿using System;
+﻿using PasteMystNet.Core;
+using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
-using System.Text.Json;
-using System.Text.Json.Serialization;
 using System.Threading.Tasks;
-using PasteMystNet.Core;
+using Newtonsoft.Json;
 
 namespace PasteMystNet
 {
@@ -13,18 +12,18 @@ namespace PasteMystNet
     public class PasteMystPasteForm
     {
 
-        [JsonPropertyName("tags")] private string? _tags; // TODO: ignore null value
+        [JsonProperty("tags", NullValueHandling = NullValueHandling.Ignore)] private string? _tags;
 
-        [JsonPropertyName("title")] public string Title { get; set; } = string.Empty;
-        [JsonPropertyName("isPrivate")] public bool IsPrivate { get; set; }
-        [JsonPropertyName("isPublic")] public bool IsPublic { get; set; }
-        [JsonPropertyName("pasties")] public IList<PasteMystPastyForm>? Pasties { get; set; } = new List<PasteMystPastyForm>();
-        [JsonPropertyName("expiresIn")] public string ExpireDuration { get; set; } = PasteMystExpirations.Never;
+        [JsonProperty("title")] public string Title { get; set; } = string.Empty;
+        [JsonProperty("isPrivate", NullValueHandling = NullValueHandling.Ignore)] public bool? IsPrivate { get; set; }
+        [JsonProperty("isPublic", NullValueHandling = NullValueHandling.Ignore)] public bool? IsPublic { get; set; }
+        [JsonProperty("pasties")] public IList<PasteMystPastyForm>? Pasties { get; set; } = new List<PasteMystPastyForm>();
+        [JsonProperty("expiresIn")] public string ExpireDuration { get; set; } = PasteMystExpirations.Never;
         [JsonIgnore] public IList<string>? Tags { get; set; } = new List<string>();
 
         public async Task<PasteMystPaste> PostPasteAsync(PasteMystToken? token = null)
         {
-            if ((IsPrivate || IsPublic) && token == null)
+            if ((IsPrivate.GetValueOrDefault() || IsPublic.GetValueOrDefault()) && token == null)
                 throw new ArgumentNullException(nameof(token));
             if (Tags is { Count: > 0 } && token == null)
                 throw new ArgumentNullException(nameof(token));
@@ -35,13 +34,14 @@ namespace PasteMystNet
                     throw new Exception($"{nameof(Pasties)}[{Pasties.IndexOf(paste)}] doesn't contain code content.");
             if (Tags != null)
                 _tags = string.Join(",", Tags);
-            using var client = new HttpClient();
+            using var httpClient = new HttpClient();
             if (token != null)
-                client.DefaultRequestHeaders.TryAddWithoutValidation("Authorization", token.ToString());
-            var response = await client.PostAsync(Constants.PostPasteEndpoint, new StringContent(JsonSerializer.Serialize(this), Encoding.UTF8, "application/json"));
+                httpClient.DefaultRequestHeaders.TryAddWithoutValidation("Authorization", token.ToString());
+            var requestContent = JsonConvert.SerializeObject(this);
+            var response = await httpClient.PostAsync(Constants.PostPasteEndpoint, new StringContent(requestContent, Encoding.UTF8, "application/json"));
             response.EnsureSuccessStatusCode();
-            var content = await response.Content.ReadAsStringAsync();
-            return JsonSerializer.Deserialize<PasteMystPaste>(content);
+            var responseContent = await response.Content.ReadAsStringAsync();
+            return JsonConvert.DeserializeObject<PasteMystPaste>(responseContent);
         }
 
     }

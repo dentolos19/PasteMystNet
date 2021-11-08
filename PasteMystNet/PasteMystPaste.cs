@@ -1,10 +1,8 @@
-﻿using System;
-using System.Net;
+﻿using PasteMystNet.Core;
+using System;
 using System.Net.Http;
-using System.Text.Json;
-using System.Text.Json.Serialization;
 using System.Threading.Tasks;
-using PasteMystNet.Core;
+using Newtonsoft.Json;
 
 namespace PasteMystNet
 {
@@ -12,42 +10,46 @@ namespace PasteMystNet
     public class PasteMystPaste
     {
 
-        [JsonPropertyName("_id")] public string Id { get; init; }
-        [JsonPropertyName("ownerId")] public string OwnerId { get; init; }
-        [JsonPropertyName("title")] public string Title { get; init; }
-        [JsonPropertyName("stars")] public int Stars { get; init; }
-        [JsonPropertyName("isPrivate")] public bool IsPrivate { get; init; }
-        [JsonPropertyName("isPublic")] public bool IsPublic { get; init; }
-        [JsonPropertyName("encrypted")] public bool IsEncrypted { get; init; }
-        [JsonPropertyName("tags")] public string[]? Tags { get; init; }
-        [JsonPropertyName("pasties")] public PasteMystPasty[] Pasties { get; init; }
-        [JsonPropertyName("edits")] public PasteMystEdit[]? Edits { get; init; }
-        [JsonPropertyName("expiresIn")] public string ExpireDuration { get; init; }
-        [JsonPropertyName("createdAt")] public long CreationUnixTime { get; init; }
-        [JsonPropertyName("deletesAt")] public long DeletionUnixTime { get; init; }
+        [JsonProperty("_id")] public string Id { get; init; }
+        [JsonProperty("ownerId")] public string OwnerId { get; init; }
+        [JsonProperty("title")] public string Title { get; init; }
+        [JsonProperty("stars")] public int Stars { get; init; }
+        [JsonProperty("isPrivate")] public bool IsPrivate { get; init; }
+        [JsonProperty("isPublic")] public bool IsPublic { get; init; }
+        [JsonProperty("encrypted")] public bool IsEncrypted { get; init; }
+        [JsonProperty("tags")] public string[]? Tags { get; init; }
+        [JsonProperty("pasties")] public PasteMystPasty[] Pasties { get; init; }
+        [JsonProperty("edits")] public PasteMystEdit[]? Edits { get; init; }
+        [JsonProperty("expiresIn")] public string ExpireDuration { get; init; }
+        [JsonProperty("createdAt")] public long CreationUnixTime { get; init; }
+        [JsonProperty("deletesAt")] public long DeletionUnixTime { get; init; }
         [JsonIgnore] public string Url => Constants.WebsiteUrl + $"/{Id}";
         [JsonIgnore] public bool HasOwner => !string.IsNullOrEmpty(OwnerId);
         [JsonIgnore] public DateTime CreationTime => DateTimeOffset.FromUnixTimeSeconds(CreationUnixTime).DateTime;
         [JsonIgnore] public DateTime? DeletionTime => DeletionUnixTime <= 0 ? null : DateTimeOffset.FromUnixTimeSeconds(DeletionUnixTime).DateTime;
 
-        public static async Task<PasteMystPaste?> GetPasteAsync(string id, PasteMystToken? token = null)
+        public PasteMystEditForm CreateEditForm()
         {
-            using var client = new HttpClient();
-            if (token != null)
-                client.DefaultRequestHeaders.TryAddWithoutValidation("Authorization", token.ToString());
-            var response = await client.GetAsync(string.Format(Constants.GetPasteEndpoint, id));
-            if (response.StatusCode != HttpStatusCode.OK)
-                return null;
-            var content = await response.Content.ReadAsStringAsync();
-            return JsonSerializer.Deserialize<PasteMystPaste>(content);
+            return new PasteMystEditForm(this);
         }
 
-        public static async Task<bool> DeletePasteAsync(string id, PasteMystToken token)
+        public static async Task<PasteMystPaste> GetPasteAsync(string id, PasteMystToken? token = null)
         {
-            using var client = new HttpClient();
-            client.DefaultRequestHeaders.TryAddWithoutValidation("Authorization", token.ToString());
-            var response = await client.DeleteAsync(string.Format(Constants.DeletePasteEndpoint, id));
-            return response.StatusCode == HttpStatusCode.OK;
+            using var httpClient = new HttpClient();
+            if (token != null)
+                httpClient.DefaultRequestHeaders.TryAddWithoutValidation("Authorization", token.ToString());
+            var response = await httpClient.GetAsync(string.Format(Constants.GetPasteEndpoint, id));
+            response.EnsureSuccessStatusCode();
+            var responseContent = await response.Content.ReadAsStringAsync();
+            return JsonConvert.DeserializeObject<PasteMystPaste>(responseContent);
+        }
+
+        public static async Task DeletePasteAsync(string id, PasteMystToken token)
+        {
+            using var httpClient = new HttpClient();
+            httpClient.DefaultRequestHeaders.TryAddWithoutValidation("Authorization", token.ToString());
+            var response = await httpClient.DeleteAsync(string.Format(Constants.DeletePasteEndpoint, id));
+            response.EnsureSuccessStatusCode();
         }
 
     }

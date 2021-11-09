@@ -11,6 +11,9 @@
 		<Description>A simple .NET API wrapper for PasteMyst!</Description>
 		<Copyright>Copyright © 2022</Copyright>
 
+		<PackageIcon>Icon.png</PackageIcon>
+		<PackageLicenseFile>LICENSE</PackageLicenseFile>
+
 		<RepositoryType>git</RepositoryType>
 		<RepositoryUrl>https://github.com/dentolos19/PasteMystNet</RepositoryUrl>
 
@@ -18,6 +21,17 @@
 
 	<ItemGroup>
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.1"/>
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Include="Resources/Icon.png">
+			<Pack>True</Pack>
+			<PackagePath></PackagePath>
+		</None>
+		<None Include="../LICENSE">
+			<Pack>True</Pack>
+			<PackagePath></PackagePath>
+		</None>
 	</ItemGroup>
 
 </Project>

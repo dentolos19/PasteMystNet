@@ -1,11 +1,11 @@
-﻿using PasteMystNet.Core;
+﻿using Newtonsoft.Json;
+using PasteMystNet.Core;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
 
 namespace PasteMystNet
 {
@@ -38,6 +38,8 @@ namespace PasteMystNet
 
         public async Task<PasteMystPaste> PatchPasteAsync(PasteMystToken token)
         {
+            if (Pasties is not { Count: > 0 })
+                throw new Exception($"{nameof(Pasties)} must not be null or empty.");
             foreach (var paste in Pasties)
                 if (string.IsNullOrEmpty(paste.Code))
                     throw new Exception($"{nameof(Pasties)}[{Pasties.IndexOf(paste)}] doesn't contain code content.");

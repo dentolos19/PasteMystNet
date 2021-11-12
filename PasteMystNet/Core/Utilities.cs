@@ -4,7 +4,7 @@ using System.Globalization;
 namespace PasteMystNet.Core
 {
 
-    public static class Utilities
+    internal static class Utilities
     {
 
         public static Color ParseAsColorHex(this string hex)

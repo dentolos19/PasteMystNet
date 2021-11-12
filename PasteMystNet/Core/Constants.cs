@@ -1,7 +1,7 @@
 ﻿namespace PasteMystNet.Core
 {
 
-    public static class Constants
+    internal static class Constants
     {
 
         public static string WebsiteUrl => "https://paste.myst.rs";

@@ -12,4 +12,40 @@ Install the library in your project.
 * .NET CLI: `dotnet add package PasteMystNet`
 * Package Manager CLI: `Install-Package PasteMystNet`
 
-The [usage wiki](https://github.com/dentolos19/PasteMystNet/wiki/Usage) gives you examples on using this library, but you can also check out the [unit tests project](./PasteMystNet.Tests).
+Try using the library in your project.
+
+```cs
+using System.Collections.Generic;
+using PasteMystNet;
+
+var userToken = new PasteMystToken("<token>"); // token for posting (private) pastes to user's profile
+var pasteForm = new PasteMystPasteForm // form for information about the paste to be posted
+{
+    Title = "My paste!",
+    ExpireDuration = PasteMystExpirations.OneDay,
+    Pasties = new List<PasteMystPastyForm>
+    {
+        new()
+        {
+            Title = "file.txt",
+            Code = "This is a test."
+        },
+        new()
+        {
+            Language = "Python",
+            Code = "print(\"Hello World\")"
+        }
+    },
+    Tags = new List<string> // this is only available for private pastes
+    {
+        "file",
+        "python",
+        "basic"
+    }
+}
+
+// var paste = await pasteForm.PostPasteAsync(); // post the paste
+var paste = await pasteForm.PostPasteAsync(userToken); // post the (private) paste to user's profile
+```
+
+For more examples for using this library, visit the [wiki](https://github.com/dentolos19/PasteMystNet/wiki/Usage) or check out the [unit tests](./PasteMystNet.Tests).

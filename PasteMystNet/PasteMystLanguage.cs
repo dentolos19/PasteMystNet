@@ -16,7 +16,7 @@ namespace PasteMystNet
         [JsonProperty("mimes")] public string[] Mimes { get; init; }
         [JsonProperty("ext")] public string[] Extensions { get; init; }
         [JsonProperty("color")] public string ColorHex { get; init; }
-        [JsonIgnore] public Color Color => ColorHex.ParseAsColorHex();
+        [JsonIgnore] public Color Color => Utilities.ParseColorHex(ColorHex);
 
         public static async Task<PasteMystLanguage> GetLanguageByNameAsync(string name)
         {

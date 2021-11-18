@@ -1,6 +1,6 @@
+using NUnit.Framework;
 using System;
 using System.Threading.Tasks;
-using NUnit.Framework;
 
 namespace PasteMystNet.Tests
 {
@@ -9,6 +9,8 @@ namespace PasteMystNet.Tests
     {
 
         [TestCase("C#")]
+        [TestCase("C++")]
+        [TestCase("JavaScript")]
         public async Task GetLanguageByNameTest(string name)
         {
             var language = await PasteMystLanguage.GetLanguageByNameAsync(name);
@@ -18,6 +20,8 @@ namespace PasteMystNet.Tests
         }
 
         [TestCase("cs")]
+        [TestCase("cpp")]
+        [TestCase("js")]
         public async Task GetLanguageByExtensionTest(string extension)
         {
             var language = await PasteMystLanguage.GetLanguageByExtensionAsync(extension);

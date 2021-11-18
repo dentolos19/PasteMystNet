@@ -1,6 +1,5 @@
 ﻿using Newtonsoft.Json;
 using PasteMystNet.Core;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
@@ -26,23 +25,22 @@ namespace PasteMystNet
         {
             _id = paste.Id;
             Title = paste.Title;
-            Pasties = paste.Pasties.Select(pasty => new PasteMystPastyForm
-            {
-                Id = pasty.Id,
-                Title = pasty.Title,
-                Language = pasty.Language,
-                Code = pasty.Code
-            }).ToList();
-            Tags = paste.Tags is { Length: > 0 } ? paste.Tags.ToList() : new List<string>();
+            Pasties = paste.Pasties is { Length: > 0 }
+                ? paste.Pasties.Select(pasty => new PasteMystPastyForm // adds already defined pasty list from paste
+                {
+                    Id = pasty.Id,
+                    Title = pasty.Title,
+                    Language = pasty.Language,
+                    Code = pasty.Code
+                }).ToList()
+                : new List<PasteMystPastyForm>(); // creates an empty list for pasties
+            Tags = paste.Tags is { Length: > 0 }
+                ? paste.Tags.ToList() // adds already defined tag list from paste
+                : new List<string>(); // creates an empty list for tags
         }
 
         public async Task<PasteMystPaste> PatchPasteAsync(PasteMystToken token)
         {
-            if (Pasties is not { Count: > 0 })
-                throw new Exception($"{nameof(Pasties)} must not be null or empty.");
-            foreach (var paste in Pasties)
-                if (string.IsNullOrEmpty(paste.Code))
-                    throw new Exception($"{nameof(Pasties)}[{Pasties.IndexOf(paste)}] doesn't contain code content.");
             if (Tags.Count > 0)
                 _tags = string.Join(",", Tags);
             using var httpClient = new HttpClient();

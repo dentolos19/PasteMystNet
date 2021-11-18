@@ -18,8 +18,7 @@ Try using the library in your project.
 using System.Collections.Generic;
 using PasteMystNet;
 
-var userToken = new PasteMystToken("<token>"); // token for posting (private) pastes to user's profile
-var pasteForm = new PasteMystPasteForm // form for information about the paste to be posted
+var pasteForm = new PasteMystPasteForm
 {
     Title = "My paste!",
     ExpireDuration = PasteMystExpirations.OneDay,
@@ -36,7 +35,7 @@ var pasteForm = new PasteMystPasteForm // form for information about the paste t
             Code = "print(\"Hello World\")"
         }
     },
-    Tags = new List<string> // this is only available for private pastes
+    Tags = new List<string>
     {
         "file",
         "python",
@@ -44,8 +43,7 @@ var pasteForm = new PasteMystPasteForm // form for information about the paste t
     }
 }
 
-// var paste = await pasteForm.PostPasteAsync(); // post the paste
-var paste = await pasteForm.PostPasteAsync(userToken); // post the (private) paste to user's profile
+var paste = await pasteForm.PostPasteAsync();
 ```
 
 For more examples for using this library, visit the [wiki](https://github.com/dentolos19/PasteMystNet/wiki/Usage) or check out the [unit tests](./PasteMystNet.Tests).

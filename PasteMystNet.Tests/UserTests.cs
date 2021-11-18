@@ -1,6 +1,6 @@
-﻿using System;
+﻿using NUnit.Framework;
+using System;
 using System.Threading.Tasks;
-using NUnit.Framework;
 
 namespace PasteMystNet.Tests
 {

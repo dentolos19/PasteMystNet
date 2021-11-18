@@ -36,7 +36,7 @@ namespace PasteMystNet
         public static async Task<PasteMystPaste> GetPasteAsync(string id, PasteMystToken? token = null)
         {
             using var httpClient = new HttpClient();
-            if (token != null)
+            if (token is not null)
                 httpClient.DefaultRequestHeaders.TryAddWithoutValidation("Authorization", token.ToString());
             var response = await httpClient.GetAsync(string.Format(Constants.GetPasteEndpoint, id));
             response.EnsureSuccessStatusCode();

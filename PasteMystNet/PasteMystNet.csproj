@@ -6,7 +6,7 @@
 		<Nullable>enable</Nullable>
 
 		<Product>PasteMyst.NET</Product>
-		<Version>1.2.0</Version>
+		<Version>1.2.1</Version>
 		<Authors>Dennise Catolos</Authors>
 		<Description>A simple .NET API wrapper for PasteMyst!</Description>
 		<Copyright>Copyright © 2022</Copyright>

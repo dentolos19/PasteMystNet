@@ -12,15 +12,12 @@ Install the library in your project.
 * .NET CLI: `dotnet add package PasteMystNet`
 * Package Manager CLI: `Install-Package PasteMystNet`
 
-Using the library.
-
 ```cs
 using System.Collections.Generic;
 using PasteMystNet;
 
 var pasteForm = new PasteMystPasteForm
 {
-    Title = "My paste!",
     ExpireDuration = PasteMystExpirations.OneDay,
     Pasties = new List<PasteMystPastyForm>
     {
@@ -34,12 +31,6 @@ var pasteForm = new PasteMystPasteForm
             Language = "Python",
             Code = "print(\"Hello World\")"
         }
-    },
-    Tags = new List<string>
-    {
-        "file",
-        "python",
-        "basic"
     }
 }
 

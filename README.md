@@ -12,7 +12,7 @@ Install the library in your project.
 * .NET CLI: `dotnet add package PasteMystNet`
 * Package Manager CLI: `Install-Package PasteMystNet`
 
-Try using the library in your project.
+Using the library.
 
 ```cs
 using System.Collections.Generic;
@@ -46,4 +46,4 @@ var pasteForm = new PasteMystPasteForm
 var paste = await pasteForm.PostPasteAsync();
 ```
 
-For more examples for using this library, visit the [wiki](https://github.com/dentolos19/PasteMystNet/wiki/Usage) or check out the [unit tests](./PasteMystNet.Tests).
+For more examples for using this library, visit the [usage wiki](https://github.com/dentolos19/PasteMystNet/wiki/Usage) or check out the [unit tests](./PasteMystNet.Tests).

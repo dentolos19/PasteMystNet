@@ -1,4 +1,4 @@
-# <img src="./.github/icon.png" width="24"/> PasteMyst.NET [![](https://img.shields.io/nuget/v/PasteMystNet?label=NuGet&logo=nuget&style=flat-square)](https://www.nuget.org/packages/PasteMystNet)
+# <img src=".github/icon.png" width="32"/> PasteMyst.NET [![](https://img.shields.io/nuget/v/PasteMystNet?label=NuGet&logo=nuget&style=flat-square)](https://www.nuget.org/packages/PasteMystNet)
 
 [![](https://img.shields.io/badge/Powered%20By-.NET-blue?logo=microsoft&style=flat-square)](https://dotnet.microsoft.com)
 [![](https://img.shields.io/badge/Made%20With-Visual%20Studio-blue?logo=visual-studio&style=flat-square)](https://visualstudio.microsoft.com)

@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using PasteMystNet.Core;
 
 namespace PasteMystNet;
@@ -46,6 +47,16 @@ public class PasteMystPaste
         httpClient.DefaultRequestHeaders.TryAddWithoutValidation("Authorization", token.ToString());
         var response = await httpClient.DeleteAsync(string.Format(PasteMystConstants.DeletePasteEndpoint, id));
         response.EnsureSuccessStatusCode();
+    }
+
+    public static async Task<int> GetTotalActivePastesAsync()
+    {
+        using var httpClient = new HttpClient();
+        var response = await httpClient.GetAsync(PasteMystConstants.GetTotalActivePastesEndpoint);
+        response.EnsureSuccessStatusCode();
+        var responseContent = await response.Content.ReadAsStringAsync();
+        var json = JsonConvert.DeserializeObject<JObject>(responseContent);
+        return json["numPastes"].ToObject<int>();
     }
 
 }

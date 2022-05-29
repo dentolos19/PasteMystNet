@@ -20,27 +20,26 @@ public class UserTests
     public async Task GetUserTest(string username)
     {
         var user = await PasteMystUser.GetUserAsync(username);
-        Assert.IsNotNull(user);
-        var dump = ObjectDumper.Dump(user);
-        Console.WriteLine(dump);
+        Console.WriteLine(ObjectDumper.Dump(user));
+        if (user.Username.Equals(username, StringComparison.OrdinalIgnoreCase))
+            Assert.Pass();
+        Assert.Fail();
     }
 
     [TestCase("vayHs/5xpELIybjpfB2uJ7xLU1JNaWfrJksIC/nxev8=")]
     public async Task GetSelfTest(string token)
     {
         var user = await PasteMystUser.GetUserAsync(new PasteMystToken(token));
-        Assert.IsNotNull(user);
-        var dump = ObjectDumper.Dump(user);
-        Console.WriteLine(dump);
+        Console.WriteLine(ObjectDumper.Dump(user));
+        Assert.Pass();
     }
 
     [TestCase("vayHs/5xpELIybjpfB2uJ7xLU1JNaWfrJksIC/nxev8=")]
     public async Task GetSelfPastesTest(string token)
     {
         var pastes = await PasteMystUser.GetUserPastesAsync(new PasteMystToken(token));
-        Assert.IsNotNull(pastes);
-        var dump = ObjectDumper.Dump(pastes);
-        Console.WriteLine(dump);
+        Console.WriteLine(ObjectDumper.Dump(pastes));
+        Assert.Pass();
     }
 
 }

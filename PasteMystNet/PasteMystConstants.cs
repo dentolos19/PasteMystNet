@@ -17,6 +17,7 @@ internal static class PasteMystConstants
 
     public static string GetLanguageByNameEndpoint => BaseEndpoint + "/data/language?name={0}";
     public static string GetLanguageByExtensionEndpoint => BaseEndpoint + "/data/languageExt?extension={0}";
+    public static string GetTotalActivePastesEndpoint => BaseEndpoint + "/data/numPastes";
 
     // user endpoints
 

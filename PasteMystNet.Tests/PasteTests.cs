@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net.Http;
 using System.Threading.Tasks;
 using NUnit.Framework;
 
@@ -12,9 +13,8 @@ public class PasteTests
     public async Task GetPasteTest(string id)
     {
         var paste = await PasteMystPaste.GetPasteAsync(id);
-        Assert.IsNotNull(paste);
-        var dump = ObjectDumper.Dump(paste);
-        Console.WriteLine(dump);
+        Console.WriteLine(ObjectDumper.Dump(paste));
+        Assert.AreEqual(id, paste.Id);
     }
 
     [Test]
@@ -38,9 +38,8 @@ public class PasteTests
             }
         };
         var paste = await pasteForm.PostPasteAsync();
-        Assert.IsNotNull(paste);
-        var dump = ObjectDumper.Dump(paste);
-        Console.WriteLine(dump);
+        Console.WriteLine(ObjectDumper.Dump(paste));
+        Assert.AreEqual(pasteForm.Title, paste.Title);
     }
 
     [TestCase("vayHs/5xpELIybjpfB2uJ7xLU1JNaWfrJksIC/nxev8=")]
@@ -71,9 +70,12 @@ public class PasteTests
             }
         };
         var paste = await pasteForm.PostPasteAsync(new PasteMystToken(token));
-        Assert.IsNotNull(paste);
-        var dump = ObjectDumper.Dump(paste);
-        Console.WriteLine(dump);
+        Console.WriteLine(ObjectDumper.Dump(paste));
+        Assert.Multiple(() =>
+        {
+            Assert.AreEqual(pasteForm.Title, paste.Title);
+            Assert.IsTrue(paste.HasOwner);
+        });
     }
 
     [TestCase("vayHs/5xpELIybjpfB2uJ7xLU1JNaWfrJksIC/nxev8=")]
@@ -105,17 +107,15 @@ public class PasteTests
             }
         };
         var paste = await pasteForm.PostPasteAsync(userToken);
-        Assert.IsNotNull(paste);
         var editForm = paste.CreateEditForm();
         editForm.Title += " (Edited)";
         editForm.Pasties[0].Title = "file_edited.txt";
         editForm.Pasties[0].Code += " This file has been edited!";
         // editForm.Pasties[1].Language = "Python";
         editForm.Tags.Add("edited");
-        paste = await editForm.PatchPasteAsync(userToken);
-        Assert.IsNotNull(paste);
-        var dump = ObjectDumper.Dump(paste);
-        Console.WriteLine(dump);
+        var editedPaste = await editForm.PatchPasteAsync(userToken);
+        Console.WriteLine(ObjectDumper.Dump(editedPaste));
+        Assert.AreEqual(editForm.Pasties[0].Code, editedPaste.Pasties[0].Code);
     }
 
     [TestCase("vayHs/5xpELIybjpfB2uJ7xLU1JNaWfrJksIC/nxev8=")]
@@ -134,8 +134,11 @@ public class PasteTests
             }
         };
         var paste = await pasteForm.PostPasteAsync(userToken);
-        Assert.IsNotNull(paste);
         await PasteMystPaste.DeletePasteAsync(paste.Id, userToken);
+        Assert.ThrowsAsync<HttpRequestException>(async () =>
+        {
+            await PasteMystPaste.GetPasteAsync(paste.Id);
+        });
     }
 
 }

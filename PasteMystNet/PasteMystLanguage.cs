@@ -16,6 +16,7 @@ public class PasteMystLanguage
 
     public static async Task<PasteMystLanguage> GetLanguageByNameAsync(string name)
     {
+        name = Uri.EscapeDataString(name); // make name percent-encoded
         using var httpClient = new HttpClient();
         var response = await httpClient.GetAsync(string.Format(PasteMystConstants.GetLanguageByNameEndpoint, Uri.EscapeDataString(name)));
         response.EnsureSuccessStatusCode();

@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 using NUnit.Framework;
 
@@ -7,15 +8,16 @@ namespace PasteMystNet.Tests;
 public class DataTests
 {
 
-    [TestCase("C#")]
-    [TestCase("C++")]
+    // [TestCase("C#")]
+    // [TestCase("C++")]
     [TestCase("JavaScript")]
     public async Task GetLanguageByNameTest(string name)
     {
         var language = await PasteMystLanguage.GetLanguageByNameAsync(name);
-        Assert.IsNotNull(language);
-        var dump = ObjectDumper.Dump(language);
-        Console.WriteLine(dump);
+        Console.WriteLine(ObjectDumper.Dump(language));
+        if (language.Name.Equals(name, StringComparison.OrdinalIgnoreCase))
+            Assert.Pass();
+        Assert.Fail();
     }
 
     [TestCase("cs")]
@@ -24,9 +26,16 @@ public class DataTests
     public async Task GetLanguageByExtensionTest(string extension)
     {
         var language = await PasteMystLanguage.GetLanguageByExtensionAsync(extension);
-        Assert.IsNotNull(language);
-        var dump = ObjectDumper.Dump(language);
-        Console.WriteLine(dump);
+        Console.WriteLine(ObjectDumper.Dump(language));
+        Assert.Contains(extension, language.Extensions);
+    }
+
+    [Test]
+    public async Task GetTotalActivePastesTest()
+    {
+        var count = await PasteMystPaste.GetTotalActivePastesAsync();
+        Console.WriteLine(count);
+        Assert.Pass();
     }
 
 }

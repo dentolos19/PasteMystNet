@@ -1,16 +1,13 @@
 ﻿using Newtonsoft.Json;
 
-namespace PasteMystNet
+namespace PasteMystNet;
+
+public class PasteMystPasty
 {
 
-    public class PasteMystPasty
-    {
-
-        [JsonProperty("_id")] public string Id { get; init; }
-        [JsonProperty("language")] public string Language { get; init; }
-        [JsonProperty("title")] public string Title { get; init; }
-        [JsonProperty("code")] public string Code { get; init; }
-
-    }
+    [JsonProperty("_id")] public string Id { get; private init; }
+    [JsonProperty("language")] public string Language { get; private init; }
+    [JsonProperty("title")] public string Title { get; private init; }
+    [JsonProperty("code")] public string Code { get; private init; }
 
 }

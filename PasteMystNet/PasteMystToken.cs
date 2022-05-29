@@ -1,21 +1,18 @@
-﻿namespace PasteMystNet
+﻿namespace PasteMystNet;
+
+public class PasteMystToken
 {
 
-    public class PasteMystToken
+    private readonly string _token;
+
+    public PasteMystToken(string token)
     {
+        _token = token;
+    }
 
-        private readonly string _token;
-
-        public PasteMystToken(string token)
-        {
-            _token = token;
-        }
-
-        public override string ToString()
-        {
-            return _token;
-        }
-
+    public override string ToString()
+    {
+        return _token;
     }
 
 }

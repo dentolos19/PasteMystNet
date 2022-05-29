@@ -1,16 +1,13 @@
-﻿namespace PasteMystNet
+﻿namespace PasteMystNet;
+
+public enum PasteMystEditType
 {
 
-    public enum PasteMystEditType
-    {
-
-        PasteTitleEdited,
-        PastyTitleEdited,
-        PastyLanguageUpdated,
-        PastyContentUpdated,
-        PastyAdded,
-        PastyRemoved
-
-    }
+    PasteTitleEdited,
+    PastyTitleEdited,
+    PastyLanguageUpdated,
+    PastyContentUpdated,
+    PastyAdded,
+    PastyRemoved
 
 }

@@ -29,7 +29,7 @@ var pasteForm = new PasteMystPasteForm
             Code = "print(\"Hello World\")"
         }
     }
-}
+};
 
 var paste = await pasteForm.PostPasteAsync();
 ```

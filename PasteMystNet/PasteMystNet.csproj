@@ -7,7 +7,7 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
 
-        <Product>PasteMyst.NET</Product>
+        <Title>PasteMyst.NET</Title>
         <Description>A simple .NET API wrapper for PasteMyst!</Description>
         <Version>1.2.3</Version>
         <Authors>Dennise Catolos</Authors>

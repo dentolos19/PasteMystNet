@@ -1,31 +1,32 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-	<PropertyGroup>
+    <PropertyGroup>
 
-		<TargetFramework>net6.0</TargetFramework>
-		<ImplicitUsings>enable</ImplicitUsings>
-		<Nullable>enable</Nullable>
+        <TargetFramework>netstandard2.1</TargetFramework>
+        <LangVersion>latest</LangVersion>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
 
-		<Product>PasteMyst.NET</Product>
-		<Description>A simple .NET API wrapper for PasteMyst!</Description>
-		<Version>1.2.2</Version>
-		<Authors>Dennise Catolos</Authors>
-		<Copyright>Copyright © 2020</Copyright>
+        <Product>PasteMyst.NET</Product>
+        <Description>A simple .NET API wrapper for PasteMyst!</Description>
+        <Version>1.2.3</Version>
+        <Authors>Dennise Catolos</Authors>
+        <Copyright>Copyright © 2020</Copyright>
 
-		<PackageIcon>Icon.png</PackageIcon>
-		<PackageProjectUrl>https://github.com/dentolos19/PasteMystNet</PackageProjectUrl>
+        <PackageIcon>Icon.png</PackageIcon>
+        <PackageProjectUrl>https://github.com/dentolos19/PasteMystNet</PackageProjectUrl>
 
-	</PropertyGroup>
+    </PropertyGroup>
 
-	<ItemGroup>
-		<PackageReference Include="Newtonsoft.Json" Version="13.0.1"/>
-	</ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="Newtonsoft.Json" Version="13.0.1"/>
+    </ItemGroup>
 
-	<ItemGroup>
-		<Content Include="Resources/Icon.png">
-			<Pack>True</Pack>
-			<PackagePath></PackagePath>
-		</Content>
-	</ItemGroup>
+    <ItemGroup>
+        <Content Include="Resources/Icon.png">
+            <Pack>True</Pack>
+            <PackagePath></PackagePath>
+        </Content>
+    </ItemGroup>
 
 </Project>

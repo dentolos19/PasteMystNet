@@ -1,25 +1,24 @@
-﻿using Newtonsoft.Json;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using PasteMystNet.Core;
 
 namespace PasteMystNet;
 
 public class PasteMystPaste
 {
 
-    [JsonProperty("_id")] public string Id { get; private init; }
-    [JsonProperty("ownerId")] public string OwnerId { get; private init; }
-    [JsonProperty("title")] public string Title { get; private init; }
-    [JsonProperty("stars")] public int Stars { get; private init; }
-    [JsonProperty("isPrivate")] public bool IsPrivate { get; private init; }
-    [JsonProperty("isPublic")] public bool IsPublic { get; private init; }
-    [JsonProperty("encrypted")] public bool IsEncrypted { get; private init; }
-    [JsonProperty("tags")] public string[]? Tags { get; private init; }
-    [JsonProperty("pasties")] public PasteMystPasty[] Pasties { get; private init; }
-    [JsonProperty("edits")] public PasteMystEdit[]? Edits { get; private init; }
-    [JsonProperty("expiresIn")] public string ExpireDuration { get; private init; }
-    [JsonProperty("createdAt")] public long CreationUnixTime { get; private init; }
-    [JsonProperty("deletesAt")] public long DeletionUnixTime { get; private init; }
+    [JsonProperty("_id")] public string Id { get; private set; }
+    [JsonProperty("ownerId")] public string OwnerId { get; private set; }
+    [JsonProperty("title")] public string Title { get; private set; }
+    [JsonProperty("stars")] public int Stars { get; private set; }
+    [JsonProperty("isPrivate")] public bool IsPrivate { get; private set; }
+    [JsonProperty("isPublic")] public bool IsPublic { get; private set; }
+    [JsonProperty("encrypted")] public bool IsEncrypted { get; private set; }
+    [JsonProperty("tags")] public string[]? Tags { get; private set; }
+    [JsonProperty("pasties")] public PasteMystPasty[] Pasties { get; private set; }
+    [JsonProperty("edits")] public PasteMystEdit[]? Edits { get; private set; }
+    [JsonProperty("expiresIn")] public string ExpireDuration { get; private set; }
+    [JsonProperty("createdAt")] public long CreationUnixTime { get; private set; }
+    [JsonProperty("deletesAt")] public long DeletionUnixTime { get; private set; }
     [JsonIgnore] public string Url => PasteMystConstants.WebsiteUrl + $"/{Id}";
     [JsonIgnore] public bool HasOwner => !string.IsNullOrEmpty(OwnerId);
     [JsonIgnore] public DateTime CreationTime => DateTimeOffset.FromUnixTimeSeconds(CreationUnixTime).DateTime;

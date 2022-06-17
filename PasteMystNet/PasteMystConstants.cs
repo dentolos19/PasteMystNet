@@ -1,4 +1,4 @@
-﻿namespace PasteMystNet.Core;
+﻿namespace PasteMystNet;
 
 internal static class PasteMystConstants
 {

@@ -1,18 +1,17 @@
-﻿using System.Drawing;
+using System.Drawing;
 using Newtonsoft.Json;
-using PasteMystNet.Core;
 
 namespace PasteMystNet;
 
 public class PasteMystLanguage
 {
 
-    [JsonProperty("name")] public string Name { get; private init; }
-    [JsonProperty("mode")] public string Mode { get; private init; }
-    [JsonProperty("mimes")] public string[] Mimes { get; private init; }
-    [JsonProperty("ext")] public string[] Extensions { get; private init; }
-    [JsonProperty("color")] public string ColorHex { get; private init; }
-    [JsonIgnore] public Color Color => ColorTranslator.FromHtml(ColorHex);
+    [JsonProperty("name")] public string Name { get; private set; }
+    [JsonProperty("mode")] public string Mode { get; private set; }
+    [JsonProperty("mimes")] public string[] Mimes { get; private set; }
+    [JsonProperty("ext")] public string[] Extensions { get; private set; }
+    [JsonProperty("color")] public string ColorHex { get; private set; }
+    [JsonIgnore] public Color Color => (Color)new ColorConverter().ConvertFromString(ColorHex);
 
     public static async Task<PasteMystLanguage> GetLanguageByNameAsync(string name)
     {

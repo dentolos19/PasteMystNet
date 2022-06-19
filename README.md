@@ -34,4 +34,4 @@ var pasteForm = new PasteMystPasteForm
 var paste = await pasteForm.PostPasteAsync();
 ```
 
-For more examples for using this library, visit the [usage wiki](https://github.com/dentolos19/PasteMystNet/wiki/Usage) or check out the [unit tests](./PasteMystNet.Tests).
+For more examples for using this library, visit the [usage wiki](https://github.com/dentolos19/PasteMystNet/wiki/Usages) or check out the [unit tests](./PasteMystNet.Tests).

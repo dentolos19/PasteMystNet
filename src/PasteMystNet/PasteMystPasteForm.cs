@@ -1,30 +1,56 @@
-﻿using System.Text;
-using Newtonsoft.Json;
+﻿using System.Text.Json.Nodes;
 
 namespace PasteMystNet;
 
 public class PasteMystPasteForm
 {
-    [JsonProperty("tags", NullValueHandling = NullValueHandling.Ignore)] private string? _tags;
+    /// <summary>
+    /// Title of the paste.
+    /// </summary>
+    public string Title { get; set; }
 
-    [JsonProperty("title")] public string Title { get; set; } = string.Empty;
-    [JsonProperty("isPrivate", NullValueHandling = NullValueHandling.Ignore)] public bool? IsPrivate { get; set; }
-    [JsonProperty("isPublic", NullValueHandling = NullValueHandling.Ignore)] public bool? IsPublic { get; set; }
-    [JsonProperty("pasties")] public IList<PasteMystPastyForm> Pasties { get; set; } = new List<PasteMystPastyForm>();
-    [JsonProperty("expiresIn")] public string ExpireDuration { get; set; } = PasteMystExpirations.Never;
-    [JsonIgnore] public IList<string>? Tags { get; set; } = new List<string>();
+    /// <summary>
+    /// When will the paste expire from now. Use values from <see cref="PasteMystExpirations"/> for this property.
+    /// </summary>
+    public string ExpiresIn { get; set; } = PasteMystExpirations.Never;
 
-    public async Task<PasteMystPaste> PostPasteAsync(PasteMystToken? token = null)
+    /// <summary>
+    /// If it is private, it's only accessible by the owner. Token is required.
+    /// </summary>
+    public bool? IsPrivate { get; set; }
+
+    /// <summary>
+    /// If it is public, it will be displayed on the owner's profile. Token is required.
+    /// </summary>
+    public bool? IsPublic { get; set; }
+
+    /// <summary>
+    /// List of tags. Token is required.
+    /// </summary>
+    public IList<string>? Tags { get; set; }
+
+    /// <summary>
+    /// List of pasties.
+    /// </summary>
+    public IList<PasteMystPastyForm> Pasties { get; set; }
+
+    internal JsonNode CreateJson()
     {
-        if (Tags is not null)
-            _tags = string.Join(",", Tags);
-        using var httpClient = new HttpClient();
-        if (token is not null)
-            httpClient.DefaultRequestHeaders.TryAddWithoutValidation("Authorization", token.ToString());
-        var requestContent = JsonConvert.SerializeObject(this);
-        var response = await httpClient.PostAsync(PasteMystConstants.PostPasteEndpoint, new StringContent(requestContent, Encoding.UTF8, "application/json"));
-        response.EnsureSuccessStatusCode();
-        var responseContent = await response.Content.ReadAsStringAsync();
-        return JsonConvert.DeserializeObject<PasteMystPaste>(responseContent);
+        var json = new JsonObject
+        {
+            ["title"] = Title,
+            ["expiresIn"] = ExpiresIn,
+            ["pasties"] = new JsonArray(Pasties.Select(pasty => (JsonNode)pasty.CreateJson()).ToArray())
+        };
+        if (IsPrivate is not null)
+            json["private"] = IsPrivate;
+        if (IsPublic is not null)
+            json["public"] = IsPublic;
+        if (Tags is { Count: > 0 })
+        {
+            var tags = string.Join(',', Tags);
+            json["tags"] = tags;
+        }
+        return json;
     }
 }

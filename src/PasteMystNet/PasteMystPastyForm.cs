@@ -1,12 +1,32 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Nodes;
 
 namespace PasteMystNet;
 
 public class PasteMystPastyForm
 {
-    [JsonProperty("_id", NullValueHandling = NullValueHandling.Ignore)] internal string? Id { get; set; }
-
-    [JsonProperty("title")] public string Title { get; set; } = string.Empty;
-    [JsonProperty("language")] public string Language { get; set; } = "Autodetect";
-    [JsonProperty("code")] public string Code { get; set; }
+    /// <summary>
+    /// Language of the pasty.
+    /// </summary>
+    public string Language { get; set; } = "Autodetect";
+    
+    /// <summary>
+    /// Title of the pasty.
+    /// </summary>
+    public string Title { get; set; }
+    
+    /// <summary>
+    /// Content of the pasty.
+    /// </summary>
+    public string Content { get; set; }
+    
+    internal JsonObject CreateJson()
+    {
+        var json = new JsonObject
+        {
+            ["language"] = Language,
+            ["title"] = Title,
+            ["code"] = Content
+        };
+        return json;
+    }
 }

@@ -1,59 +1,93 @@
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
+﻿using System.Text.Json.Serialization;
 
 namespace PasteMystNet;
 
 public class PasteMystPaste
 {
-    [JsonProperty("_id")] public string Id { get; private set; }
-    [JsonProperty("ownerId")] public string OwnerId { get; private set; }
-    [JsonProperty("title")] public string Title { get; private set; }
-    [JsonProperty("stars")] public int Stars { get; private set; }
-    [JsonProperty("isPrivate")] public bool IsPrivate { get; private set; }
-    [JsonProperty("isPublic")] public bool IsPublic { get; private set; }
-    [JsonProperty("encrypted")] public bool IsEncrypted { get; private set; }
-    [JsonProperty("tags")] public string[]? Tags { get; private set; }
-    [JsonProperty("pasties")] public PasteMystPasty[] Pasties { get; private set; }
-    [JsonProperty("edits")] public PasteMystEdit[]? Edits { get; private set; }
-    [JsonProperty("expiresIn")] public string ExpireDuration { get; private set; }
-    [JsonProperty("createdAt")] public long CreationUnixTime { get; private set; }
-    [JsonProperty("deletesAt")] public long DeletionUnixTime { get; private set; }
-    [JsonIgnore] public string Url => PasteMystConstants.WebsiteUrl + $"/{Id}";
-    [JsonIgnore] public bool HasOwner => !string.IsNullOrEmpty(OwnerId);
-    [JsonIgnore] public DateTime CreationTime => DateTimeOffset.FromUnixTimeSeconds(CreationUnixTime).DateTime;
-    [JsonIgnore] public DateTime? DeletionTime => DeletionUnixTime <= 0 ? null : DateTimeOffset.FromUnixTimeSeconds(DeletionUnixTime).DateTime;
+    /// <summary>
+    /// ID of the paste.
+    /// </summary>
+    [JsonInclude]
+    [JsonPropertyName("_id")]
+    public string Id { get; private set; }
 
-    public PasteMystEditForm CreateEditForm()
-    {
-        return new PasteMystEditForm(this);
-    }
+    /// <summary>
+    /// ID of the owner.
+    /// </summary>
+    [JsonInclude]
+    [JsonPropertyName("ownerId")]
+    public string OwnerId { get; private set; }
 
-    public static async Task<PasteMystPaste> GetPasteAsync(string id, PasteMystToken? token = null)
-    {
-        using var httpClient = new HttpClient();
-        if (token is not null)
-            httpClient.DefaultRequestHeaders.TryAddWithoutValidation("Authorization", token.ToString());
-        var response = await httpClient.GetAsync(string.Format(PasteMystConstants.GetPasteEndpoint, id));
-        response.EnsureSuccessStatusCode();
-        var responseContent = await response.Content.ReadAsStringAsync();
-        return JsonConvert.DeserializeObject<PasteMystPaste>(responseContent);
-    }
+    /// <summary>
+    /// Title of the paste.
+    /// </summary>
+    [JsonInclude]
+    [JsonPropertyName("title")]
+    public string Title { get; private set; }
 
-    public static async Task DeletePasteAsync(string id, PasteMystToken token)
-    {
-        using var httpClient = new HttpClient();
-        httpClient.DefaultRequestHeaders.TryAddWithoutValidation("Authorization", token.ToString());
-        var response = await httpClient.DeleteAsync(string.Format(PasteMystConstants.DeletePasteEndpoint, id));
-        response.EnsureSuccessStatusCode();
-    }
+    /// <summary>
+    /// Unix time of when the paste was created.
+    /// </summary>
+    [JsonInclude]
+    [JsonPropertyName("createdAt")]
+    public long CreatedAt { get; private set; }
 
-    public static async Task<int> GetTotalActivePastesAsync()
-    {
-        using var httpClient = new HttpClient();
-        var response = await httpClient.GetAsync(PasteMystConstants.GetTotalActivePastesEndpoint);
-        response.EnsureSuccessStatusCode();
-        var responseContent = await response.Content.ReadAsStringAsync();
-        var json = JsonConvert.DeserializeObject<JObject>(responseContent);
-        return json["numPastes"].ToObject<int>();
-    }
+    /// <summary>
+    /// How long the paste will expire from its creation time.
+    /// </summary>
+    [JsonInclude]
+    [JsonPropertyName("expiresIn")]
+    public string ExpiresIn { get; private set; }
+
+    /// <summary>
+    /// When the paste will be deleted. The value defaults to 0 when expiration is set to never.
+    /// </summary>
+    [JsonInclude]
+    [JsonPropertyName("deletesAt")]
+    public long DeletedAt { get; private set; }
+
+    /// <summary>
+    /// Number of stars the paste has.
+    /// </summary>
+    [JsonInclude]
+    [JsonPropertyName("stars")]
+    public int Stars { get; private set; }
+
+    /// <summary>
+    /// If it's private, it's only accessible by the owner.
+    /// </summary>
+    [JsonInclude]
+    [JsonPropertyName("isPrivate")]
+    public bool IsPrivate { get; private set; }
+
+    /// <summary>
+    /// If it's public, it will be displayed on the owner's profile.
+    /// </summary>
+    [JsonInclude]
+    [JsonPropertyName("isPublic")]
+    public bool IsPublic { get; private set; }
+
+    /// <summary>
+    /// List of tags.
+    /// </summary>
+    [JsonInclude]
+    [JsonPropertyName("tags")]
+    public IReadOnlyList<string> Tags { get; private set; }
+
+    /// <summary>
+    /// List of pasties.
+    /// </summary>
+    [JsonInclude]
+    [JsonPropertyName("pasties")]
+    public IReadOnlyList<PasteMystPasty> Pasties { get; private set; }
+
+    /// <summary>
+    /// List of edits.
+    /// </summary>
+    [JsonInclude]
+    [JsonPropertyName("edits")]
+    public IReadOnlyList<PasteMystEdit> Edits { get; private set; }
+
+    public DateTime CreatedAtTime => PasteMystUtils.ParseUnixTime(CreatedAt);
+    public DateTime DeletedAtTime => PasteMystUtils.ParseUnixTime(DeletedAt);
 }

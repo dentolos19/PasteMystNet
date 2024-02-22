@@ -1,6 +1,6 @@
 ﻿namespace PasteMystNet;
 
-public class PasteMystExpirations
+public static class PasteMystExpirations
 {
     public const string Never = "never";
     public const string OneHour = "1h";

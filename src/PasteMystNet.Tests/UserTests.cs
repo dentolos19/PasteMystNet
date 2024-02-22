@@ -1,43 +1,34 @@
-﻿using System;
-using System.Threading.Tasks;
-using NUnit.Framework;
-
-namespace PasteMystNet.Tests;
+﻿namespace PasteMystNet.Tests;
 
 public class UserTests
 {
-    [TestCase("codemyst")]
-    [TestCase("virgincode")]
-    public async Task UserExistsTest(string username)
+    private PasteMystClient _client = null!;
+
+    [SetUp]
+    public void Setup()
     {
-        var exists = await PasteMystUser.UserExistsAsync(username);
-        Assert.IsTrue(exists);
+        _client = new PasteMystClient();
     }
 
-    [TestCase("codemyst")]
-    [TestCase("virgincode")]
-    public async Task GetUserTest(string username)
+    [TearDown]
+    public void TearDown()
     {
-        var user = await PasteMystUser.GetUserAsync(username);
-        Console.WriteLine(ObjectDumper.Dump(user));
-        if (user.Username.Equals(username, StringComparison.OrdinalIgnoreCase))
-            Assert.Pass();
-        Assert.Fail();
+        _client.Dispose();
     }
 
-    [TestCase("vayHs/5xpELIybjpfB2uJ7xLU1JNaWfrJksIC/nxev8=")]
-    public async Task GetSelfTest(string token)
+    [Test]
+    [TestCase("jisidjas", false)]
+    [TestCase("codemyst", true)]
+    public async Task UserExistsTest(string username, bool exists)
     {
-        var user = await PasteMystUser.GetUserAsync(new PasteMystToken(token));
-        Console.WriteLine(ObjectDumper.Dump(user));
-        Assert.Pass();
+        var userExists = await _client.UserExistsAsync(username);
+        Assert.That(userExists, Is.EqualTo(exists));
     }
 
-    [TestCase("vayHs/5xpELIybjpfB2uJ7xLU1JNaWfrJksIC/nxev8=")]
-    public async Task GetSelfPastesTest(string token)
+    [Test]
+    public Task GetUserTest()
     {
-        var pastes = await PasteMystUser.GetUserPastesAsync(new PasteMystToken(token));
-        Console.WriteLine(ObjectDumper.Dump(pastes));
-        Assert.Pass();
+        Assert.DoesNotThrowAsync(async () => await _client.GetUserAsync("codemyst"));
+        return Task.CompletedTask;
     }
 }

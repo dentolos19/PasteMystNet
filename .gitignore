@@ -9,6 +9,7 @@
 # user-specific files
 *.user
 *.suo
+.env
 
 # miscellaneous files
 .DS_Store

@@ -1,5 +1,5 @@
 <h1>
-    <img src="docs/icon.png" style="height: 1em;"/>
+    <img src="docs/icon.png" style="height: 1em"/>
     <span>PasteMyst.NET</span>
     <a href="https://nuget.org/packages/PasteMystNet">
       <img src="https://img.shields.io/nuget/v/PasteMystNet?label=NuGet&logo=nuget&style=flat-square"/>
@@ -12,8 +12,12 @@ A simple .NET API wrapper for [PasteMyst](https://paste.myst.rs)!
 
 Install the library in your project.
 
+### Prequisities
+
 - .NET CLI: `dotnet add package PasteMystNet`
 - Package Manager CLI: `Install-Package PasteMystNet`
+
+### Example
 
 ```cs
 using System.Collections.Generic;
@@ -41,3 +45,7 @@ var paste = await pasteForm.PostPasteAsync();
 ```
 
 For more examples for using this library, visit the [usage wiki](https://github.com/dentolos19/PasteMystNet/wiki/Usages) or check out the [unit tests](./PasteMystNet.Tests).
+
+## 📜 License
+
+Distributed under the MIT License. See [LICENSE](LICENSE) for more information.

@@ -5,15 +5,30 @@ namespace PasteMystNet;
 
 internal static class PasteMystUtils
 {
-    public static DateTime ParseUnixTime(long unixTime)
+    public static DateTime ParseUnixTime(long time)
     {
-        return DateTimeOffset.FromUnixTimeSeconds(unixTime).DateTime;
+        return DateTimeOffset.FromUnixTimeSeconds(time).DateTime;
     }
-    public static void ValidateHttpResponse(HttpResponseMessage httpResponse)
+
+    public static async Task ValidateHttpResponse(HttpResponseMessage response)
     {
-        if (httpResponse.IsSuccessStatusCode) return;
-        var responseContent = httpResponse.Content.ReadAsStringAsync().Result;
-        var responseJson = JsonSerializer.Deserialize<JsonObject>(responseContent);
-        throw new HttpRequestException(responseJson?["statusMessage"]?.ToString() ?? "Unknown error.");
+        try
+        {
+            response.EnsureSuccessStatusCode();
+        }
+        catch (HttpRequestException requestException)
+        {
+            var json = JsonSerializer.Deserialize<JsonObject>(await response.Content.ReadAsStringAsync());
+            var requestContent = default(string);
+            if (response.RequestMessage.Content is not null)
+                requestContent = await response.RequestMessage.Content.ReadAsStringAsync();
+            var exception = new PasteMystException(
+                json?["statusMessage"]?.ToString() ?? "Unknown error.",
+                requestException,
+                response.RequestMessage.RequestUri,
+                requestContent
+            );
+            throw exception;
+        }
     }
 }

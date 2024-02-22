@@ -13,14 +13,14 @@ public partial class PasteMystClient
     public async Task<PasteMystUser> GetUserAsync(string username)
     {
         var response = await _httpClient.GetAsync($"user/{username}");
-        PasteMystUtils.ValidateHttpResponse(response);
+        await PasteMystUtils.ValidateHttpResponse(response);
         return JsonSerializer.Deserialize<PasteMystUser>(await response.Content.ReadAsStringAsync())!;
     }
 
     public async Task<PasteMystUser> GetCurrentUserAsync()
     {
         var response = await _httpClient.GetAsync("user/self");
-        PasteMystUtils.ValidateHttpResponse(response);
+        await PasteMystUtils.ValidateHttpResponse(response);
         return JsonSerializer.Deserialize<PasteMystUser>(await response.Content.ReadAsStringAsync())!;
     }
 }

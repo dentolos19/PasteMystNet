@@ -8,7 +8,6 @@ namespace PasteMystNet.Tests;
 
 public class PasteTests
 {
-
     [TestCase("b0zis5k8")]
     public async Task GetPasteTest(string id)
     {
@@ -140,5 +139,4 @@ public class PasteTests
             await PasteMystPaste.GetPasteAsync(paste.Id);
         });
     }
-
 }

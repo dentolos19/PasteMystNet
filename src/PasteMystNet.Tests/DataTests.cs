@@ -6,7 +6,6 @@ namespace PasteMystNet.Tests;
 
 public class DataTests
 {
-
     // [TestCase("C#")]
     // [TestCase("C++")]
     [TestCase("JavaScript")]
@@ -36,5 +35,4 @@ public class DataTests
         Console.WriteLine(count);
         Assert.Pass();
     }
-
 }

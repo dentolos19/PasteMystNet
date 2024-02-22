@@ -5,7 +5,6 @@ namespace PasteMystNet;
 
 public class PasteMystLanguage
 {
-
     [JsonProperty("name")] public string Name { get; private set; }
     [JsonProperty("mode")] public string Mode { get; private set; }
     [JsonProperty("mimes")] public string[] Mimes { get; private set; }
@@ -31,5 +30,4 @@ public class PasteMystLanguage
         var responseContent = await response.Content.ReadAsStringAsync();
         return JsonConvert.DeserializeObject<PasteMystLanguage>(responseContent);
     }
-
 }

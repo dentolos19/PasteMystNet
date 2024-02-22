@@ -11,15 +11,13 @@
         <Description>A simple .NET API wrapper for PasteMyst!</Description>
         <Version>1.2.3</Version>
         <Authors>Dennise Catolos</Authors>
-        <Copyright>Copyright © 2020</Copyright>
-
         <PackageIcon>Icon.png</PackageIcon>
         <PackageProjectUrl>https://github.com/dentolos19/PasteMystNet</PackageProjectUrl>
 
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Newtonsoft.Json" Version="13.0.1"/>
+        <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     </ItemGroup>
 
     <ItemGroup>

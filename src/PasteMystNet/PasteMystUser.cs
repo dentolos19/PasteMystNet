@@ -5,7 +5,6 @@ namespace PasteMystNet;
 
 public class PasteMystUser
 {
-
     [JsonProperty("_id")] public string Id { get; private set; }
     [JsonProperty("username")] public string Username { get; private set; }
     [JsonProperty("avatarUrl")] public string AvatarUrl { get; private set; }
@@ -54,5 +53,4 @@ public class PasteMystUser
         var responseContent = await response.Content.ReadAsStringAsync();
         return JsonConvert.DeserializeObject<string[]>(responseContent);
     }
-
 }

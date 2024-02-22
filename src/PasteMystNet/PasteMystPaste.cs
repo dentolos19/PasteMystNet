@@ -5,7 +5,6 @@ namespace PasteMystNet;
 
 public class PasteMystPaste
 {
-
     [JsonProperty("_id")] public string Id { get; private set; }
     [JsonProperty("ownerId")] public string OwnerId { get; private set; }
     [JsonProperty("title")] public string Title { get; private set; }
@@ -57,5 +56,4 @@ public class PasteMystPaste
         var json = JsonConvert.DeserializeObject<JObject>(responseContent);
         return json["numPastes"].ToObject<int>();
     }
-
 }

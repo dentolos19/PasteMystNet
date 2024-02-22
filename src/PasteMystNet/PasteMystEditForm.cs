@@ -5,9 +5,9 @@ namespace PasteMystNet;
 
 public class PasteMystEditForm
 {
+    [JsonIgnore] private readonly string _id;
 
     [JsonProperty("tags", NullValueHandling = NullValueHandling.Ignore)] private string? _tags;
-    [JsonIgnore] private readonly string _id;
 
     [JsonProperty("title")] public string Title { get; set; }
     [JsonProperty("isPrivate", NullValueHandling = NullValueHandling.Ignore)] public bool? IsPrivate { get; set; }
@@ -45,5 +45,4 @@ public class PasteMystEditForm
         var responseContent = await response.Content.ReadAsStringAsync();
         return JsonConvert.DeserializeObject<PasteMystPaste>(responseContent);
     }
-
 }

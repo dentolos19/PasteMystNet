@@ -5,7 +5,6 @@ namespace PasteMystNet;
 
 public class PasteMystPasteForm
 {
-
     [JsonProperty("tags", NullValueHandling = NullValueHandling.Ignore)] private string? _tags;
 
     [JsonProperty("title")] public string Title { get; set; } = string.Empty;
@@ -28,5 +27,4 @@ public class PasteMystPasteForm
         var responseContent = await response.Content.ReadAsStringAsync();
         return JsonConvert.DeserializeObject<PasteMystPaste>(responseContent);
     }
-
 }

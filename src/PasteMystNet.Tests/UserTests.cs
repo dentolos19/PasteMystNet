@@ -6,7 +6,6 @@ namespace PasteMystNet.Tests;
 
 public class UserTests
 {
-
     [TestCase("codemyst")]
     [TestCase("virgincode")]
     public async Task UserExistsTest(string username)
@@ -41,5 +40,4 @@ public class UserTests
         Console.WriteLine(ObjectDumper.Dump(pastes));
         Assert.Pass();
     }
-
 }

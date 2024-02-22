@@ -2,7 +2,6 @@
 
 internal static class PasteMystConstants
 {
-
     public static string WebsiteUrl => "https://paste.myst.rs";
     public static string BaseEndpoint => WebsiteUrl + "/api/v2";
 
@@ -25,5 +24,4 @@ internal static class PasteMystConstants
     public static string GetUserEndpoint => BaseEndpoint + "/user/{0}";
     public static string GetSelfEndpoint => BaseEndpoint + "/user/self";
     public static string GetSelfPastesEndpoint => BaseEndpoint + "/user/self/pastes";
-
 }

@@ -2,7 +2,6 @@
 
 public class PasteMystToken
 {
-
     private readonly string _token;
 
     public PasteMystToken(string token)
@@ -14,5 +13,4 @@ public class PasteMystToken
     {
         return _token;
     }
-
 }

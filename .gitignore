@@ -1,84 +1,16 @@
-# personalized dotnet gitignore
-# by Dennise Catolos (2022-06-16)
-
+# environment files
 .vs/
 .idea/
 
-# user-specific files
-*.suo
+# output files
+bin/
+obj/
+
+# user files
 *.user
+*.suo
 
-# project-specific files
-project.lock.json
-project.fragment.lock.json
-artifacts/
-
-# build artifacts
-[Bb]in/
-[Oo]bj/
-[Pp]ublish/
-
-# nuget
-*.nuget.props
-*.nuget.targets
-
-# jetbrains
-_ReSharper*/
-_TeamCity*
-*.dotCover
-*.[Rr]e[Ss]harper
-*.DotSettings.user
-*.sln.iml
-
-# visual studio
-*.psess
-*.vsp
-*.vspx
-*.sap
-*.e2e
-*.coverage
-*.coveragexml
-
-# visual studio extensions
-BenchmarkDotNet.Artifacts/
-[Tt]est[Rr]esult*/
-[Bb]uild[Ll]og.*
-*.VisualState.xml
-TestResult.xml
-nunit-*.xml
-StyleCopReport.xml
-
-# visual studio build
-*_i.c
-*_p.c
-*_h.h
-*.ilk
-*.meta
-*.obj
-*.iobj
-*.pch
-*.pdb
-*.ipdb
-*.pgc
-*.pgd
-*.rsp
-*.sbr
-*.tlb
-*.tli
-*.tlh
-*.tmp
-*.tmp_proj
-*_wpftmp.csproj
-*.log
-*.tlog
-*.vspscc
-*.vssscc
-.builds
-*.pidb
-*.svclog
-*.scc
-
-# windows/macos desktop files
-Thumbs.db
-Desktop.ini
+# miscellaneous files
 .DS_Store
+Desktop.ini
+Thumbs.db

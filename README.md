@@ -1,8 +1,14 @@
-# <img src=".github/icon.png" width="32"/> PasteMyst.NET [![](https://img.shields.io/nuget/v/PasteMystNet?label=NuGet&logo=nuget&style=flat-square)](https://www.nuget.org/packages/PasteMystNet)
+<h1>
+    <img src="docs/icon.png" style="height: 1em;"/>
+    <span>PasteMyst.NET</span>
+    <a href="https://nuget.org/packages/PasteMystNet">
+      <img src="https://img.shields.io/nuget/v/PasteMystNet?label=NuGet&logo=nuget&style=flat-square"/>
+    </a>
+</h1>
 
 A simple .NET API wrapper for [PasteMyst](https://paste.myst.rs)!
 
-## Usage
+## ⚒️ Usage
 
 Install the library in your project.
 

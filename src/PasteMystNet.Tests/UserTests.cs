@@ -19,6 +19,7 @@ public class UserTests
     [Test]
     [TestCase("jisidjas", false)]
     [TestCase("codemyst", true)]
+    [TestCase("dentolos19", true)]
     public async Task UserExistsTest(string username, bool exists)
     {
         var userExists = await Client.UserExistsAsync(username);

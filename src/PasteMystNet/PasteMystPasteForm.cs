@@ -7,7 +7,7 @@ public class PasteMystPasteForm
     /// <summary>
     /// Title of the paste.
     /// </summary>
-    public string Title { get; set; }
+    public string Title { get; set; } = string.Empty;
 
     /// <summary>
     /// When will the paste expire from now. Use values from <see cref="PasteMystExpirations"/> for this property.
@@ -27,30 +27,27 @@ public class PasteMystPasteForm
     /// <summary>
     /// List of tags. Token is required.
     /// </summary>
-    public IList<string>? Tags { get; set; }
+    public IList<string>? Tags { get; set; } = new List<string>();
 
     /// <summary>
     /// List of pasties.
     /// </summary>
-    public IList<PasteMystPastyForm> Pasties { get; set; }
+    public IList<PasteMystPastyForm> Pasties { get; set; } = new List<PasteMystPastyForm>();
 
-    internal JsonNode CreateJson()
+    internal JsonNode ToJson()
     {
         var json = new JsonObject
         {
             ["title"] = Title,
             ["expiresIn"] = ExpiresIn,
-            ["pasties"] = new JsonArray(Pasties.Select(pasty => (JsonNode)pasty.CreateJson()).ToArray())
+            ["pasties"] = new JsonArray(Pasties.Select(pasty => (JsonNode)pasty.ToJson()).ToArray())
         };
         if (IsPrivate is not null)
-            json["private"] = IsPrivate;
+            json["isPrivate"] = IsPrivate;
         if (IsPublic is not null)
-            json["public"] = IsPublic;
+            json["isPublic"] = IsPublic;
         if (Tags is { Count: > 0 })
-        {
-            var tags = string.Join(',', Tags);
-            json["tags"] = tags;
-        }
+            json["tags"] = string.Join(',', Tags);
         return json;
     }
 }

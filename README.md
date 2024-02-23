@@ -1,17 +1,12 @@
-<h1>
-    <img src="docs/icon.png" style="height: 1em"/>
-    <span>PasteMyst.NET</span>
-    <a href="https://nuget.org/packages/PasteMystNet">
-      <img src="https://img.shields.io/nuget/v/PasteMystNet?label=NuGet&logo=nuget&style=flat-square"/>
-    </a>
-</h1>
+<img src="docs/icon.png" align="right" height="60" />
+
+# PasteMyst.NET
+
+[![Project License](https://img.shields.io/github/license/dentolos19/PasteMystNet?style=flat-square)](./LICENSE)
+[![NuGet Downloads](https://img.shields.io/nuget/dt/PasteMystNet?style=flat-square)](https://nuget.org/packages/PasteMystNet)
 
 A simple .NET API wrapper for [pastemyst](https://paste.myst.rs)!
 
-## ⚒️ Usage
+## Usage
 
-Please visit [the wiki](https://github.com/dentolos19/PasteMystNet/wiki) to learn about how to use this project!
-
-## 📜 License
-
-Distributed under the MIT License. See [LICENSE](LICENSE) for more information.
+Please check out [the wiki](https://github.com/dentolos19/PasteMystNet/wiki) to learn how to use this in your project!

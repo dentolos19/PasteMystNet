@@ -17,7 +17,7 @@ public class PasteTests
     {
         Client.Dispose();
     }
-    
+
     [Test]
     [TestCase("b0zis5k8")]
     public async Task GetPasteTest(string pasteId)
@@ -37,14 +37,24 @@ public class PasteTests
             [
                 new PasteMystPastyForm
                 {
-                    Content = "Hello, world!",
+                    Content = "Hello, world!"
                 }
             ]
         };
         var paste = await Client.CreatePasteAsync(pasteForm);
         Console.WriteLine($"Paste ID: {paste.Id}");
-        Console.WriteLine($"Creation At: {paste.CreatedAt} // {paste.CreatedAtTime.ToString(CultureInfo.CurrentCulture)}");
-        Console.WriteLine($"Deleted At: {paste.DeletedAt} // {paste.DeletedAtTime.ToString(CultureInfo.CurrentCulture)}");
+        Console.WriteLine(
+            "Created At: " +
+            paste.CreatedAt +
+            " // " +
+            paste.CreatedAtTime.ToString(CultureInfo.CurrentCulture)
+        );
+        Console.WriteLine(
+            "Deleted At: " +
+            paste.DeletedAt +
+            " // " +
+            paste.DeletedAtTime.ToString(CultureInfo.CurrentCulture)
+        );
         Assert.Multiple(() =>
         {
             Assert.That(paste.Title, Is.EqualTo(pasteForm.Title));

@@ -10,7 +10,7 @@ public class PasteMystCurrentUser : PasteMystUser
     [JsonInclude]
     [JsonPropertyName("stars")]
     public IReadOnlyList<string> Stars { get; private set; }
-    
+
     /// <summary>
     /// User IDs of the services that the user used to create an account.
     /// </summary>

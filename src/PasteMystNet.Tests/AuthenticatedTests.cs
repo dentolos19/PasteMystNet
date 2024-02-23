@@ -33,7 +33,7 @@ public class AuthenticatedTests
         var pastes = await Client.GetCurrentUsersPastesAsync();
         Console.WriteLine(ObjectDumper.Dump(pastes));
     }
-    
+
     [Test]
     public async Task CreatePasteTest()
     {
@@ -42,10 +42,12 @@ public class AuthenticatedTests
             Title = "PasteMyst.NET Temporary Paste",
             IsPrivate = true,
             ExpiresIn = PasteMystExpirations.OneHour,
-            Tags = [
+            Tags =
+            [
                 "unit tests"
             ],
-            Pasties = [
+            Pasties =
+            [
                 new PasteMystPastyForm
                 {
                     Content = "Hello, world!"
@@ -72,10 +74,12 @@ public class AuthenticatedTests
             Title = "PasteMyst.NET Temporary Paste",
             IsPrivate = true,
             ExpiresIn = PasteMystExpirations.OneHour,
-            Tags = [
+            Tags =
+            [
                 "unit tests"
             ],
-            Pasties = [
+            Pasties =
+            [
                 new PasteMystPastyForm
                 {
                     Content = "Hello, world!"
@@ -97,7 +101,7 @@ public class AuthenticatedTests
             Assert.That(editedPaste.Pasties, Has.Count.EqualTo(editForm.Pasties.Count));
         });
     }
-    
+
     [Test]
     public async Task DeletePasteTest()
     {

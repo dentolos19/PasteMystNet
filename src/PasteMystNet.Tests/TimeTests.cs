@@ -3,7 +3,7 @@
 public class TimeTests
 {
     private PasteMystClient Client { get; set; } = null!;
-    
+
     [SetUp]
     public void Setup()
     {
@@ -15,7 +15,7 @@ public class TimeTests
     {
         Client.Dispose();
     }
-    
+
     [Test]
     [TestCase(1708644974, PasteMystExpirations.OneHour, 1708648574)]
     public async Task ExpiresInToUnixTimeTest(long unixTime, string expiresIn, long expectedUnixTime)

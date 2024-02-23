@@ -3,10 +3,10 @@
 public class PasteMystException(
     string message,
     Exception inner,
-    Uri requestUri,
+    Uri requestUrl,
     string? requestContent
 ) : Exception(message, inner)
 {
-    public Uri RequestUri { get; } = requestUri;
+    public Uri RequestUrl { get; } = requestUrl;
     public string? RequestContent { get; } = requestContent;
 }

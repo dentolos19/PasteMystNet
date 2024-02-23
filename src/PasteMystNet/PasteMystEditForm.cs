@@ -8,8 +8,12 @@ public class PasteMystEditForm(PasteMystPaste paste)
     public string Title { get; set; } = paste.Title;
     public bool IsPrivate { get; set; } = paste.IsPrivate;
     public bool IsPublic { get; set; } = paste.IsPublic;
-    public IList<string> Tags { get; set; } = (IList<string>)paste.Tags;
-    public IList<PasteMystPastyForm> Pasties { get; set; } = paste.Pasties.Select(pasty => new PasteMystPastyForm(pasty)).ToList();
+    public IList<string> Tags { get; set; } =
+        (IList<string>)paste.Tags;
+
+    public IList<PasteMystPastyForm> Pasties { get; set; } =
+        paste.Pasties.Select(pasty => new PasteMystPastyForm(pasty)).ToList();
+
     internal JsonObject ToJson()
     {
         var json = new JsonObject

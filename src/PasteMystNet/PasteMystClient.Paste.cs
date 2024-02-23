@@ -43,7 +43,7 @@ public partial class PasteMystClient
         await PasteMystUtils.ValidateResponseAsync(response);
         return JsonSerializer.Deserialize<PasteMystPaste>(await response.Content.ReadAsStringAsync())!;
     }
-    
+
     public async Task DeletePasteAsync(string id)
     {
         var response = await _httpClient.DeleteAsync($"paste/{id}");

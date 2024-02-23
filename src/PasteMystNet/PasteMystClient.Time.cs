@@ -7,7 +7,12 @@ public partial class PasteMystClient
 {
     public async Task<long> ExpiresInToUnixTimeAsync(long createdAt, string expiresIn)
     {
-        var response = await _httpClient.GetAsync($"time/expiresInToUnixTime?createdAt={createdAt}&expiresIn={expiresIn}");
+        var response = await _httpClient.GetAsync(
+            "time/expiresInToUnixTime?createdAt=" +
+            createdAt +
+            "&expiresIn=" +
+            expiresIn
+        );
         await PasteMystUtils.ValidateResponseAsync(response);
         var valueString =
             JsonSerializer.Deserialize<JsonObject>(

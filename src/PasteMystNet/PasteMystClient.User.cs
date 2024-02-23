@@ -23,7 +23,7 @@ public partial class PasteMystClient
         await PasteMystUtils.ValidateResponseAsync(response);
         return JsonSerializer.Deserialize<PasteMystCurrentUser>(await response.Content.ReadAsStringAsync())!;
     }
-    
+
     public async Task<IReadOnlyList<string>> GetCurrentUsersPastesAsync()
     {
         var response = await _httpClient.GetAsync("user/self/pastes");

@@ -17,21 +17,21 @@ public class PasteMystLanguage
     [JsonInclude]
     [JsonPropertyName("mode")]
     public string Mode { get; private set; }
-    
+
     /// <summary>
     /// List of mimes used by the language.
     /// </summary>
     [JsonInclude]
     [JsonPropertyName("mime")]
     public string[] Mimes { get; private set; }
-    
+
     /// <summary>
     /// List of extensions used by the language.
     /// </summary>
     [JsonInclude]
     [JsonPropertyName("ext")]
     public IReadOnlyList<string> Extension { get; private set; }
-    
+
     /// <summary>
     /// Color representing the language.
     /// </summary>

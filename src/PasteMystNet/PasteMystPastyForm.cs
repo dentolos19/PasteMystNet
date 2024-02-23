@@ -5,7 +5,7 @@ namespace PasteMystNet;
 public class PasteMystPastyForm
 {
     private string? _id = string.Empty;
-    
+
     /// <summary>
     /// Language of the pasty.
     /// </summary>
@@ -25,7 +25,7 @@ public class PasteMystPastyForm
     {
         // empty
     }
-    
+
     public PasteMystPastyForm(PasteMystPasty paste)
     {
         _id = paste.Id;
@@ -33,7 +33,7 @@ public class PasteMystPastyForm
         Title = paste.Title;
         Content = paste.Content;
     }
-    
+
     internal JsonObject ToJson()
     {
         var json = new JsonObject

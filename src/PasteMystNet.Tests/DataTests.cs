@@ -15,8 +15,8 @@ public class DataTests
     {
         Client.Dispose();
     }
-    
-    [Test] // TODO: fix this test
+
+    [Test]
     [TestCase("python", "Python")]
     [TestCase("java", "Java")]
     public async Task GetLanguageByNameTest(string name, string expectedName)
@@ -27,8 +27,8 @@ public class DataTests
         Console.WriteLine($"Expected Name: {expectedName}");
         Assert.That(language.Name, Is.EqualTo(expectedName));
     }
-    
-    [Test] // TODO: fix this test
+
+    [Test]
     [TestCase("cs", "C#")]
     [TestCase("py", "Python")]
     public async Task GetLanguageByExtensionTest(string extension, string expectedName)
@@ -39,7 +39,7 @@ public class DataTests
         Console.WriteLine($"Expected Name: {expectedName}");
         Assert.That(language.Name, Is.EqualTo(expectedName));
     }
-    
+
     [Test]
     public async Task GetActivePastesTest()
     {

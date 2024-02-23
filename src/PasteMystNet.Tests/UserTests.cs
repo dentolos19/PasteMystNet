@@ -30,6 +30,5 @@ public class UserTests
     public async Task GetUserTest()
     {
         _ = await Client.GetUserAsync("codemyst");
-
     }
 }

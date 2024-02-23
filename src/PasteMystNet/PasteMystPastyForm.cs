@@ -4,7 +4,7 @@ namespace PasteMystNet;
 
 public class PasteMystPastyForm
 {
-    private string? _id = string.Empty;
+    private readonly string? _id;
 
     /// <summary>
     /// Language of the pasty.

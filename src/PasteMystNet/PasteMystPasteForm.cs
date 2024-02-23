@@ -15,17 +15,17 @@ public class PasteMystPasteForm
     public string ExpiresIn { get; set; } = PasteMystExpirations.Never;
 
     /// <summary>
-    /// If it is private, it's only accessible by the owner. Token is required.
+    /// If it is private, it's only accessible by the owner. Requires authorization.
     /// </summary>
     public bool? IsPrivate { get; set; }
 
     /// <summary>
-    /// If it is public, it will be displayed on the owner's profile. Token is required.
+    /// If it is public, it will be displayed on the owner's profile. Requires authorization.
     /// </summary>
     public bool? IsPublic { get; set; }
 
     /// <summary>
-    /// List of tags. Token is required.
+    /// List of tags. Requires authorization.
     /// </summary>
     public IList<string>? Tags { get; set; } = new List<string>();
 

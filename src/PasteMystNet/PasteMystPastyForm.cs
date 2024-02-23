@@ -8,11 +8,11 @@ public class PasteMystPastyForm
     /// Language of the pasty.
     /// </summary>
     public string Language { get; set; } = "Autodetect";
-    
+
     /// <summary>
     /// Title of the pasty.
     /// </summary>
-    public string Title { get; set; }
+    public string Title { get; set; } = string.Empty;
     
     /// <summary>
     /// Content of the pasty.

@@ -19,6 +19,7 @@ public class DataTests
     [Test]
     [TestCase("python", "Python")]
     [TestCase("java", "Java")]
+    [TestCase("c#", "C#")]
     public async Task GetLanguageByNameTest(string name, string expectedName)
     {
         var language = await Client.GetLanguageByNameAsync(name);

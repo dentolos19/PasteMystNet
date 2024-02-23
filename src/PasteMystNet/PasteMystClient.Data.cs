@@ -10,6 +10,7 @@ public partial class PasteMystClient
     /// </summary>
     public async Task<PasteMystLanguage> GetLanguageByNameAsync(string name)
     {
+        name = Uri.EscapeDataString(name); // make it percentage-encoded
         var response = await _httpClient.GetAsync($"data/language?name={name}");
         await PasteMystUtils.ValidateResponseAsync(response);
         return JsonSerializer.Deserialize<PasteMystLanguage>(await response.Content.ReadAsStringAsync())!;

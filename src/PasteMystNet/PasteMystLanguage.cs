@@ -1,4 +1,5 @@
-﻿using System.Text.Json.Serialization;
+﻿using System.Drawing;
+using System.Text.Json.Serialization;
 
 namespace PasteMystNet;
 
@@ -23,7 +24,7 @@ public class PasteMystLanguage
     /// </summary>
     [JsonInclude]
     [JsonPropertyName("mime")]
-    public IReadOnlyList<string> Mimes { get; private set; }
+    public IReadOnlyList<string>? Mimes { get; private set; }
 
     /// <summary>
     /// List of extensions used by the language.
@@ -37,5 +38,7 @@ public class PasteMystLanguage
     /// </summary>
     [JsonInclude]
     [JsonPropertyName("color")]
-    public string Color { get; private set; }
+    public string ColorHex { get; private set; }
+
+    public Color Color => (Color)new ColorConverter().ConvertFromString(ColorHex);
 }

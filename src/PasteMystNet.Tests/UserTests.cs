@@ -29,6 +29,7 @@ public class UserTests
     [Test]
     public async Task GetUserTest()
     {
-        _ = await Client.GetUserAsync("codemyst");
+        var user = await Client.GetUserAsync("codemyst");
+        Console.WriteLine(ObjectDumper.Dump(user));
     }
 }

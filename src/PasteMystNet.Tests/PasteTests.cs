@@ -23,6 +23,7 @@ public class PasteTests
     public async Task GetPasteTest(string pasteId)
     {
         var paste = await Client.GetPasteAsync(pasteId);
+        Console.WriteLine(ObjectDumper.Dump(paste));
         Assert.That(paste.Id, Is.EqualTo(pasteId));
     }
 
@@ -59,6 +60,8 @@ public class PasteTests
                     : "N/A"
             )
         );
+        Console.WriteLine();
+        Console.WriteLine(ObjectDumper.Dump(paste));
         Assert.Multiple(() =>
         {
             Assert.That(paste.Title, Is.EqualTo(pasteForm.Title));

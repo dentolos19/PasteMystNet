@@ -26,6 +26,8 @@ public class DataTests
         Console.WriteLine($"Requested Name: {name}");
         Console.WriteLine($"Response Name: {language.Name}");
         Console.WriteLine($"Expected Name: {expectedName}");
+        Console.WriteLine();
+        Console.WriteLine(ObjectDumper.Dump(language));
         Assert.That(language.Name, Is.EqualTo(expectedName));
     }
 
@@ -38,6 +40,8 @@ public class DataTests
         Console.WriteLine($"Requested Extension: {extension}");
         Console.WriteLine($"Response Name: {language.Name}");
         Console.WriteLine($"Expected Name: {expectedName}");
+        Console.WriteLine();
+        Console.WriteLine(ObjectDumper.Dump(language));
         Assert.That(language.Name, Is.EqualTo(expectedName));
     }
 
@@ -45,6 +49,7 @@ public class DataTests
     public async Task GetActivePastesTest()
     {
         var activePastes = await Client.GetActivePastesAsync();
+        Console.WriteLine("Active Pastes: " + activePastes);
         Assert.That(activePastes, Is.GreaterThan(0));
     }
 }

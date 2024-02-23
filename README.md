@@ -10,40 +10,7 @@ A simple .NET API wrapper for [pastemyst](https://paste.myst.rs)!
 
 ## ⚒️ Usage
 
-### Prerequisities
-
-- .NET Standard 2.1 [compatible framework](https://learn.microsoft.com/dotnet/standard/net-standard?tabs=net-standard-2-1#select-net-standard-version)
-- The package itself: `dotnet add package PasteMystNet`
-
-### Example
-
-```cs
-using System.Collections.Generic;
-using PasteMystNet;
-
-var client = new PasteMystClient();
-var pasteForm = new PasteMystPasteForm
-{
-    ExpiresIn = PasteMystExpirations.OneDay,
-    Pasties =
-    [
-        new PasteMystPastyForm
-        {
-            Title = "file.txt",
-            Content = "This is a test."
-        },
-        new PasteMystPastyForm
-        {
-            Language = "Python",
-            Content = "print(\"Hello World\")"
-        }
-    ]
-};
-
-var paste = await client.CreatePasteAsync(pasteForm);
-```
-
-For more examples for using this library, visit the [usage wiki](https://github.com/dentolos19/PasteMystNet/wiki/Usages) or check out the [unit tests](./PasteMystNet.Tests).
+Please visit [the wiki](https://github.com/dentolos19/PasteMystNet/wiki) to learn about how to use this project!
 
 ## 📜 License
 

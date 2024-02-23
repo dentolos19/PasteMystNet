@@ -23,7 +23,7 @@ public class PasteMystLanguage
     /// </summary>
     [JsonInclude]
     [JsonPropertyName("mime")]
-    public string[] Mimes { get; private set; }
+    public IReadOnlyList<string> Mimes { get; private set; }
 
     /// <summary>
     /// List of extensions used by the language.

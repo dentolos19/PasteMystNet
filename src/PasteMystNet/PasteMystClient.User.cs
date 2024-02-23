@@ -36,7 +36,7 @@ public partial class PasteMystClient
     /// <summary>
     /// Gets the current user's paste IDs. Requires authorization.
     /// </summary>
-    public async Task<IReadOnlyList<string>> GetCurrentUsersPastesAsync()
+    public async Task<IReadOnlyList<string>> GetCurrentUserPastesAsync()
     {
         var response = await _httpClient.GetAsync("user/self/pastes");
         await PasteMystUtils.ValidateResponseAsync(response);

@@ -30,7 +30,7 @@ public class AuthenticatedTests
     [Test]
     public async Task GetCurrentUserPastesTest()
     {
-        var pastes = await Client.GetCurrentUsersPastesAsync();
+        var pastes = await Client.GetCurrentUserPastesAsync();
         Console.WriteLine(ObjectDumper.Dump(pastes));
     }
 

@@ -2,25 +2,25 @@ namespace PasteMystNet.Tests;
 
 public class PasteTests
 {
-    private PasteMystClient _client = null!;
+    private PasteMystClient Client { get; set; } = null!;
 
     [SetUp]
     public void Setup()
     {
-        _client = new PasteMystClient();
+        Client = new PasteMystClient();
     }
 
     [TearDown]
     public void TearDown()
     {
-        _client.Dispose();
+        Client.Dispose();
     }
     
     [Test]
     [TestCase("b0zis5k8")]
     public async Task GetPasteTest(string pasteId)
     {
-        var paste = await _client.GetPasteAsync(pasteId);
+        var paste = await Client.GetPasteAsync(pasteId);
         Assert.That(paste.Id, Is.EqualTo(pasteId));
     }
 
@@ -40,7 +40,10 @@ public class PasteTests
                 }
             ]
         };
-        var paste = await _client.CreatePasteAsync(pasteForm);
+        var paste = await Client.CreatePasteAsync(pasteForm);
+        Console.WriteLine($"Paste ID: {paste.Id}");
+        Console.WriteLine($"Creation At: {paste.CreatedAt} // {paste.CreatedAtTime.ToString()}");
+        Console.WriteLine($"Deleted At: {paste.DeletedAt} // {paste.DeletedAtTime.ToString()}");
         Assert.Multiple(() =>
         {
             Assert.That(paste.Title, Is.EqualTo(pasteForm.Title));

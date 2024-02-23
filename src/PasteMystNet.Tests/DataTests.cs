@@ -2,18 +2,18 @@
 
 public class DataTests
 {
-    private PasteMystClient _client = null!;
+    private PasteMystClient Client { get; set; } = null!;
 
     [SetUp]
     public void Setup()
     {
-        _client = new PasteMystClient();
+        Client = new PasteMystClient();
     }
 
     [TearDown]
     public void TearDown()
     {
-        _client.Dispose();
+        Client.Dispose();
     }
     
     [Test] // TODO: fix this test
@@ -21,7 +21,7 @@ public class DataTests
     [TestCase("java", "Java")]
     public async Task GetLanguageByNameTest(string name, string expectedName)
     {
-        var language = await _client.GetLanguageByNameAsync("Java");
+        var language = await Client.GetLanguageByNameAsync("Java");
         Console.WriteLine($"Requested Name: {name}");
         Console.WriteLine($"Response Name: {language.Name}");
         Console.WriteLine($"Expected Name: {expectedName}");
@@ -33,7 +33,7 @@ public class DataTests
     [TestCase("py", "Python")]
     public async Task GetLanguageByExtensionTest(string extension, string expectedName)
     {
-        var language = await _client.GetLanguageByExtensionAsync("cs");
+        var language = await Client.GetLanguageByExtensionAsync("cs");
         Console.WriteLine($"Requested Extension: {extension}");
         Console.WriteLine($"Response Name: {language.Name}");
         Console.WriteLine($"Expected Name: {expectedName}");
@@ -43,7 +43,7 @@ public class DataTests
     [Test]
     public async Task GetActivePastesTest()
     {
-        var number = await _client.GetActivePastesAsync();
-        Console.WriteLine(number);
+        var activePastes = await Client.GetActivePastesAsync();
+        Assert.That(activePastes, Is.GreaterThan(0));
     }
 }

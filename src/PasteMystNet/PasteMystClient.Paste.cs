@@ -8,7 +8,7 @@ public partial class PasteMystClient
     public async Task<PasteMystPaste> GetPasteAsync(string id)
     {
         var response = await _httpClient.GetAsync($"paste/{id}");
-        await PasteMystUtils.ValidateHttpResponse(response);
+        await PasteMystUtils.ValidateResponseAsync(response);
         return JsonSerializer.Deserialize<PasteMystPaste>(await response.Content.ReadAsStringAsync())!;
     }
 
@@ -24,7 +24,7 @@ public partial class PasteMystClient
                 "application/json"
             )
         );
-        await PasteMystUtils.ValidateHttpResponse(response);
+        await PasteMystUtils.ValidateResponseAsync(response);
         return JsonSerializer.Deserialize<PasteMystPaste>(await response.Content.ReadAsStringAsync())!;
     }
 }

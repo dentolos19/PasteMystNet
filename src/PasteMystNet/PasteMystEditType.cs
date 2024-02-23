@@ -1,6 +1,6 @@
 ﻿namespace PasteMystNet;
 
-public enum PasteMystEditType : int
+public enum PasteMystEditType
 {
     Title = 0,
     PastyTitle = 1,

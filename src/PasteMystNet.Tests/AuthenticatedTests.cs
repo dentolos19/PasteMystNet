@@ -4,19 +4,31 @@ namespace PasteMystNet.Tests;
 
 public class AuthenticatedTests
 {
-    private PasteMystClient _client = null!;
+    private PasteMystClient Client { get; set; } = null!;
 
     [SetUp]
     public void Setup()
     {
         Env.Load();
         var token = Environment.GetEnvironmentVariable("AUTH_TOKEN");
-        _client = new PasteMystClient(token);
+        Client = new PasteMystClient(token);
     }
 
     [TearDown]
     public void TearDown()
     {
-        _client.Dispose();
+        Client.Dispose();
+    }
+
+    [Test]
+    public async Task GetCurrentUserTest()
+    {
+        _ = await Client.GetCurrentUserAsync();
+    }
+
+    [Test]
+    public async Task GetCurrentUserPastesTest()
+    {
+        _ = await Client.GetCurrentUsersPastesAsync();
     }
 }

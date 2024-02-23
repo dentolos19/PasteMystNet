@@ -12,10 +12,20 @@
         <Authors>Dennise Catolos</Authors>
         <Description>A simple .NET API wrapper for PasteMyst!</Description>
         <Version>2.0.0</Version>
+        <PackageIcon>icon.png</PackageIcon>
+        <PackageProjectUrl>https://github.com/dentolos19/PasteMystNet</PackageProjectUrl>
     </PropertyGroup>
 
     <ItemGroup>
         <PackageReference Include="System.Text.Json" Version="8.0.2"/>
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Include="..\..\public\icon.png">
+        <Pack>True</Pack>
+        <PackagePath></PackagePath>
+        <Link>icon.png</Link>
+      </None>
     </ItemGroup>
 
 </Project>

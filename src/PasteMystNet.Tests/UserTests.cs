@@ -2,18 +2,18 @@
 
 public class UserTests
 {
-    private PasteMystClient _client = null!;
+    private PasteMystClient Client { get; set; } = null!;
 
     [SetUp]
     public void Setup()
     {
-        _client = new PasteMystClient();
+        Client = new PasteMystClient();
     }
 
     [TearDown]
     public void TearDown()
     {
-        _client.Dispose();
+        Client.Dispose();
     }
 
     [Test]
@@ -21,14 +21,14 @@ public class UserTests
     [TestCase("codemyst", true)]
     public async Task UserExistsTest(string username, bool exists)
     {
-        var userExists = await _client.UserExistsAsync(username);
+        var userExists = await Client.UserExistsAsync(username);
         Assert.That(userExists, Is.EqualTo(exists));
     }
 
     [Test]
-    public Task GetUserTest()
+    public async Task GetUserTest()
     {
-        Assert.DoesNotThrowAsync(async () => await _client.GetUserAsync("codemyst"));
-        return Task.CompletedTask;
+        _ = await Client.GetUserAsync("codemyst");
+
     }
 }

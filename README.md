@@ -1,5 +1,5 @@
 <h1>
-    <img src="docs/icon.png" style="height: 1em"/>
+    <img src="public/icon.png" style="height: 1em"/>
     <span>PasteMyst.NET</span>
     <a href="https://nuget.org/packages/PasteMystNet">
       <img src="https://img.shields.io/nuget/v/PasteMystNet?label=NuGet&logo=nuget&style=flat-square"/>

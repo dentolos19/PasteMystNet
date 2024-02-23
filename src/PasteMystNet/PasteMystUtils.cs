@@ -7,10 +7,10 @@ internal static class PasteMystUtils
 {
     public static DateTime ParseUnixTime(long time)
     {
-        return DateTimeOffset.FromUnixTimeSeconds(time).DateTime;
+        return DateTimeOffset.FromUnixTimeSeconds(time).DateTime.ToLocalTime();
     }
 
-    public static async Task ValidateHttpResponse(HttpResponseMessage response)
+    public static async Task ValidateResponseAsync(HttpResponseMessage response)
     {
         try
         {
@@ -22,13 +22,12 @@ internal static class PasteMystUtils
             var requestContent = default(string);
             if (response.RequestMessage.Content is not null)
                 requestContent = await response.RequestMessage.Content.ReadAsStringAsync();
-            var exception = new PasteMystException(
-                json?["statusMessage"]?.ToString() ?? "Unknown error.",
+            throw new PasteMystException(
+                json?["statusMessage"]?.ToString() ?? "Unknown error. Please check the inner exception.",
                 requestException,
                 response.RequestMessage.RequestUri,
                 requestContent
             );
-            throw exception;
         }
     }
 }

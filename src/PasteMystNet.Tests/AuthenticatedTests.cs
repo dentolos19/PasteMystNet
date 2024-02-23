@@ -65,16 +65,53 @@ public class AuthenticatedTests
     }
 
     [Test]
-    public Task EditPasteTest()
+    public async Task EditPasteTest()
     {
-        // TODO: implement this test
-        return Task.CompletedTask;
+        var pasteForm = new PasteMystPasteForm
+        {
+            Title = "PasteMyst.NET Temporary Paste",
+            IsPrivate = true,
+            ExpiresIn = PasteMystExpirations.OneHour,
+            Tags = [
+                "unit tests"
+            ],
+            Pasties = [
+                new PasteMystPastyForm
+                {
+                    Content = "Hello, world!"
+                }
+            ]
+        };
+        var paste = await Client.CreatePasteAsync(pasteForm);
+        var editForm = new PasteMystEditForm(paste);
+        editForm.Title += " (edited)";
+        editForm.Tags.Add("edited");
+        editForm.Pasties[0].Content += " I've been edited!";
+        // TODO: fix the issue with adding a new pasty
+        var editedPaste = await Client.EditPasteAsync(editForm);
+        Console.WriteLine(ObjectDumper.Dump(editedPaste));
+        Assert.Multiple(() =>
+        {
+            Assert.That(editedPaste.Title, Is.EqualTo(editForm.Title));
+            Assert.That(editedPaste.Tags, Is.EquivalentTo(editForm.Tags));
+            Assert.That(editedPaste.Pasties, Has.Count.EqualTo(editForm.Pasties.Count));
+        });
     }
     
     [Test]
-    public Task DeletePasteTest()
+    public async Task DeletePasteTest()
     {
-        // TODO: implement this test
-        return Task.CompletedTask;
+        var paste = await Client.CreatePasteAsync(new PasteMystPasteForm
+        {
+            Pasties =
+            [
+                new PasteMystPastyForm
+                {
+                    Content = "Hello, word!"
+                }
+            ]
+        });
+        await Client.DeletePasteAsync(paste.Id);
+        Assert.That(async () => await Client.GetPasteAsync(paste.Id), Throws.InstanceOf<PasteMystException>());
     }
 }

@@ -30,7 +30,7 @@ public class PasteMystLanguage
     /// </summary>
     [JsonInclude]
     [JsonPropertyName("ext")]
-    public string[] Extension { get; private set; }
+    public IReadOnlyList<string> Extension { get; private set; }
     
     /// <summary>
     /// Color representing the language.

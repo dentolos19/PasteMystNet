@@ -21,7 +21,7 @@ public class DataTests
     [TestCase("java", "Java")]
     public async Task GetLanguageByNameTest(string name, string expectedName)
     {
-        var language = await Client.GetLanguageByNameAsync("Java");
+        var language = await Client.GetLanguageByNameAsync(name);
         Console.WriteLine($"Requested Name: {name}");
         Console.WriteLine($"Response Name: {language.Name}");
         Console.WriteLine($"Expected Name: {expectedName}");
@@ -33,7 +33,7 @@ public class DataTests
     [TestCase("py", "Python")]
     public async Task GetLanguageByExtensionTest(string extension, string expectedName)
     {
-        var language = await Client.GetLanguageByExtensionAsync("cs");
+        var language = await Client.GetLanguageByExtensionAsync(extension);
         Console.WriteLine($"Requested Extension: {extension}");
         Console.WriteLine($"Response Name: {language.Name}");
         Console.WriteLine($"Expected Name: {expectedName}");

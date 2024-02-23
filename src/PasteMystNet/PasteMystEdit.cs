@@ -16,7 +16,7 @@ public class PasteMystEdit
     /// </summary>
     [JsonInclude]
     [JsonPropertyName("editId")]
-    public string EditId { get; private set; }
+    public int EditId { get; private set; }
     
     /// <summary>
     /// Type of edit.
@@ -45,4 +45,6 @@ public class PasteMystEdit
     [JsonInclude]
     [JsonPropertyName("editedAt")]
     public long EditedAt { get; private set; }
+
+    public DateTime EditedAtTime => PasteMystUtils.ParseUnixTime(EditedAt);
 }

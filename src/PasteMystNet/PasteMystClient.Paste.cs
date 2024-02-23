@@ -28,9 +28,9 @@ public partial class PasteMystClient
         return JsonSerializer.Deserialize<PasteMystPaste>(await response.Content.ReadAsStringAsync())!;
     }
 
-    public async Task EditPasteAsync(PasteMystEditForm form)
+    public async Task<PasteMystPaste> EditPasteAsync(PasteMystEditForm form)
     {
-        var response = await _httpClient.PutAsync
+        var response = await _httpClient.PatchAsync
         (
             $"paste/{form.Id}",
             new StringContent
@@ -41,6 +41,7 @@ public partial class PasteMystClient
             )
         );
         await PasteMystUtils.ValidateResponseAsync(response);
+        return JsonSerializer.Deserialize<PasteMystPaste>(await response.Content.ReadAsStringAsync())!;
     }
     
     public async Task DeletePasteAsync(string id)

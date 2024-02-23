@@ -31,13 +31,12 @@ public class PasteTests
     {
         var pasteForm = new PasteMystPasteForm
         {
-            Title = "Test Paste",
+            Title = "PasteMyst.NET Temporary Paste",
             ExpiresIn = PasteMystExpirations.OneHour,
             Pasties =
             [
                 new PasteMystPastyForm
                 {
-                    Title = "Test Pasty",
                     Content = "Hello, world!",
                 }
             ]

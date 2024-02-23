@@ -4,7 +4,7 @@ namespace PasteMystNet;
 
 public class PasteMystPastyForm
 {
-    private string? _id;
+    private string? _id = string.Empty;
     
     /// <summary>
     /// Language of the pasty.
@@ -15,11 +15,11 @@ public class PasteMystPastyForm
     /// Title of the pasty.
     /// </summary>
     public string Title { get; set; } = string.Empty;
-    
+
     /// <summary>
     /// Content of the pasty.
     /// </summary>
-    public string Content { get; set; }
+    public string Content { get; set; } = string.Empty;
 
     public PasteMystPastyForm()
     {
@@ -43,7 +43,7 @@ public class PasteMystPastyForm
             ["code"] = Content
         };
         if (_id is not null)
-            json["id"] = _id;
+            json["_id"] = _id;
         return json;
     }
 }

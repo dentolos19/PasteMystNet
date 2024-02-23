@@ -30,7 +30,7 @@ public class PasteMystEdit
     /// </summary>
     [JsonInclude]
     [JsonPropertyName("metadata")]
-    public string[] Metadata { get; private set; }
+    public IReadOnlyList<string> Metadata { get; private set; }
 
     /// <summary>
     /// Actual paste edit. It stores old data before the edit modified the current paste.

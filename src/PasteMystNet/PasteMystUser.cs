@@ -52,4 +52,7 @@ public class PasteMystUser
     [JsonInclude]
     [JsonPropertyName("contributor")]
     public bool Contributor { get; private set; }
+
+    public Uri ProfileUrl => new($"https://paste.myst.rs/users/{Username}");
+    public bool IsSupporter => SupporterLength > 0;
 }

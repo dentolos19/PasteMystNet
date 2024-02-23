@@ -53,7 +53,11 @@ public class PasteTests
             "Deleted At: " +
             paste.DeletedAt +
             " // " +
-            paste.DeletedAtTime.ToString(CultureInfo.CurrentCulture)
+            (
+                paste.DeletedAtTime.HasValue
+                    ? paste.DeletedAtTime.Value.ToString(CultureInfo.CurrentCulture)
+                    : "N/A"
+            )
         );
         Assert.Multiple(() =>
         {

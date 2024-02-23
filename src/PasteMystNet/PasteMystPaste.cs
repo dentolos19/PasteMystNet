@@ -72,7 +72,7 @@ public class PasteMystPaste
     /// </summary>
     [JsonInclude]
     [JsonPropertyName("tags")]
-    public IReadOnlyList<string> Tags { get; private set; }
+    public IReadOnlyList<string>? Tags { get; private set; }
 
     /// <summary>
     /// List of pasties.
@@ -86,8 +86,10 @@ public class PasteMystPaste
     /// </summary>
     [JsonInclude]
     [JsonPropertyName("edits")]
-    public IReadOnlyList<PasteMystEdit> Edits { get; private set; }
+    public IReadOnlyList<PasteMystEdit>? Edits { get; private set; }
 
+    public Uri Url => new($"https://paste.myst.rs/{Id}");
+    public bool HasOwner => !string.IsNullOrEmpty(OwnerId);
     public DateTime CreatedAtTime => PasteMystUtils.ParseUnixTime(CreatedAt);
-    public DateTime DeletedAtTime => PasteMystUtils.ParseUnixTime(DeletedAt);
+    public DateTime? DeletedAtTime => DeletedAt > 0 ? PasteMystUtils.ParseUnixTime(DeletedAt) : null;
 }

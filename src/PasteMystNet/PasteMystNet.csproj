@@ -10,7 +10,7 @@
     <PropertyGroup>
         <Title>PasteMyst.NET</Title>
         <Authors>Dennise Catolos</Authors>
-        <Description>A simple .NET API wrapper for PasteMyst!</Description>
+        <Description>A simple .NET API wrapper for pastemyst!</Description>
         <Version>2.0.0</Version>
         <PackageIcon>icon.png</PackageIcon>
         <PackageProjectUrl>https://github.com/dentolos19/PasteMystNet</PackageProjectUrl>

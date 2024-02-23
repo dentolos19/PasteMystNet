@@ -1,12 +1,12 @@
 <h1>
-    <img src="public/icon.png" style="height: 1em"/>
+    <img src="docs/icon.png" style="height: 1em"/>
     <span>PasteMyst.NET</span>
     <a href="https://nuget.org/packages/PasteMystNet">
       <img src="https://img.shields.io/nuget/v/PasteMystNet?label=NuGet&logo=nuget&style=flat-square"/>
     </a>
 </h1>
 
-A simple .NET API wrapper for [PasteMyst](https://paste.myst.rs)!
+A simple .NET API wrapper for [pastemyst](https://paste.myst.rs)!
 
 ## ⚒️ Usage
 

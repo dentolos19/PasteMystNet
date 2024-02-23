@@ -1,33 +1,41 @@
-using System.Drawing;
-using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace PasteMystNet;
 
 public class PasteMystLanguage
 {
-    [JsonProperty("name")] public string Name { get; private set; }
-    [JsonProperty("mode")] public string Mode { get; private set; }
-    [JsonProperty("mimes")] public string[] Mimes { get; private set; }
-    [JsonProperty("ext")] public string[] Extensions { get; private set; }
-    [JsonProperty("color")] public string ColorHex { get; private set; }
-    [JsonIgnore] public Color Color => (Color)new ColorConverter().ConvertFromString(ColorHex);
+    /// <summary>
+    /// Name of the language.
+    /// </summary>
+    [JsonInclude]
+    [JsonPropertyName("name")]
+    public string Name { get; private set; }
 
-    public static async Task<PasteMystLanguage> GetLanguageByNameAsync(string name)
-    {
-        name = Uri.EscapeDataString(name); // make name percent-encoded
-        using var httpClient = new HttpClient();
-        var response = await httpClient.GetAsync(string.Format(PasteMystConstants.GetLanguageByNameEndpoint, Uri.EscapeDataString(name)));
-        response.EnsureSuccessStatusCode();
-        var responseContent = await response.Content.ReadAsStringAsync();
-        return JsonConvert.DeserializeObject<PasteMystLanguage>(responseContent);
-    }
-
-    public static async Task<PasteMystLanguage> GetLanguageByExtensionAsync(string extension)
-    {
-        using var httpClient = new HttpClient();
-        var response = await httpClient.GetAsync(string.Format(PasteMystConstants.GetLanguageByExtensionEndpoint, Uri.EscapeDataString(extension)));
-        response.EnsureSuccessStatusCode();
-        var responseContent = await response.Content.ReadAsStringAsync();
-        return JsonConvert.DeserializeObject<PasteMystLanguage>(responseContent);
-    }
+    /// <summary>
+    /// Language mode to be used in the editor.
+    /// </summary>
+    [JsonInclude]
+    [JsonPropertyName("mode")]
+    public string Mode { get; private set; }
+    
+    /// <summary>
+    /// List of mimes used by the language.
+    /// </summary>
+    [JsonInclude]
+    [JsonPropertyName("mime")]
+    public string[] Mimes { get; private set; }
+    
+    /// <summary>
+    /// List of extensions used by the language.
+    /// </summary>
+    [JsonInclude]
+    [JsonPropertyName("ext")]
+    public IReadOnlyList<string> Extension { get; private set; }
+    
+    /// <summary>
+    /// Color representing the language.
+    /// </summary>
+    [JsonInclude]
+    [JsonPropertyName("color")]
+    public string Color { get; private set; }
 }

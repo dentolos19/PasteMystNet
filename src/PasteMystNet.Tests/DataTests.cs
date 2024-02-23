@@ -1,38 +1,49 @@
-using System;
-using System.Threading.Tasks;
-using NUnit.Framework;
-
-namespace PasteMystNet.Tests;
+﻿namespace PasteMystNet.Tests;
 
 public class DataTests
 {
-    // [TestCase("C#")]
-    // [TestCase("C++")]
-    [TestCase("JavaScript")]
-    public async Task GetLanguageByNameTest(string name)
+    private PasteMystClient Client { get; set; } = null!;
+
+    [SetUp]
+    public void Setup()
     {
-        var language = await PasteMystLanguage.GetLanguageByNameAsync(name);
-        Console.WriteLine(ObjectDumper.Dump(language));
-        if (language.Name.Equals(name, StringComparison.OrdinalIgnoreCase))
-            Assert.Pass();
-        Assert.Fail();
+        Client = new PasteMystClient();
     }
 
-    [TestCase("cs")]
-    [TestCase("cpp")]
-    [TestCase("js")]
-    public async Task GetLanguageByExtensionTest(string extension)
+    [TearDown]
+    public void TearDown()
     {
-        var language = await PasteMystLanguage.GetLanguageByExtensionAsync(extension);
-        Console.WriteLine(ObjectDumper.Dump(language));
-        Assert.Contains(extension, language.Extensions);
+        Client.Dispose();
     }
-
+    
+    [Test] // TODO: fix this test
+    [TestCase("python", "Python")]
+    [TestCase("java", "Java")]
+    public async Task GetLanguageByNameTest(string name, string expectedName)
+    {
+        var language = await Client.GetLanguageByNameAsync(name);
+        Console.WriteLine($"Requested Name: {name}");
+        Console.WriteLine($"Response Name: {language.Name}");
+        Console.WriteLine($"Expected Name: {expectedName}");
+        Assert.That(language.Name, Is.EqualTo(expectedName));
+    }
+    
+    [Test] // TODO: fix this test
+    [TestCase("cs", "C#")]
+    [TestCase("py", "Python")]
+    public async Task GetLanguageByExtensionTest(string extension, string expectedName)
+    {
+        var language = await Client.GetLanguageByExtensionAsync(extension);
+        Console.WriteLine($"Requested Extension: {extension}");
+        Console.WriteLine($"Response Name: {language.Name}");
+        Console.WriteLine($"Expected Name: {expectedName}");
+        Assert.That(language.Name, Is.EqualTo(expectedName));
+    }
+    
     [Test]
-    public async Task GetTotalActivePastesTest()
+    public async Task GetActivePastesTest()
     {
-        var count = await PasteMystPaste.GetTotalActivePastesAsync();
-        Console.WriteLine(count);
-        Assert.Pass();
+        var activePastes = await Client.GetActivePastesAsync();
+        Assert.That(activePastes, Is.GreaterThan(0));
     }
 }

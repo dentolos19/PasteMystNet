@@ -1,48 +1,26 @@
-using System.Text;
-using Newtonsoft.Json;
+﻿using System.Text.Json.Nodes;
 
 namespace PasteMystNet;
 
-public class PasteMystEditForm
+public class PasteMystEditForm(PasteMystPaste paste)
 {
-    [JsonIgnore] private readonly string _id;
-
-    [JsonProperty("tags", NullValueHandling = NullValueHandling.Ignore)] private string? _tags;
-
-    [JsonProperty("title")] public string Title { get; set; }
-    [JsonProperty("isPrivate", NullValueHandling = NullValueHandling.Ignore)] public bool? IsPrivate { get; set; }
-    [JsonProperty("isPublic", NullValueHandling = NullValueHandling.Ignore)] public bool? IsPublic { get; set; }
-    [JsonProperty("pasties")] public IList<PasteMystPastyForm> Pasties { get; }
-    [JsonIgnore] public IList<string> Tags { get; }
-
-    internal PasteMystEditForm(PasteMystPaste paste)
+    public string Id { get; } = paste.Id;
+    public string Title { get; set; } = paste.Title;
+    public bool IsPrivate { get; set; } = paste.IsPrivate;
+    public bool IsPublic { get; set; } = paste.IsPublic;
+    public IList<string> Tags { get; set; } = (IList<string>)paste.Tags;
+    public IList<PasteMystPastyForm> Pasties { get; set; } = paste.Pasties.Select(pasty => new PasteMystPastyForm(pasty)).ToList();
+    internal JsonObject ToJson()
     {
-        _id = paste.Id;
-        Title = paste.Title;
-        Pasties = paste.Pasties is { Length: > 0 }
-            ? paste.Pasties.Select(pasty => new PasteMystPastyForm // adds already defined pasty list from paste
-            {
-                Id = pasty.Id,
-                Title = pasty.Title,
-                Language = pasty.Language,
-                Code = pasty.Code
-            }).ToList()
-            : new List<PasteMystPastyForm>(); // creates an empty list for pasties
-        Tags = paste.Tags is { Length: > 0 }
-            ? paste.Tags.ToList() // adds already defined tag list from paste
-            : new List<string>(); // creates an empty list for tags
-    }
-
-    public async Task<PasteMystPaste> PatchPasteAsync(PasteMystToken token)
-    {
-        if (Tags.Count > 0)
-            _tags = string.Join(",", Tags);
-        using var httpClient = new HttpClient();
-        httpClient.DefaultRequestHeaders.TryAddWithoutValidation("Authorization", token.ToString());
-        var requestContent = JsonConvert.SerializeObject(this);
-        var response = await httpClient.PatchAsync(string.Format(PasteMystConstants.PatchPasteEndpoint, _id), new StringContent(requestContent, Encoding.UTF8, "application/json"));
-        response.EnsureSuccessStatusCode();
-        var responseContent = await response.Content.ReadAsStringAsync();
-        return JsonConvert.DeserializeObject<PasteMystPaste>(responseContent);
+        var json = new JsonObject
+        {
+            ["title"] = Title,
+            ["isPrivate"] = IsPrivate,
+            ["isPublic"] = IsPublic,
+            ["pasties"] = new JsonArray(Pasties.Select(pasty => (JsonNode)pasty.ToJson()).ToArray())
+        };
+        if (Tags is { Count: > 0 })
+            json["tags"] = string.Join(',', Tags);
+        return json;
     }
 }

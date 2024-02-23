@@ -1,56 +1,55 @@
-using System.Net;
-using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace PasteMystNet;
 
 public class PasteMystUser
 {
-    [JsonProperty("_id")] public string Id { get; private set; }
-    [JsonProperty("username")] public string Username { get; private set; }
-    [JsonProperty("avatarUrl")] public string AvatarUrl { get; private set; }
-    [JsonProperty("defaultLang")] public string DefaultLanguage { get; private set; }
-    [JsonProperty("publicProfile")] public bool IsPublicProfile { get; private set; }
-    [JsonProperty("supporterLength")] public int SupporterLength { get; private set; }
-    [JsonProperty("contributor")] public bool IsContributor { get; private set; }
-    [JsonIgnore] public string ProfileUrl => PasteMystConstants.WebsiteUrl + "/users/" + Username;
-    [JsonIgnore] public bool IsSupporter => SupporterLength > 0;
+    /// <summary>
+    /// ID of the user.
+    /// </summary>
+    [JsonInclude]
+    [JsonPropertyName("_id")]
+    public string Id { get; private set; }
 
-    [JsonProperty("stars")] public string[]? Stars { get; private set; }
-    [JsonProperty("serviceIds")] public IDictionary<string, string>? ServiceIds { get; private set; }
+    /// <summary>
+    /// Username of the user.
+    /// </summary>
+    [JsonInclude]
+    [JsonPropertyName("username")]
+    public string Username { get; private set; }
 
-    public static async Task<bool> UserExistsAsync(string username)
-    {
-        using var httpClient = new HttpClient();
-        var response = await httpClient.GetAsync(string.Format(PasteMystConstants.UserExistsEndpoint, username));
-        return response.StatusCode == HttpStatusCode.OK;
-    }
+    /// <summary>
+    /// URL of their avatar.
+    /// </summary>
+    [JsonInclude]
+    [JsonPropertyName("avatarUrl")]
+    public Uri AvatarUrl { get; private set; }
 
-    public static async Task<PasteMystUser> GetUserAsync(string username)
-    {
-        using var httpClient = new HttpClient();
-        var response = await httpClient.GetAsync(string.Format(PasteMystConstants.GetUserEndpoint, username));
-        response.EnsureSuccessStatusCode();
-        var responseContent = await response.Content.ReadAsStringAsync();
-        return JsonConvert.DeserializeObject<PasteMystUser>(responseContent);
-    }
+    /// <summary>
+    /// The default language of the user.
+    /// </summary>
+    [JsonInclude]
+    [JsonPropertyName("defaultLang")]
+    public string DefaultLanguage { get; private set; }
 
-    public static async Task<PasteMystUser> GetUserAsync(PasteMystToken token)
-    {
-        using var httpClient = new HttpClient();
-        httpClient.DefaultRequestHeaders.TryAddWithoutValidation("Authorization", token.ToString());
-        var response = await httpClient.GetAsync(PasteMystConstants.GetSelfEndpoint);
-        response.EnsureSuccessStatusCode();
-        var responseContent = await response.Content.ReadAsStringAsync();
-        return JsonConvert.DeserializeObject<PasteMystUser>(responseContent);
-    }
+    /// <summary>
+    /// Whether if they have a public profile.
+    /// </summary>
+    [JsonInclude]
+    [JsonPropertyName("publicProfile")]
+    public bool PublicProfile { get; private set; }
 
-    public static async Task<string[]> GetUserPastesAsync(PasteMystToken token)
-    {
-        using var httpClient = new HttpClient();
-        httpClient.DefaultRequestHeaders.TryAddWithoutValidation("Authorization", token.ToString());
-        var response = await httpClient.GetAsync(PasteMystConstants.GetSelfPastesEndpoint);
-        response.EnsureSuccessStatusCode();
-        var responseContent = await response.Content.ReadAsStringAsync();
-        return JsonConvert.DeserializeObject<string[]>(responseContent);
-    }
+    /// <summary>
+    /// How long has the user has been a supporter for. The value defaults to 0 if they are not a supporter.
+    /// </summary>
+    [JsonInclude]
+    [JsonPropertyName("supporterLength")]
+    public int SupporterLength { get; private set; }
+
+    /// <summary>
+    /// Whether if they are a contributor to <a href="https://paste.myst.rs">pastemyst</a>.
+    /// </summary>
+    [JsonInclude]
+    [JsonPropertyName("contributor")]
+    public bool Contributor { get; private set; }
 }

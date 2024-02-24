@@ -3,7 +3,7 @@
     <span>PasteMyst.NET</span>
 </h1>
 
-[![NuGet Version](https://img.shields.io/nuget/v/PasteMystNet?logo=nuget)](https://nuget.org/packages/AniListNet)
+[![NuGet Version](https://img.shields.io/nuget/v/PasteMystNet?logo=nuget)](https://nuget.org/packages/PasteMystNet)
 [![NuGet Downloads](https://img.shields.io/nuget/dt/PasteMystNet)](https://nuget.org/packages/PasteMystNet)
 
 A simple .NET API wrapper for [pastemyst](https://paste.myst.rs)!

@@ -1,6 +1,9 @@
-# PasteMyst.NET
+<h1>
+    <img src="docs/icon.png" style="height: 1em"/>
+    <span>AniList.NET</span>
+</h1>
 
-[![Project License](https://img.shields.io/github/license/dentolos19/PasteMystNet)](./LICENSE)
+[![NuGet Version](https://img.shields.io/nuget/v/PasteMystNet?logo=nuget)](https://nuget.org/packages/AniListNet)
 [![NuGet Downloads](https://img.shields.io/nuget/dt/PasteMystNet)](https://nuget.org/packages/PasteMystNet)
 
 A simple .NET API wrapper for [pastemyst](https://paste.myst.rs)!

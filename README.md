@@ -24,7 +24,7 @@ Contributions are what make the open source community such an amazing place to l
 
 1. Clone the repo: `git clone https://github.com/dentolos19/PasteMystNet.git`
 2. Get your API key from [pastemyst](https://paste.myst.rs/user/settings).
-3. Use the template `.env.example` and create a file named `.env` inside the project `PasteMystNet.Tests` and enter your key.
+3. Use the template `.env.template` and create a file named `.env` inside the project `PasteMystNet.Tests` and enter your key.
 4. Restore dependencies: `dotnet restore` (optional)
 5. Test the library: `dotnet test` or use the built-in tests runner in your IDE (recommended)
 

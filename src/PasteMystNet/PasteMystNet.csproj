@@ -21,7 +21,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <None Include="..\..\docs\icon.png">
+        <None Include="..\..\public\icon.png">
             <Pack>True</Pack>
             <PackagePath></PackagePath>
             <Link>icon.png</Link>

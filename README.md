@@ -1,5 +1,5 @@
 <h1>
-    <img src="public/icon.png" height="35">
+    <img src="public/icon.png" alt="Icon" height="30">
     <span>PasteMyst.NET</span>
 </h1>
 

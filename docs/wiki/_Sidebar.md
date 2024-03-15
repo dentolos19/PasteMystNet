@@ -1,0 +1,5 @@
+- [Home](./)
+- [Usage (v1)](./Usage-v1)
+- [Tutorials](./Tutorials)
+  - [Editing a paste](./Tutorials#editing-a-paste)
+- [Changelog](https://github.com/dentolos19/PasteMystNet/releases)

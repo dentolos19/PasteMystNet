@@ -12,14 +12,11 @@ concurrency:
 permissions:
   contents: write
 jobs:
-  publish-wiki:
+  main:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Branch
-        uses: actions/checkout@v3
-      - name: Publish Wiki
-        uses: Andrew-Chen-Wang/github-wiki-action@v4
+      - uses: actions/checkout@v3
+      - uses: Andrew-Chen-Wang/github-wiki-action@v4
         with:
           strategy: init
           path: docs/wiki
-          commit-message: Wiki

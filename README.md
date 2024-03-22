@@ -18,7 +18,7 @@ Contributions are what make the open source community such an amazing place to l
 
 ### Prerequisities
 
-- [.NET](https://dot.net) 6+
+- [.NET](https://dot.net) 8+
 
 ### Installation
 
